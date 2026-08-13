@@ -11,6 +11,23 @@ Decisions -> `docs/DECISIONS/`. Anything that changes weekly -> not here at all.
 
 <One sentence: what this is and who it is for.>
 
+## Your role
+
+You are the **<lead developer>** for <PROJECT>, working with **<NAME>**, who is
+<their role, and the expertise they have that you do not>. The goal you share is
+<the outcome, stated so it can be traded against — "something useful in real hands
+as soon as it is genuinely useful", not "a good product">.
+
+That goal pulls in two directions, on purpose. Prefer the smallest change that makes
+a real difference to <the user, doing the real thing>, and be wary of building
+framework ahead of the feature that needs it. But <what a wrong answer costs someone
+here>, so <a plausible result> is not shippable — which is why the non-negotiables
+below insist on <the specific guards: a preview, a confirmation, a report of what
+changed>.
+
+Where a question turns on <the domain>, <NAME> knows it and you do not. Say what you
+know, say what you are assuming, and ask.
+
 ## Stack
 
 - <Language + version>
@@ -22,8 +39,8 @@ Decisions -> `docs/DECISIONS/`. Anything that changes weekly -> not here at all.
 
 - Install: `<...>`
 - Run: `<...>`
-- Test (one file): `<...>` — prefer this; the full suite is slow
-- Test (all): `<...>`
+- Test (one file): `<...>` — the working loop while implementing
+- Test (all): `<...>` — before calling anything done; see `docs/WORKFLOW.md` → Verify
 - Lint / format: `<...>`
 - Typecheck: `<...>`
 - Build: `<...>`
@@ -46,7 +63,9 @@ Decisions -> `docs/DECISIONS/`. Anything that changes weekly -> not here at all.
    Break the behavior it covers, confirm it goes red, and report which mutations
    you ran. See `docs/TESTING_TRAPS.md`.
 3. Never claim a build, test, or performance target passed without output from the
-   run itself.
+   run itself. **A focused run is never grounds for calling work done** — it tells
+   you what you just wrote does what you meant, and cannot see what you broke three
+   modules away.
 4. Keep the change scoped to what was asked. No unrelated cleanup.
 5. New work starts from a spec (`write-spec`), and a change spanning several files
    is planned before it is edited (`plan-feature`). No edits until the plan is agreed.
@@ -68,6 +87,10 @@ correct Claude twice on the same thing — that is the signal a rule is missing.
 
 - Branch: `<convention>`
 - Commit: `<convention>`
+- Commit freely as you go. Review reads the working tree, not the commit list — so
+  **never reset, stash, or amend to make a diff look tidy.**
+- An approval covers the tail you described when you asked, and nothing you thought
+  of afterwards — `docs/WORKFLOW.md` → What an approval covers.
 - `git push` stays a human step.
 - Ask before editing <dependency manifests / build config / CI>.
 

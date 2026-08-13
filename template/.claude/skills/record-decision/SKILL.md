@@ -11,6 +11,30 @@ a contract, a technology commitment, a rule that says "never do X".
 Do **not** write one for a choice that the code already explains, or one that the
 next person can reverse in an afternoon without consequence.
 
+## ADR or work item?
+
+Four places hold plan-level state, and **the boundary between them is what stops any
+of them rotting.** Put a thing in the wrong one and it is either edited when it
+should have been amended, or repeated in five places until the copies disagree.
+
+| Where | Holds | Changes |
+|-------|-------|---------|
+| `docs/PRODUCT.md` | what the product *is* — pillars, baseline, what is not built | rarely, and it is the human's call |
+| `docs/DECISIONS/` | decisions that constrain work not yet filed | append-only — amend, never rewrite |
+| `docs/work/<id>-<slug>/` | one unit of work: its spec, plan, notes | constantly; the tracker holds its status |
+| `.claude/rules/`, `CLAUDE.md` | the *rule* a decision implies, where the agent will meet it | in the same change as its ADR |
+
+**The test for work item versus ADR:** *would this reasoning need repeating in a work
+item that does not exist yet?* If yes, it is an ADR. A spec's **Alternatives
+considered** explains why *this* work was done this way and is complete on its own;
+an ADR explains a rule that binds work nobody has scoped. "We rejected a shared
+dialog for this one tool" belongs in the spec. "Every destructive action gets its own
+confirmation" is an ADR.
+
+**When in doubt, write the work item.** An ADR that only ever constrained one item is
+permanent clutter in an append-only record; an item whose reasoning turns out to bind
+everything can be promoted to an ADR later, in five minutes. The asymmetry decides it.
+
 ## Procedure
 
 1. Read `docs/DECISIONS/` first. Most "new" decisions amend an existing one.
@@ -27,7 +51,13 @@ next person can reverse in an afternoon without consequence.
 7. If this amends an earlier ADR, say so **in both files** and be specific about
    which clause. "Amends ADR-0004 decision 2" is useful; "supersedes ADR-0004" is
    usually false and throws away the parts still in force.
-8. Update the invariant in `CLAUDE.md` in the same change if the decision changed one.
+8. **Write the rule where the agent will meet it, in the same change.** The ADR holds
+   the reasoning; the rule it implies goes in `.claude/rules/` if it governs one
+   subsystem, or `CLAUDE.md` → Non-negotiables if it binds everywhere. Nothing loads
+   `docs/DECISIONS/` by default, so **an ADR that decides something and briefs nobody
+   has not landed** — it will be violated by the next session, which had no reason to
+   open the directory. State the rule there and link the ADR for the reasoning; do
+   not restate the argument in both places.
 
 ## Amend, don't rewrite
 

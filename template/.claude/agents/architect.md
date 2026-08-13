@@ -72,10 +72,11 @@ Then grep the whole tree for the patterns the change participates in.
    with a single caller and no filed work that needs the second. Recommend
    collapsing it to the concrete case.
 
-5. **Rules that should be ADRs.** The boundary test: *would this reasoning have to
-   be repeated in a work item that does not exist yet?* If the branch has quietly
-   established a rule that binds unscoped future work — a new invariant, a new
-   "always do it this way" — and no ADR says so, that is your highest-value output.
+5. **Rules that should be ADRs.** Apply the boundary test the `record-decision` skill
+   states: *would this reasoning have to be repeated in a work item that does not
+   exist yet?* If the branch has quietly established a rule that binds unscoped
+   future work — a new invariant, a new "always do it this way" — and no ADR says
+   so, that is your highest-value output.
    Draft it as a one-line rule stated precisely enough to be violated, and name the
    forces on both sides so a human can accept or reject it.
 

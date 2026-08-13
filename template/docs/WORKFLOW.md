@@ -1,5 +1,19 @@
 # Workflow
 
+## What belongs here
+
+How work gets done: the stages, what each one produces, the tracker moves, and how
+an item ends. The project's own labels, IDs, and commands go in *Project
+configuration* below.
+
+## What does not belong here
+
+What the work *is* (`work/<id>-<slug>/spec.md`), which layer of test covers what
+(`TEST_STRATEGY.md`), or the step-by-step of carrying a stage out — each stage below
+names the skill that is the authority on that.
+
+---
+
 Plan → Implement → Verify, once per work item.
 
 A **work item** is one unit of work: one issue, one branch, one plan, one review,
@@ -131,10 +145,24 @@ this, and why it didn't (`write-spec`, and `TESTING_TRAPS.md` → The autopsy). 
 is the one part of the loop a one-line fix must not skip, because a defect that
 escaped is the only free evidence about the suite anyone gets.
 
-Commit only after reviewing the diff yourself. `git push` stays a human step.
-Commit subjects cite the plan item they land — `042.3: pin restore against the
-ground-plane fallback` — which is what makes partial progress on a branch that
-takes three days legible in `git log` without opening a single diff.
+Commit freely as you go, reading each diff yourself before you do. **The review
+surface is the working tree against the merge-base, plus untracked files** — not the
+commit list — so checkpoints cost the review nothing, and nothing is ever gained by
+resetting, stashing, or amending to present a tidy history. Commit subjects cite the
+plan item they land — `042.3: pin restore against the ground-plane fallback` — which
+is what makes partial progress on a branch that takes three days legible in
+`git log` without opening a single diff. `git push` stays a human step.
+
+### What an approval covers
+
+**A bare "approved", answering a summary of what happens next, authorises the whole
+tail that summary described** — commit, merge, close, report — and is not to be
+re-asked a step at a time. **A narrower word authorises only what it says:**
+"commit" is not "push", "fix it" is not "and merge it".
+
+The summary is therefore the contract. Before asking, say what the tail is, in the
+order it will happen; the approval covers that list and nothing you thought of
+afterwards. Anything else is a new ask, however small.
 
 ## Plan
 
@@ -163,8 +191,13 @@ so; the tracker shows it open and looking untouched.
 
 ## Verify
 
-Run the narrowest suite that covers the criteria first, then broaden when
-practical. Then hand the diff to a **fresh** reviewer — the `reviewer` agent, or
+Run the narrowest suite that covers the criteria first, then **run full verification
+before reporting** — not when it is convenient. The two answer different questions:
+a focused run tells you the thing you just wrote does what you meant, and it cannot
+tell you what you broke three modules away, which is exactly what a passing focused
+run tempts you to assume. **A focused run is never grounds for calling work done.**
+
+Then hand the diff to a **fresh** reviewer — the `reviewer` agent, or
 `review-change` in a clean context. Self-review does not satisfy this step.
 
 The `reviewer` agent returns a mechanical verdict: `NEEDS WORK` if it raised any

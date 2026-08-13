@@ -154,9 +154,10 @@ whether it blocks.
 
 8. **Closing hygiene.** If the branch claims the item is done: every criterion
    resolved, `spec.md` → Status flipped, `notes.md` promoted before it dies — a
-   decision to an ADR, a vacuous-test shape to `TESTING_TRAPS.md`, a risk to the
-   register, a repeated correction to `CLAUDE.md` → Gotchas — and commit messages
-   citing the item id, which is the only work-item→commit link there is. A
+   decision to an ADR *with the rule it implies written into `.claude/rules/` or the
+   non-negotiables in the same change*, a vacuous-test shape to `TESTING_TRAPS.md`, a
+   risk to the register, a repeated correction to `CLAUDE.md` → Gotchas — and commit
+   messages citing the item id, which is the only work-item→commit link there is. A
    half-closed item is a blocker on a "done" claim, and a non-issue on partial
    progress deliberately left open.
 

@@ -41,7 +41,7 @@ CLAUDE.local.md
 
 ```
 template/
-  CLAUDE.md                      Short, always loaded: stack, commands, structure, non-negotiables, gotchas.
+  CLAUDE.md                      Short, always loaded: role, stack, commands, structure, non-negotiables, gotchas.
   AGENTS.md                      Symlink to CLAUDE.md, so non-Claude agents read the same file.
   CLAUDE.local.md.example        Machine-local notes. Copy, gitignore.
 
@@ -58,7 +58,7 @@ template/
       plan-feature/                Plan stage. Produces a plan and nothing else.
       implement-feature/           Implement stage. Test-first, increment-verified, stops when reality diverges.
       review-change/               Independent review — of the tests as much as the code.
-      record-decision/             When to write an ADR, and how to amend rather than rewrite.
+      record-decision/             ADR or work item, how to amend rather than rewrite, and shipping the rule with it.
       sync-tickets/                Spec → tracker issues, idempotent, reports drift instead of resolving it.
     agents/
       architect.md                 Advisory, whole-tree. Convention drift, ADR conformance, duplication.
@@ -73,7 +73,7 @@ template/
     RISK_REGISTER.md             Material risks, with mitigations and owners.
     DECISIONS/                   ADR template.
     work/TEMPLATE/               Copy per work item.
-      spec.md                      Source, priority, what and why, acceptance criteria, rejected alternatives.  (before Plan)
+      spec.md                      Source, priority, what and why, acceptance criteria, alternatives considered.  (before Plan)
       plan.md                      The agreed plan, with the mutation each test must catch.  (end of Plan)
       notes.md                     Findings, deferrals, mutations run.       (during Implement/Verify)
       PRD.md                       Only when the work spans several items.
@@ -81,6 +81,14 @@ template/
 ```
 
 ## The ideas worth keeping if you keep nothing else
+
+**The agent has a role, and the goal has a tension in it.** `CLAUDE.md` opens by
+naming who the agent is, who it works with, what that person knows that it does not,
+and the goal they share — stated so it can be traded against. Then it names the
+tension in that goal, because there always is one: ship the smallest thing that
+helps, except where a wrong answer costs someone something real, and there
+*plausible* is not shippable. Without that paragraph the non-negotiables read as
+arbitrary ceremony instead of as the price of a specific risk.
 
 **Work items are independent.** Each owns a directory, an issue, a branch, and its
 own status, so nothing has to be reordered, renumbered, or reopened when priorities
@@ -93,6 +101,18 @@ implementation is how scope creeps, and a reviewer holding the implementer's
 assumptions is not an independent reviewer. Because context does not survive the
 boundary, the agreed plan is written to `plan.md` and posted to the issue — a plan
 that exists only in a session transcript does not exist.
+
+**An approval covers the tail you described when you asked.** A bare "approved",
+answering a summary of what happens next, authorises that whole tail — commit, merge,
+close, report — and is not to be re-asked a step at a time; a narrower word
+authorises only what it says. That makes the summary the contract, and puts the
+burden where it belongs: on saying what is about to happen *before* asking.
+
+**An ADR that briefs nobody has not landed.** Nothing loads `docs/DECISIONS/` by
+default, so a decision recorded only there gets violated by the next session, which
+had no reason to open the directory. The reasoning stays in the ADR; the rule it
+implies is written into `.claude/rules/` or the non-negotiables in the same change,
+and appears in exactly one place — where a rule is stated is where it is argued with.
 
 **A test is done when it fails on a mutation, not when it passes.** Break the thing
 it covers and confirm it goes red. `TESTING_TRAPS.md` catalogues eleven ways a green

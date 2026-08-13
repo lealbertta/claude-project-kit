@@ -7,6 +7,12 @@ Work top to bottom. Under an hour for the whole pass.
 ### 1. `CLAUDE.md` — the only file that loads every session
 
 - [ ] The one-line description of what this is and who it is for.
+- [ ] **Your role** — who the agent is, who it works with, and what that person
+      knows that it does not, so a domain question has somewhere to go. Then the
+      goal you share, stated so it can be traded against, and the tension in it:
+      what pulls toward shipping the smallest thing, and what makes a merely
+      plausible answer unshippable anyway. Skip this and the non-negotiables below
+      read as ceremony with no cause behind them.
 - [ ] **Stack** — languages, frameworks, datastores, with versions. This is what
       stops the agent proposing an API your version does not have.
 - [ ] **Commands** — install, run, test-one-file, test-all, lint, typecheck, build.
@@ -59,7 +65,10 @@ irreversible. Loosen it once the verification scripts are reliable — not befor
 - [ ] `ARCHITECTURE.md`: the module table and dependency direction, at minimum.
 - [ ] Write ADR-0001 for whatever you already decided while setting this up. You
       have made three or four decisions by now; they are worth more written down
-      today than reconstructed in six months.
+      today than reconstructed in six months. Write the *rule* each one implies into
+      `.claude/rules/` or `CLAUDE.md` → Non-negotiables in the same pass — nothing
+      loads `docs/DECISIONS/` by default, so an ADR nothing cites constrains nobody
+      (`record-decision`).
 
 ### 5. `docs/WORKFLOW.md`
 

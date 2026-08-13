@@ -19,9 +19,22 @@ This is the Implement stage of `docs/WORKFLOW.md`. Start from the agreed
 4. Before declaring an item done, run its mutation check: break the thing the test
    covers and confirm the test goes red. Record which mutations you ran. If a
    mutation survives, the test is the defect — fix the test in this cycle.
-5. Run the broader verification command before completion when practical.
+5. Run **full verification** before declaring the item done — not the targeted tests
+   you have been running, and not "when practical". A focused run cannot see what
+   you broke three modules away; `docs/WORKFLOW.md` → Verify has the argument.
 6. Update ADRs, the work item's `notes.md`, fixtures, and contract documentation when a
    contract moved. A change whose contracts moved is not complete while those are stale.
+
+## Commit as you go
+
+Commit at each plan item, with the item id in the subject. **Review reads the
+working tree against the merge-base, including uncommitted and untracked files**
+(`docs/WORKFLOW.md` → Session shape), so checkpoints cost the review nothing and
+they are what makes a three-day branch legible in `git log`.
+
+**Never reset, stash, revert, or amend to make the diff look right for review.** The
+reviewer sees the work in whatever state it is in; rewriting history to present
+something tidy destroys work to solve a problem that does not exist.
 
 ## When reality contradicts the plan
 
