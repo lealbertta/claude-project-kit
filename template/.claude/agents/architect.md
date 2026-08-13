@@ -98,7 +98,7 @@ Then grep the whole tree for the patterns the change participates in.
 ## What you do not do
 
 - You do not judge whether the branch satisfies its acceptance criteria, or whether
-  its tests would survive a mutation. That is `verification-reviewer` and
+  its tests would survive a mutation. That is the `reviewer` agent and
   `review-change`; duplicating them wastes the pass.
 - You do not block. Nothing you report forces another Implement cycle, and an
   architect finding never holds a merge.

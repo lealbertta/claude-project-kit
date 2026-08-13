@@ -104,7 +104,7 @@ docs/DECISIONS/              ADR template + your first decision
 | `.claude/rules/` | A subsystem has rules that are noise elsewhere |
 | `plan-feature` + `implement-feature` | A change first spans several sessions |
 | `docs/work/<id>-<slug>/` | You first lose track of what a change was for |
-| `verification-reviewer` | You first ship something a self-review missed |
+| `reviewer` | You first ship something a self-review missed |
 | `docs/WORKFLOW.md` | You have a tracker and more than one thing in flight |
 | `PRODUCT.md` → Next / Someday | You start forgetting what you decided not to do |
 | `PRD.md` | One piece of work clearly needs several branches |
@@ -144,11 +144,11 @@ mutation each test must catch is a plan you have actually thought through.
 
 **Why review agents are separate, and why neither can edit.** A reviewer that fixes
 things stops reporting them, and the finding disappears into a diff nobody reads —
-so neither `architect` nor `verification-reviewer` gets `Edit` or `Write`. Both do
-get `Bash`, one to run the suite and the other to read git history, and that is
-exactly the grant that could slide from reviewing into fixing. Where the tool list
-stops being the constraint the instructions have to be, so each says what its `Bash`
-is for and the architect says outright that it never modifies the tree.
+so neither `architect` nor `reviewer` gets `Edit` or `Write`. Both do get `Bash`,
+one to read git history and the other to actually run the suite, and that is exactly
+the grant that could slide from reviewing into fixing. Where the tool list stops
+being the constraint the instructions have to be, so each says what its `Bash` is for
+and states outright that it never modifies the tree.
 
 **Why the architect is advisory and the reviewer is not.** The reviewer answers a
 closed question — does this change do what its spec said, do its tests have teeth —
@@ -156,6 +156,16 @@ and the answer gates a merge. The architect asks an open one about the whole tre
 where the honest answer is often "this is fine for now". Make that a gate and it
 becomes either a rubber stamp or an argument at the worst possible moment, so its
 output is work items and ADR proposals a human weighs later instead.
+
+**Why the reviewer's verdict is mechanical.** `NEEDS WORK` if and only if there is at
+least one `blocker`, and every finding is tagged with exactly one severity when it is
+written. The alternative — a reviewer weighing its own findings into an overall
+impression at the end — is a loop that does not terminate, because the same branch
+can read as *nearly there* on one pass and *not quite* on the next with nothing having
+changed. Deciding severity per finding, and deriving the verdict by counting, is what
+makes "send it back to Implement" an answer rather than a mood. It also forces the
+useful discipline: to call something a blocker you have to say which line and what
+fix, and a finding that cannot survive that is a `should`.
 
 **Why mutation checks are in the loop rather than a nice-to-have.** In the source
 project, an independent review ran mutations the implementing session had not, and

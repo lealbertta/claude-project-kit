@@ -62,7 +62,7 @@ template/
       sync-tickets/                Spec → tracker issues, idempotent, reports drift instead of resolving it.
     agents/
       architect.md                 Advisory, whole-tree. Convention drift, ADR conformance, duplication.
-      verification-reviewer.md     Runs commands. Attacks the tests, reports per criterion.
+      reviewer.md                  Work-item-scoped. Runs the checks, attacks the tests, verdicts the branch.
 
   docs/
     PRODUCT.md                   Vision and pillars (frozen) + Now / Next / Someday (weekly).

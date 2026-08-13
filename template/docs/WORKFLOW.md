@@ -137,9 +137,14 @@ If reality contradicts the plan, stop and report. See Re-entry.
 ## Verify
 
 Run the narrowest suite that covers the criteria first, then broaden when
-practical. Then hand the diff to a **fresh** reviewer — the
-`verification-reviewer` agent, or `review-change` in a clean context. Self-review
-does not satisfy this step.
+practical. Then hand the diff to a **fresh** reviewer — the `reviewer` agent, or
+`review-change` in a clean context. Self-review does not satisfy this step.
+
+The `reviewer` agent returns a mechanical verdict: `NEEDS WORK` if it raised any
+`blocker`, otherwise `READY FOR HUMAN REVIEW`. A `NEEDS WORK` verdict re-enters at
+Implement (see Re-entry) and the item comes back for another pass. Its `should` and
+`question` findings never force that loop on their own — `question` is where a
+Gated criterion is reported, since only the human can close one.
 
 Resolve **every** criterion to one of three outcomes before reporting. Do not stop
 at the first failure: the test run is already paid for, so extract every

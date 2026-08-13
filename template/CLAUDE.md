@@ -48,8 +48,8 @@ Decisions -> `docs/DECISIONS/`. Anything that changes weekly -> not here at all.
 4. Keep the change scoped to what was asked. No unrelated cleanup.
 5. New work starts from a spec (`write-spec`), and a change spanning several files
    is planned before it is edited (`plan-feature`). No edits until the plan is agreed.
-6. Hand nontrivial diffs to a fresh reviewer — the `review-change` skill or the
-   `verification-reviewer` agent. Never self-review.
+6. Hand nontrivial diffs to a fresh reviewer — the `reviewer` agent or the
+   `review-change` skill. Never self-review.
 7. <Never <X> without an approved ADR (ADR-000N).>
 
 <!-- Add two or three invariants of your own at 7, 8, 9 — the rules whose violation
