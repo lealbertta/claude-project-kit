@@ -15,7 +15,7 @@ Check:
 - External-service and resource isolation, and lifetime ownership
 - Transaction, undo, and persistence boundaries
 - Extensibility through reusable configuration rather than per-case special code
-- Compatibility with the project's ADRs and current milestone
+- Compatibility with the project's ADRs and the work item's `spec.md`
 - Whether a new abstraction is load-bearing or speculative
 
 Return material findings with exact file and line evidence. Distinguish blockers

@@ -20,7 +20,7 @@ This is the Implement stage of `docs/WORKFLOW.md`. Start from the agreed
    covers and confirm the test goes red. Record which mutations you ran. If a
    mutation survives, the test is the defect — fix the test in this cycle.
 5. Run the broader verification command before completion when practical.
-6. Update ADRs, milestone notes, fixtures, and contract documentation when a
+6. Update ADRs, the work item's `notes.md`, fixtures, and contract documentation when a
    contract moved. A change whose contracts moved is not complete while those are stale.
 
 ## When reality contradicts the plan

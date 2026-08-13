@@ -17,9 +17,8 @@ Three problems, one system:
 2. **Evidence.** Work is planned before it is written, verified by someone who did
    not write it, and reported with the commands that prove it — and a test does not
    count until it has been shown to fail on a mutation.
-3. **No false sequencing.** Work items are independent by default. There is no
-   global phase, no ordered task list, and nothing that has to be renumbered when
-   priorities change.
+3. **No false sequencing.** Work items are independent by default, so nothing has
+   to be reordered or renumbered when priorities change.
 
 ## Install
 
@@ -83,9 +82,9 @@ template/
 ## The ideas worth keeping if you keep nothing else
 
 **Work items are independent.** Each owns a directory, an issue, a branch, and its
-own status. There is no global phase file, so nothing has to be reordered, renumbered,
-or reopened when priorities change. `PRODUCT.md` → Next is an unordered set, and
-dependencies are stated on the item that has them rather than implied by position.
+own status, so nothing has to be reordered, renumbered, or reopened when priorities
+change. `PRODUCT.md` → Next is an unordered set, and dependencies are stated on the
+item that has them rather than implied by position.
 
 **Each stage gets a clean context, and the plan is written down.** Plan, implement,
 and review in three separate sessions. Carrying exploration context into

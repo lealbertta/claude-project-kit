@@ -128,14 +128,13 @@ items with the harness already consuming some of that; treat the number as folkl
 but the direction as real. The failure mode is not a missing rule — it is a file so
 long that none of it is read closely.
 
-**Why there is no phase file.** The source project tracked everything in a single
-`CURRENT_PHASE.md` with an ordered task table. It worked until it didn't: the order
-implied dependencies that did not exist, finishing anything out of sequence meant
-editing the table, and the per-task status cells grew into thousands of words of
-findings that existed nowhere else and could not be found by anyone looking for
-them. Work items with their own folders fix all three — independent status, no
-implied order, and `notes.md` that is explicitly disposable once its durable
-findings are promoted.
+**Why work items get their own folders.** The source project tracked everything in
+one ordered task table instead. It worked until it didn't: the order implied
+dependencies that did not exist, finishing anything out of sequence meant editing
+the table, and the per-task status cells grew into thousands of words of findings
+that existed nowhere else and could not be found by anyone looking for them. A
+folder per item fixes all three — independent status, no implied order, and
+`notes.md` that is explicitly disposable once its durable findings are promoted.
 
 **Why the plan is written to a file and posted to the issue.** The three-session
 split only works if the plan survives the session boundary. It is also a forcing
