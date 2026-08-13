@@ -110,6 +110,7 @@ docs/DECISIONS/              ADR template + your first decision
 | `PRD.md` | One piece of work clearly needs several branches |
 | `sync-tickets` | Keeping the tracker in step by hand becomes the annoying part |
 | `RISK_REGISTER.md` | A risk survives more than one conversation |
+| `architect` | The same pattern turns up in a third place, or an ADR stops describing the code |
 
 Do not start with all of it on a weekend project. Do start with the `CLAUDE.md`
 non-negotiables and `TESTING_TRAPS.md`, including on the weekend project.
@@ -144,7 +145,16 @@ mutation each test must catch is a plan you have actually thought through.
 **Why reviewers are separate agents with narrowed tools.** `architecture-reviewer`
 has Read/Grep/Glob and nothing else, so it cannot slide from reviewing into fixing.
 A reviewer that fixes things stops reporting them, and the finding disappears into
-a diff nobody reads.
+a diff nobody reads. Where one genuinely needs `Bash` — `verification-reviewer` to
+run the suite, `architect` to read git history — its instructions have to say what
+the tool is for, because the tool list no longer says it on its own.
+
+**Why the architect is advisory and the reviewers are not.** The reviewers answer a
+closed question — does this change do what its spec said, do its tests have teeth —
+and the answer gates a merge. The architect asks an open one about the whole tree,
+where the honest answer is often "this is fine for now". Make that a gate and it
+becomes either a rubber stamp or an argument at the worst possible moment, so its
+output is work items and ADR proposals a human weighs later instead.
 
 **Why mutation checks are in the loop rather than a nice-to-have.** In the source
 project, an independent review ran mutations the implementing session had not, and
