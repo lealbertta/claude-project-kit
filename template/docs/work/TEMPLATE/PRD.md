@@ -14,8 +14,16 @@ This file is the parent. Its child work items live in subfolders beside it:
           spec.md ...
 -->
 
-- Epic: <#41>
-- Status: <Proposed | Agreed | In progress | Done | Abandoned>
+- **Epic:** <#41>
+- **Status:** <Proposed | Agreed | In progress | Done | Abandoned>. The tracker is
+  the truth and wins any disagreement; this field exists so a PRD pasted into a
+  chat is still self-describing.
+- **Source:** <where this came from — a person and a date, a review, a run of
+  support tickets. Prose citations are fine and do not need to resolve as links.>
+- **Sized:** <rough number of work items, and how many have landed.>
+- **Priority:** <High | Medium | Low>, then the reason. Story-level `[P1]` tags
+  rank work *within* the feature; this one ranks the feature against everything
+  else.
 
 ## Overview and problem statement
 
@@ -24,9 +32,8 @@ falsifiable.>
 
 **The problem.** <What the current state prevents, in terms a user would recognize.>
 
-**Why now, and why not <the obvious alternative>.** <The alternative someone will
-raise in review, and why it loses. Writing it once here is cheaper than defending
-it four times.>
+**Why now.** <What changed to make this worth doing at this point and not later.
+The alternatives it beat go in *Alternatives considered* below.>
 
 ## User stories
 
@@ -73,6 +80,21 @@ already reference the old ones. Never renumber, never reuse.
 
 - **NFR-1** — <measurable. "Fast" is not one. "The answer is a function of position
   only, never of how many times it was asked" is.>
+
+## Alternatives considered
+
+The shapes this feature could have taken, and why each lost. Not optional: at PRD
+scale the rejected shape is the one that gets re-proposed by whoever joins next,
+and re-arguing it costs more than writing it down once did. Number them; they get
+cited from child items and from ADRs.
+
+1. **<A different shape for the whole feature>** — <why it lost>
+2. **<Buy / adopt / extend something existing instead of building>** — <why it lost>
+3. **<Do nothing>** — <what happens if this is never built. Where that answer is
+   "not much", say so and reconsider the feature.>
+
+A rejection whose reason constrains work beyond this feature belongs in
+`docs/DECISIONS/` as well; cite the ADR from the line here.
 
 ## Out of scope
 

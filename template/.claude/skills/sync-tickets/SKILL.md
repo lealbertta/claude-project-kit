@@ -9,8 +9,26 @@ Turn a spec into tracker issues without creating duplicates, and report where th
 spec and the tracker have drifted apart.
 
 **The rule this rests on: the spec holds requirements, the tracker holds state.**
-Neither writes into the other's column. Do not copy status into the spec, and do
-not treat an edited issue body as a requirement change.
+Neither writes into the other's column. Do not treat an edited issue body as a
+requirement change.
+
+### The one copy of state, and why it is allowed
+
+A spec carries a `Status:` line anyway. It is a courtesy copy so that a spec
+pasted into a chat is still self-describing, and **the tracker wins any
+disagreement** — nothing reads the spec's copy to decide anything, no step is
+gated on it, and a stale one is a cosmetic defect rather than a wrong answer.
+That is the whole license. Anything beyond it — a due date, an assignee, a
+percentage — is mirrored state that goes stale without anyone noticing, and does
+not go in the spec.
+
+Report a disagreement between the two as drift, in the same list as the rest. Do
+not fix it silently, in either direction.
+
+`Priority:` runs the other way. It is a judgement with its reason attached, so it
+lives in the spec and the tracker's label is the copy — mirror it onto the issue
+where you use priority labels, and report the drift when a triage session changes
+one and not the other.
 
 ## The join key
 
@@ -51,6 +69,7 @@ its criteria sitting in unclosed children.
    - Requirements with no issue
    - Issues whose requirement no longer exists in the spec
    - Issues whose title or criteria no longer match the spec
+   - Specs whose `Status:` or `Priority:` line disagrees with the tracker
 5. Ask before creating or closing anything. Tracker writes are outward-facing and
    a mis-scoped run makes dozens of them.
 6. Write the result to `<work-dir>/tickets.md` as a generated table, headed **"Generated

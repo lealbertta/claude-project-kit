@@ -21,6 +21,8 @@ docs/work/042-restore-reads-last-support/
 ```
 
 Copy `docs/work/TEMPLATE/` to start one. The number matches the issue.
+`docs/work/EXAMPLE-042-restore-reads-last-support/` is the same three files filled
+in, and is the faster way to see what is expected of each.
 
 ### When the work is bigger than one item
 
@@ -50,6 +52,7 @@ definition of done. Acceptance criteria never become tickets of their own.
 | Repository | `<owner>/<repo>` |
 | Work-item label | `<task>` |
 | Blocked label | `<blocked>` |
+| Priority labels | `<p-high>`, `<p-medium>`, `<p-low>` — the copy; the spec's `Priority:` line holds the reason |
 | Board | `<https://github.com/users/<owner>/projects/<N>>` |
 | Board project ID | `<PVT_...>` |
 | Status field ID | `<PVTSSF_...>` |
@@ -67,6 +70,18 @@ gh issue list --state open --label <task> --limit 100 \
 
 That returns the eligible set, not a queue — choose from it. Confirm the choice
 with the human before starting, then assign yourself.
+
+Each item's `spec.md` carries a **Priority** with the reason on the same line.
+Read the reasons of the high ones before choosing; they are claims, and a claim
+written three weeks ago is often no longer true. Priority narrows the set — it
+does not order it, and it never overrides a *Depends on*.
+
+```sh
+grep -rl 'Priority:\*\* High' docs/work/*/spec.md
+```
+
+That works with no tracker at all, which is the point: it is the fallback for the
+scaled-down setup where this file is not installed.
 
 ## Board state
 
@@ -117,6 +132,9 @@ is the one part of the loop a one-line fix must not skip, because a defect that
 escaped is the only free evidence about the suite anyone gets.
 
 Commit only after reviewing the diff yourself. `git push` stays a human step.
+Commit subjects cite the plan item they land — `042.3: pin restore against the
+ground-plane fallback` — which is what makes partial progress on a branch that
+takes three days legible in `git log` without opening a single diff.
 
 ## Plan
 
@@ -138,6 +156,10 @@ item by item, test-first — the failing test comes before the implementation, n
 after. Keep `notes.md` open as you go.
 
 If reality contradicts the plan, stop and report. See Re-entry.
+
+An item that ends **Blocked** or **Failed** updates its `Sized:` line to what is
+left rather than what it was. That line is the only place a half-landed item says
+so; the tracker shows it open and looking untouched.
 
 ## Verify
 

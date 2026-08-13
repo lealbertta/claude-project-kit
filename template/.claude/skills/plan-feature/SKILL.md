@@ -22,10 +22,13 @@ This is the Plan stage of `docs/WORKFLOW.md`. It produces a plan and nothing els
    tests to write.
 8. For each test, name the mutation it must catch. If you cannot name one, the
    test is decoration and the plan is not finished.
-9. Mark any criterion that this environment cannot settle (real hardware, real
-   users, visual judgement) and name the check that would close it.
-10. Identify migration and compatibility concerns, and the rollback plan.
-11. Do not edit implementation files. Output the plan and wait for approval.
+9. Number the changes `<item>.<n>` — `042.1`, `042.2`. Commits cite them, so the
+   numbers are permanent: a change added later takes the next free one even where
+   it belongs logically in the middle.
+10. Mark any criterion that this environment cannot settle (real hardware, real
+    users, visual judgement) and name the check that would close it.
+11. Identify migration and compatibility concerns, and the rollback plan.
+12. Do not edit implementation files. Output the plan and wait for approval.
 
 Ask hard questions of your own plan before presenting it: which item here is
 load-bearing and which is speculative; what does this change make *reachable*
@@ -39,9 +42,9 @@ world was simpler than it is now.
 
 **Non-goals:** <what this deliberately does not touch>
 
-| # | Change | File(s) | Serves | Proven by | Mutation it must catch |
-|---|--------|---------|--------|-----------|------------------------|
-| 1 | <what and why> | `path` | AC-0 | `TestName` | <what to break so it fails> |
+| ID | Change | File(s) | Serves | Proven by | Mutation it must catch |
+|----|--------|---------|--------|-----------|------------------------|
+| 042.1 | <what and why> | `path` | AC-0 | `TestName` | <what to break so it fails> |
 
 **Implications:** schema / undo / performance / compatibility / lifecycle —
 one line each, or "none" with the reason.

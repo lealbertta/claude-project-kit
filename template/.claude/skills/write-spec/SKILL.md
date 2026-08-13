@@ -15,6 +15,11 @@ Two sizes. Pick the smaller one that fits.
 Most work is the first. Reach for a PRD only when you already know the work needs
 more than one branch.
 
+`docs/work/EXAMPLE-042-restore-reads-last-support/spec.md` is a filled-in one.
+Read it before the first spec on a project: it shows the level of specificity a
+criterion needs, and what an alternative and a divergence look like written
+honestly.
+
 ## Procedure
 
 This is written **with** the developer, not for them. Ask before assuming.
@@ -33,9 +38,43 @@ This is written **with** the developer, not for them. Ask before assuming.
 6. Tag `[Gated]` every criterion only a real device, real users, real load, or
    human eyes can settle, and name the check that would close it. Do not leave it
    implicit — an untagged gated criterion gets reported as passing.
-7. List non-goals, and mark each *deferred* or *excluded*.
-8. Record open questions with an owner. Ask the developer for the answers you
-   need now; leave the rest open rather than guessing and calling it a decision.
+7. Write **Alternatives considered** before the spec is called done — see below.
+8. List non-goals, and mark each *deferred* or *excluded*.
+9. Fill the header block. **Source** is who asked and when; **Sized** is a rough
+   number of sessions; **Priority** is High/Medium/Low *with the reason on the
+   same line*. Ask for what you do not know rather than inventing it — an invented
+   priority is worse than a missing one, because it gets acted on.
+10. Record open questions with an owner. Ask the developer for the answers you
+    need now; leave the rest open rather than guessing and calling it a decision.
+
+## Alternatives considered
+
+The section people skip, and the one that pays. A spec that records only the
+chosen approach cannot stop the rejected one being proposed again in six weeks,
+and it cannot tell a later reader whether the choice is still right — because the
+reason is the only part that transfers.
+
+- Write **two or more**, numbered, each with the reason it lost. A list of one is
+  a decision defending itself.
+- Include the honest baseline — *do nothing* — wherever it is a real option. An
+  item whose baseline was never stated is an item nobody checked was worth doing.
+- A rejection is not "we preferred X". Name what it costs: the case it handles
+  worse, the thing it makes unreachable, the work it doubles.
+
+**Where it goes.** Local reasons stay in `spec.md`. A rejection whose reason
+constrains work *beyond this item* is a decision — write the ADR
+(`record-decision`) and cite it from the list, so the spec stays short and the
+constraint is somewhere the next item will actually look.
+
+## Priority
+
+One of High, Medium, Low, and then the reason, on the same line. Both halves are
+load-bearing: the word is what makes the set greppable, and the reason is what
+makes it arguable instead of a queue position someone has to accept.
+
+This does **not** reintroduce ordering. `PRODUCT.md` → Next stays an unordered
+set, and priority is a claim about *this* item that stands on its own — a real
+sequencing constraint is still a *Depends on* line and nothing else.
 
 ## When the work item is a bug fix
 

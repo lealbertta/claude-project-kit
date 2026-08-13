@@ -73,10 +73,11 @@ template/
     RISK_REGISTER.md             Material risks, with mitigations and owners.
     DECISIONS/                   ADR template.
     work/TEMPLATE/               Copy per work item.
-      spec.md                      What and why, acceptance criteria.        (before Plan)
+      spec.md                      Source, priority, what and why, acceptance criteria, rejected alternatives.  (before Plan)
       plan.md                      The agreed plan, with the mutation each test must catch.  (end of Plan)
       notes.md                     Findings, deferrals, mutations run.       (during Implement/Verify)
       PRD.md                       Only when the work spans several items.
+    work/EXAMPLE-042-…/          A filled-in work item. Read it before writing your first. Delete it after.
 ```
 
 ## The ideas worth keeping if you keep nothing else
@@ -111,6 +112,19 @@ you accumulate one test per bug and never learn the shape you keep falling for.
 hardware, real users, real load, or human eyes can settle. A gated criterion is
 never a pass and never a failure; it is outstanding, and it names the check that
 would close it. Two-outcome reporting is what turns "we didn't check" into "green".
+
+**A rejected alternative is worth more than the chosen one.** Every spec numbers
+the approaches that lost and why, including the honest *do nothing* baseline. The
+chosen approach is visible in the code forever; the rejected one is visible
+nowhere, so it gets re-proposed six weeks later by someone who only sees the
+outcome, and the argument runs again from the start. Reasons local to the item
+stay in its spec; a reason that constrains later work becomes an ADR.
+
+**Every item says where it came from and what it is worth.** A `Source` line — a
+person and a date, a review, a bug hit in anger — is who to ask when a criterion
+turns out to be ambiguous, and what lets a stale item be killed honestly rather
+than inherited. A `Priority` carries its reason on the same line, because a
+priority you cannot argue with is a queue position wearing a label.
 
 **Record divergence instead of restating it.** When what shipped differs from what
 the spec said, both go in the document. Editing the spec to match the code leaves

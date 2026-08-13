@@ -17,6 +17,10 @@ paths:
   truth wins, and the other is corrected in the same change.
 - Keep `CLAUDE.md` concise and broadly applicable. Move subsystem details to
   path-scoped rules or skills.
+- **Write down what was rejected, with the reason it lost.** A spec or PRD that
+  records only the chosen approach cannot stop the rejected one being re-proposed,
+  and cannot tell a later reader whether the choice still holds. Local reasons stay
+  in the work item; a reason that constrains later work becomes an ADR.
 - Mark assumptions, unresolved decisions, and measured results clearly. A number
   that was computed and a number that was guessed must not read the same.
 - When a document describes a command, keep the command runnable or label it as a

@@ -72,14 +72,24 @@ gh project list --owner <owner>
 gh project field-list <N> --owner <owner> --format json
 ```
 
-- [ ] Two labels are enough: a work-item label and a blocked label.
+- [ ] Two labels are enough to start: a work-item label and a blocked label. Add
+      priority labels only if you will actually filter on them — the reason lives in
+      the spec either way, and a label with no reason behind it is the thing this
+      kit is trying not to have.
 - [ ] No board? Delete the Board state section. The loop works without one; it does
       not work without the written plan.
 
 ### 6. First work item
 
+- [ ] Read `docs/work/EXAMPLE-042-restore-reads-last-support/` first — spec, plan,
+      and notes, filled in. It is faster than reading the templates and it is the
+      only place the kit shows what a rejected alternative, a gated criterion, and
+      a recorded divergence look like when they are real rather than bracketed.
 - [ ] `cp -R docs/work/TEMPLATE docs/work/001-<slug>`, delete `PRD.md` unless the
       work spans several items, and fill in `spec.md`. Use the `write-spec` skill.
+- [ ] Delete the example folder once you have two work items of your own. A
+      borrowed example that outlives its usefulness gets cited as if it were house
+      style.
 
 ---
 
@@ -111,6 +121,13 @@ docs/DECISIONS/              ADR template + your first decision
 | `sync-tickets` | Keeping the tracker in step by hand becomes the annoying part |
 | `RISK_REGISTER.md` | A risk survives more than one conversation |
 | `architect` | The same pattern turns up in a third place, or an ADR stops describing the code |
+
+With no tracker installed, the spec header block is the whole system: `Status:` is
+read where the tracker would have been, and `grep -rl 'Priority:\*\* High'
+docs/work/*/spec.md` is how the next thing to do gets found. That is the one
+configuration where the spec's own fields are authoritative rather than a copy —
+worth knowing before the first time you add a tracker and have to say which side
+wins.
 
 Do not start with all of it on a weekend project. Do start with the `CLAUDE.md`
 non-negotiables and `TESTING_TRAPS.md`, including on the weekend project.
@@ -217,3 +234,44 @@ moves. Anything local is generated from it and never hand-edited.
 **Why every deferred note names an owner.** One six-slice phase generated dozens of
 "we noticed X and did not fix it". The ones that named the ticket that owned them
 got closed. The ones that did not, did not.
+
+**Why a spec records what it rejected.** The approach that shipped is legible from
+the code for as long as the code exists. The three that lost are legible from
+nothing, so the first person who did not sit in the conversation proposes one of
+them again — and because the reason it lost was never written, the argument runs
+from the beginning, with less information than it had the first time. A rejection
+with no reason attached does not help: "we preferred the other one" is the part
+everyone already inferred. What transfers is the cost — the case it handles worse,
+the thing it makes unreachable, the work it doubles. The *do nothing* baseline is
+in the list for the same reason and one more: it is the only line that asks
+whether the item was worth doing, and an item nobody asked that about is how a
+backlog fills with work that was merely proposed.
+
+**Why the spec carries a `Status:` line when the tracker owns status.** Because a
+spec gets pasted into a chat window, and one that cannot say what state it is in
+gets answered from memory. It is the single exception to "never mirror state", and
+it survives only because it is fenced: the tracker wins any disagreement, nothing
+is gated on the spec's copy, and a stale one is cosmetic rather than wrong. The
+fence is what makes it safe, so it is written down in `sync-tickets` next to the
+rule it breaks. Anything else — assignee, dates, percent complete — has no such
+excuse and goes stale silently, which is the failure this kit spends most of its
+pages avoiding.
+
+**Why there is a priority at all, in a kit that refuses to order work.** Priority
+and sequence are different claims, and conflating them is what made the source
+project's ordered task table unusable. A sequence says *this cannot start until
+that lands*, which is a fact about dependencies and lives on the item as *Depends
+on*. A priority says *this is worth doing sooner*, which is a judgement, is
+frequently wrong, and goes stale — so it is written with its reason attached and
+in the same line, where the next reader can see it has expired. `Next` stays an
+unordered set; priority narrows what to pick from it, and never overrides a
+dependency.
+
+**Why the kit ships one filled-in work item.** Every other file here is a template
+with angle brackets, which is honest about what is missing and useless as a model.
+People do not learn a documentation habit from a form; they learn it from one
+completed instance they can copy the *tone* of — how specific a criterion has to be
+before someone else can check it, how short a rejected alternative can be and still
+carry its reason, what a divergence reads like when it was recorded instead of
+edited away. It costs one folder and it is the first thing worth deleting once the
+project has two of its own.
