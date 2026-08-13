@@ -1,0 +1,6 @@
+{
+  "_comment": "Copy to settings.local.json (gitignored). Machine-specific paths and env only — never secrets, since this file is read like any other.",
+  "env": {
+    "<TOOL>_PATH": "/absolute/path/on/this/machine"
+  }
+}

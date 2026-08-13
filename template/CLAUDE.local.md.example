@@ -1,0 +1,15 @@
+# Personal Project Notes
+
+This file is intentionally local. Copy it to `CLAUDE.local.md` and add that name
+to `.gitignore`.
+
+Use it for machine-specific facts that would be wrong for anyone else:
+
+- Preferred editor / local tooling paths
+- Reference hardware or test accounts available on this machine
+- Local environment quirks worth remembering across sessions
+- Temporary experiment notes
+
+Never store certificates, passwords, tokens, API keys, or provisioning profiles
+here. `.claude/settings.json` denies reads of common secret paths, but this file
+is not one of them — it is loaded into context in full.

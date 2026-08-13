@@ -1,0 +1,47 @@
+{
+  "_comment": "Permission posture. Principle: allow the verification commands you want run without friction, ask for anything that changes shared configuration or history, deny secrets, generated output, and irreversible git. Delete this _comment key and replace the <PLACEHOLDER> entries.",
+  "permissions": {
+    "allow": [
+      "Bash(<./scripts/test.sh>*)",
+      "Bash(<./scripts/verify.sh>*)",
+      "Bash(<./scripts/build.sh>*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git check-ignore *)",
+      "Bash(gh issue view*)",
+      "Bash(gh issue list*)",
+      "Bash(gh pr view*)",
+      "Bash(gh pr diff*)"
+    ],
+    "ask": [
+      "Edit(/<dependency-manifest-dir>/**)",
+      "Edit(/<build-config-dir>/**)",
+      "Edit(/.github/**)",
+      "Bash(git commit *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Edit(**/.env)",
+      "Read(**/.env.*)",
+      "Edit(**/.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.p12)",
+      "Read(**/*.key)",
+      "Read(**/id_rsa*)",
+      "Read(/<generated-output-dir>/**)",
+      "Edit(/<generated-output-dir>/**)",
+      "Read(/<build-artifacts-dir>/**)",
+      "Edit(/<build-artifacts-dir>/**)",
+      "Read(/<log-dir>/**)",
+      "Edit(/<log-dir>/**)",
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
+      "Bash(git filter-branch *)"
+    ]
+  }
+}
