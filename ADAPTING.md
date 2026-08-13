@@ -175,6 +175,27 @@ guard branch nothing reached, and two fields nothing compared. None were bugs in
 change. All were tests that did not work. The suite was large and mostly green and
 that was not evidence of much.
 
+**Why there is no mutation score, and no coverage threshold.** Coverage measures
+that a line ran, not that anything checked it — the correlation with test
+effectiveness largely disappears once you control for how many tests were written,
+and methods at full line coverage routinely still have untested behaviour. Mutation
+is the better signal, but the industrial lesson from running it at scale is that
+mutation *adequacy* is neither practical nor desirable: what works is mutating only
+the changed lines, suppressing arid ones, and delivering each survivor as a review
+comment on a specific line. So the kit reports a named surviving mutation and never
+a ratio. A ratio invites a threshold, a threshold invites tests written to move it,
+and the cheapest way to move either number is to execute lines without asserting
+anything.
+
+**Why a bug fix owes an autopsy.** A regression test stops that one defect coming
+back. The autopsy — which test should have caught this, and why it didn't — is what
+stops the next one, and it is the only measurement of the suite that arrives already
+paid for. Without it a project accumulates one test per bug and never learns the
+shape it keeps falling for, which is exactly how a file like `TESTING_TRAPS.md` ends
+up empty in a codebase that badly needs it. The answer has somewhere to go: a new
+shape is a trap, a repeat is a `CLAUDE.md` → Gotchas line, because a trap claiming a
+second victim means the rule is not holding where it is currently written.
+
 **Why "Gated" is a first-class outcome.** Without it, a criterion only real hardware
 can settle gets reported as passing (false) or failing (also false, and it blocks
 the merge). It becomes passing. The third outcome — plus naming the check that would

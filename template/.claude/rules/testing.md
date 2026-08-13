@@ -13,10 +13,18 @@ paths:
   be awaited explicitly.
 - Every bug fix includes a failing regression test written *before* the fix, when
   the behavior is testable.
+- **Every bug fix also names the test that should have caught it, and why it did
+  not.** A defect that got through is evidence about the suite that has already been
+  paid for. See `docs/TESTING_TRAPS.md` → The autopsy; a new failure shape goes in
+  that file before the fix is called done.
 - **A test is not done when it passes. It is done when it fails on a mutation.**
   Remove the behavior, invert the comparison, or delete the constant, and confirm
   the test goes red. Report which mutations were checked. Read
   `docs/TESTING_TRAPS.md` before writing tests for a new rule.
+- **Mutate logic, not narration.** Logging, metrics, and error-message wording are
+  arid: mutations there survive for reasons nobody should act on, and chasing them
+  trains everyone to ignore the mutations that matter. There is no mutation-score
+  target — the output is a named surviving mutation, not a ratio.
 - **Pin the production wiring, not only the rule.** A rule proven by direct unit
   tests can be deleted from the code path that calls it with the whole suite still
   green. At least one test must exercise the composed path.

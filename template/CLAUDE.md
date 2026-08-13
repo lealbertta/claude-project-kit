@@ -40,6 +40,8 @@ Decisions -> `docs/DECISIONS/`. Anything that changes weekly -> not here at all.
 1. Write the failing test before the implementation, for rules, data migrations,
    and bug fixes. Where an automated test cannot express the behavior (feel,
    visuals, real-hardware performance), say so rather than writing a vacuous one.
+   A bug fix also names the test that *should* have caught it and why it did not —
+   see `docs/TESTING_TRAPS.md` → The autopsy.
 2. **IMPORTANT: a test is done when it fails on a mutation, not when it passes.**
    Break the behavior it covers, confirm it goes red, and report which mutations
    you ran. See `docs/TESTING_TRAPS.md`.

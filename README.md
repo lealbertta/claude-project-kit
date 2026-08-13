@@ -69,7 +69,7 @@ template/
     WORKFLOW.md                  Plan → Implement → Verify, per work item. Board state, outcomes, re-entry.
     ARCHITECTURE.md              Modules, dependency direction, data layers, seams.
     TEST_STRATEGY.md             Which layer covers what; fixtures; what only reality can settle.
-    TESTING_TRAPS.md             Eleven ways a passing test proves nothing. Read before writing tests.
+    TESTING_TRAPS.md             Eleven ways a passing test proves nothing, and the autopsy that finds the twelfth.
     RISK_REGISTER.md             Material risks, with mitigations and owners.
     DECISIONS/                   ADR template.
     work/TEMPLATE/               Copy per work item.
@@ -96,7 +96,16 @@ that exists only in a session transcript does not exist.
 **A test is done when it fails on a mutation, not when it passes.** Break the thing
 it covers and confirm it goes red. `TESTING_TRAPS.md` catalogues eleven ways a green
 suite proved nothing — the most common being that the rule is thoroughly tested and
-the production wiring is tested by nothing.
+the production wiring is tested by nothing. There is no mutation score and no
+coverage threshold: the output is a named surviving mutation on the lines this change
+touched, because a ratio invites a threshold and a threshold invites tests written to
+move it.
+
+**A bug fix owes an autopsy.** Which test should have caught this, and why didn't
+it? The regression test stops that defect coming back; the autopsy is what stops the
+next one, and it is the only measurement of a suite that arrives already paid for. A
+new failure shape becomes a trap, a repeat becomes a `CLAUDE.md` gotcha. Skip it and
+you accumulate one test per bug and never learn the shape you keep falling for.
 
 **Three outcomes, not two.** Verified, Failed, and *Gated* — for what only real
 hardware, real users, real load, or human eyes can settle. A gated criterion is

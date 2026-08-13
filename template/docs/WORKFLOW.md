@@ -111,6 +111,11 @@ Not every item needs a full loop. When the change fits in one sentence, **skip
 Plan**: minimal fix plus a regression test, then Verify normally. Implement and
 Verify are never skipped.
 
+A bug fix skipping Plan still owes its **Autopsy** — which test should have caught
+this, and why it didn't (`write-spec`, and `TESTING_TRAPS.md` → The autopsy). That
+is the one part of the loop a one-line fix must not skip, because a defect that
+escaped is the only free evidence about the suite anyone gets.
+
 Commit only after reviewing the diff yourself. `git push` stays a human step.
 
 ## Plan

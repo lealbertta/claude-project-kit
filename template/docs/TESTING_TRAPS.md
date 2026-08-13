@@ -6,6 +6,9 @@ The specific ways tests in *this* project have passed while proving nothing. Add
 trap when you find one; each entry costs a paragraph and saves the next person a
 release. Do not add general testing advice — that is what books are for.
 
+The reliable way to find one is **the autopsy** below. Every trap here started as
+something that got through.
+
 ## What does not belong here
 
 Which tests to write (`TEST_STRATEGY.md`), or how the loop runs (`WORKFLOW.md`).
@@ -22,6 +25,39 @@ mutations you ran and what caught them.
 
 The number that matters is not how many tests exist. It is how many distinct ways
 you can break the code and still be caught.
+
+**Do not mutate arid lines.** Logging, metrics, telemetry, and the wording of error
+messages yield mutations that survive for reasons nobody should act on — and a
+finding nobody should act on teaches people to dismiss the findings they should.
+Mutate the rule, the branch, the constant, the comparison, and the wiring. Leave the
+narration alone.
+
+**Do not chase a score.** Killing every possible mutant is not the goal and is not
+worth what it costs. The useful output is a *named surviving mutation on the lines
+this change touched*, reported where someone can act on it. A ratio invites a
+threshold, and a threshold invites tests written to move it.
+
+---
+
+## The autopsy — where every trap below came from
+
+A defect that reached a human is the cheapest evidence about a suite anyone ever
+gets, because it has already been paid for. Spend it: **a bug-fix work item answers
+two questions in its `spec.md` before the fix is written.**
+
+1. **Which test should have caught this?** Name it. If none exists, that is the
+   finding, and the regression test is the answer.
+2. **Why didn't it?** It ran and asserted the wrong thing; it never ran at all; its
+   fixture made the branch unreachable; it moved with the constant it was pinning.
+   This is the answer worth having, and it is the one that gets skipped.
+
+If (2) names a shape not already below, add it as a trap. If it names one that *is*
+below, say which — a trap with a second victim has earned its place, and a rule
+already written that did not hold is a `CLAUDE.md` → Gotchas line rather than a new
+trap.
+
+"Nothing could have caught it" is a legitimate answer exactly once per behavior:
+record it as a gated check and name what would close it. Twice is the trap.
 
 ---
 

@@ -22,6 +22,17 @@ a criterion.
 - **AC-3** `[Gated]` — <only a real device / real users / real load / human eyes
   can settle this. Name the check that would close it.>
 
+## Autopsy
+
+Bug fixes only. Written before the fix is planned; delete this section otherwise.
+
+- **Should have been caught by:** <the test that existed and passed anyway, or
+  "nothing — no test covered this path">
+- **Why it wasn't:** <asserted the wrong thing / never ran / fixture made the branch
+  unreachable / moved with the constant it was pinning>
+- **Written down as:** <new trap in `docs/TESTING_TRAPS.md`, or the existing trap
+  this is a second instance of — which makes it a `CLAUDE.md` → Gotchas line>
+
 ## Non-goals
 
 - <What this deliberately does not touch, and who owns it instead.>

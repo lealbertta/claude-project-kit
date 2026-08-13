@@ -37,6 +37,24 @@ This is written **with** the developer, not for them. Ask before assuming.
 8. Record open questions with an owner. Ask the developer for the answers you
    need now; leave the rest open rather than guessing and calling it a decision.
 
+## When the work item is a bug fix
+
+One extra section, written **before** the fix is planned, under the heading
+**Autopsy**. It is two lines and it is the highest-value thing in the spec:
+
+- **Should have been caught by:** <the test that existed and passed anyway, or
+  "nothing — no test covered this path">
+- **Why it wasn't:** <it asserted the wrong thing / it never ran / its fixture made
+  the branch unreachable / it moved with the constant it was pinning>
+
+Then act on the second line. A failure shape not already in `docs/TESTING_TRAPS.md`
+goes in it; one that *is* already there names the trap, because a trap with a second
+victim means the rule is not holding where it is written — which is a
+`CLAUDE.md` → Gotchas line.
+
+Writing the regression test without answering these produces a suite that grows one
+test per bug and learns nothing.
+
 ## Questions worth asking before the spec is done
 
 - What is true today that makes this necessary now?

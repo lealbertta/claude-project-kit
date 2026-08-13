@@ -97,7 +97,10 @@ whether it blocks.
      revert the wiring, change the constant. `plan.md` named the mutation each test
      had to catch — check the test actually catches it. **A test that passes against
      a deleted feature is a finding, and usually a larger one than any bug in the
-     diff.**
+     diff.** Mutate logic, not narration: a surviving mutation in logging, metrics,
+     or the wording of an error message is not a finding, and reporting it teaches
+     the implementation agent to discount the ones that are. There is no
+     mutation-score target — report the named survivor, never a ratio.
    - **The shapes to look for**, from `docs/TESTING_TRAPS.md`: the rule tested
      thoroughly while the production wiring is pinned by nothing; an assertion
      expressed in terms of the constant it is supposed to pin; a fixture that makes
@@ -140,7 +143,16 @@ whether it blocks.
    sprinkled defensively through internal code? Comments that merely restate the code
    are a comment, lightly; the architect owns comment hygiene branch-wide.
 
-7. **Closing hygiene.** If the branch claims the item is done: every criterion
+7. **The autopsy, on a bug fix.** If this item fixes a defect, `spec.md` carries an
+   **Autopsy** naming the test that should have caught it and why it did not. Check
+   the second line is a real diagnosis and not a restatement of the bug, and that it
+   was acted on: a new failure shape belongs in `docs/TESTING_TRAPS.md`, and a shape
+   already there belongs in `CLAUDE.md` → Gotchas, because a trap with a second
+   victim means the rule is not holding where it is written. A regression test with
+   no autopsy is a `should`; an autopsy whose finding was never written down is a
+   blocker, since that is the whole reason the loop exists.
+
+8. **Closing hygiene.** If the branch claims the item is done: every criterion
    resolved, `spec.md` → Status flipped, `notes.md` promoted before it dies — a
    decision to an ADR, a vacuous-test shape to `TESTING_TRAPS.md`, a risk to the
    register, a repeated correction to `CLAUDE.md` → Gotchas — and commit messages

@@ -41,6 +41,15 @@ shapes to look for are:
 A passing suite that survives a deleted feature is a finding, and usually a larger
 one than any bug in the diff.
 
+Mutate logic, not narration — a mutation surviving in logging, metrics, or the
+wording of an error message is not a finding, and reporting it trains people to
+discount the findings that are. There is no mutation-score target; report the named
+survivor.
+
+If the change fixes a bug, check `spec.md` → Autopsy: the test that should have
+caught it, why it didn't, and where that was written down. A regression test whose
+lesson went nowhere leaves a suite that grows one test per bug and learns nothing.
+
 ## Report
 
 Findings with file and line references, severity, evidence, and a concrete
