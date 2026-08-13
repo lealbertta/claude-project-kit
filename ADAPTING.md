@@ -142,14 +142,15 @@ split only works if the plan survives the session boundary. It is also a forcing
 function: a plan you must write as a table of changes mapped to criteria and to the
 mutation each test must catch is a plan you have actually thought through.
 
-**Why reviewers are separate agents with narrowed tools.** `architecture-reviewer`
-has Read/Grep/Glob and nothing else, so it cannot slide from reviewing into fixing.
-A reviewer that fixes things stops reporting them, and the finding disappears into
-a diff nobody reads. Where one genuinely needs `Bash` — `verification-reviewer` to
-run the suite, `architect` to read git history — its instructions have to say what
-the tool is for, because the tool list no longer says it on its own.
+**Why review agents are separate, and why neither can edit.** A reviewer that fixes
+things stops reporting them, and the finding disappears into a diff nobody reads —
+so neither `architect` nor `verification-reviewer` gets `Edit` or `Write`. Both do
+get `Bash`, one to run the suite and the other to read git history, and that is
+exactly the grant that could slide from reviewing into fixing. Where the tool list
+stops being the constraint the instructions have to be, so each says what its `Bash`
+is for and the architect says outright that it never modifies the tree.
 
-**Why the architect is advisory and the reviewers are not.** The reviewers answer a
+**Why the architect is advisory and the reviewer is not.** The reviewer answers a
 closed question — does this change do what its spec said, do its tests have teeth —
 and the answer gates a merge. The architect asks an open one about the whole tree,
 where the honest answer is often "this is fine for now". Make that a gate and it

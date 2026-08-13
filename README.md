@@ -62,7 +62,6 @@ template/
       sync-tickets/                Spec → tracker issues, idempotent, reports drift instead of resolving it.
     agents/
       architect.md                 Advisory, whole-tree. Convention drift, ADR conformance, duplication.
-      architecture-reviewer.md     Read-only. Boundaries, data ownership, compatibility.
       verification-reviewer.md     Runs commands. Attacks the tests, reports per criterion.
 
   docs/
