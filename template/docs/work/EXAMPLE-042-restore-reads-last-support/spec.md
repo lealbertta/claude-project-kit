@@ -78,9 +78,10 @@ looking like that is where it always lived.
 - **Why it wasn't:** it asserted on position. Restore produces the right position
   and the wrong support, so a position-shaped assertion is green in precisely the
   case that is broken.
-- **Written down as:** a second instance of `TESTING_TRAPS.md` → *the assertion
-  pins a consequence, not the rule*. A trap with a second victim means the rule is
-  not holding where it is written, so it also became a `CLAUDE.md` → Gotchas line:
+- **Written down as:** a shape not already in `TESTING_TRAPS.md`, added to it as
+  *the assertion pins a consequence, not the rule*. It then took a second victim
+  inside this same item — see `notes.md` → the survivor — and a trap that does not
+  hold where it is written is also a `CLAUDE.md` → Gotchas line:
   *placement tests assert on the support reference, never on coordinates.*
 
 ## Non-goals

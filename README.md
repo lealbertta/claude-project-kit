@@ -77,6 +77,7 @@ template/
       plan.md                      The agreed plan, with the mutation each test must catch.  (end of Plan)
       notes.md                     Findings, deferrals, mutations run.       (during Implement/Verify)
       PRD.md                       Only when the work spans several items.
+                                   `sync-tickets` generates a fourth file, `tickets.md`, where a tracker is in use.
     work/EXAMPLE-042-…/          A filled-in work item. Read it before writing your first. Delete it after.
 ```
 

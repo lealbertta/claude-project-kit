@@ -40,7 +40,8 @@ know, say what you are assuming, and ask.
 - Install: `<...>`
 - Run: `<...>`
 - Test (one file): `<...>` — the working loop while implementing
-- Test (all): `<...>` — before calling anything done; see `docs/WORKFLOW.md` → Verify
+- Test (all) / full verification: `<...>` — before calling anything done; see
+  `docs/WORKFLOW.md` → Verify
 - Lint / format: `<...>`
 - Typecheck: `<...>`
 - Build: `<...>`
@@ -73,8 +74,9 @@ know, say what you are assuming, and ask.
    `review-change` skill. Never self-review.
 7. <Never <X> without an approved ADR (ADR-000N).>
 
-<!-- Add two or three invariants of your own at 7, 8, 9 — the rules whose violation
-     costs a rewrite. Everything else belongs in `docs/ARCHITECTURE.md`. -->
+<!-- Rules 1-6 are supplied; keep them. Replace the placeholder at 7 with two or
+     three invariants of your own — the rules whose violation costs a rewrite.
+     Everything else belongs in `docs/ARCHITECTURE.md`. -->
 
 ## Gotchas
 

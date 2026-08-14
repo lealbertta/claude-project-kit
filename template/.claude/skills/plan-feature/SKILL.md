@@ -38,13 +38,13 @@ world was simpler than it is now.
 ## Output format
 
 ```markdown
-## Plan — #<ticket> <title>
+## Plan — <id> <title>
 
 **Non-goals:** <what this deliberately does not touch>
 
 | ID | Change | File(s) | Serves | Proven by | Mutation it must catch |
 |----|--------|---------|--------|-----------|------------------------|
-| 042.1 | <what and why> | `path` | AC-0 | `TestName` | <what to break so it fails> |
+| 042.1 | <what and why> | `path` | AC-1 | `TestName` | <what to break so it fails> |
 
 **Implications:** schema / undo / performance / compatibility / lifecycle —
 one line each, or "none" with the reason.
@@ -54,5 +54,6 @@ one line each, or "none" with the reason.
 **Rollback:** <how to undo this if it goes wrong>
 ```
 
-On approval, post the plan verbatim to the ticket before ending the session. The
-implementation happens in a fresh session and will not inherit this context.
+On approval, write it to `plan.md` and post it verbatim to the issue before ending
+the session. The implementation happens in a fresh session and will not inherit
+this context.

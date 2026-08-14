@@ -133,7 +133,7 @@ docs/DECISIONS/              ADR template + your first decision
 
 With no tracker installed, the spec header block is the whole system: `Status:` is
 read where the tracker would have been, and `grep -rl 'Priority:\*\* High'
-docs/work/*/spec.md` is how the next thing to do gets found. That is the one
+--include=spec.md docs/work` is how the next thing to do gets found. That is the one
 configuration where the spec's own fields are authoritative rather than a copy —
 worth knowing before the first time you add a tracker and have to say which side
 wins.

@@ -65,7 +65,7 @@ its criteria sitting in unclosed children.
    `label = "spec:<work-id>:<FR-id>"`. Found → compare. Missing → create.
 3. Create with the label attached, the acceptance criteria in the description, and
    a link back to the spec file.
-4. **Report, do not reconcile.** Print three lists and stop:
+4. **Report, do not reconcile.** Print these four lists and stop:
    - Requirements with no issue
    - Issues whose requirement no longer exists in the spec
    - Issues whose title or criteria no longer match the spec

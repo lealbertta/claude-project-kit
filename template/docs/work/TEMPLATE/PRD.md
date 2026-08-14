@@ -21,7 +21,7 @@ This file is the parent. Its child work items live in subfolders beside it:
 - **Source:** <where this came from — a person and a date, a review, a run of
   support tickets. Prose citations are fine and do not need to resolve as links.>
 - **Sized:** <rough number of work items, and how many have landed.>
-- **Priority:** <High | Medium | Low>, then the reason. Story-level `[P1]` tags
+- **Priority:** <High | Medium | Low>, then the reason. Story-level priorities
   rank work *within* the feature; this one ranks the feature against everything
   else.
 
@@ -38,11 +38,16 @@ The alternatives it beat go in *Alternatives considered* below.>
 ## User stories
 
 Each story is independently shippable and independently testable, and carries a
-priority. Order within a priority is not implied.
+priority — the same three words a spec uses, with the reason on the same line. A
+bare rank is a queue position wearing a label. Order within a priority is not
+implied.
 
-### US-1 `[P1]` — <short name>
+### US-1 — <short name>
 
 > As a <user>, I want <action> so that <outcome>.
+
+**Priority:** <High | Medium | Low> — <the reason, which is what makes it arguable
+when it goes stale.>
 
 #### FR-1 — <title>
 
@@ -59,7 +64,7 @@ stopped being a PRD.>
 
 …
 
-### US-2 `[P2]` — <short name>
+### US-2 — <short name>
 
 …
 
@@ -117,7 +122,9 @@ question and must not live only in a chat log.
 
 ## Work items
 
-Generated as the feature is broken down. One row per child item.
+Generated as the feature is broken down. One row per child item. `Status` is the
+same courtesy copy as the header field above — the tracker wins any disagreement,
+and nothing reads this column to decide anything.
 
 | Item | Covers | Status |
 |------|--------|--------|

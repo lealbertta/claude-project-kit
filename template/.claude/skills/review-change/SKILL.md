@@ -52,7 +52,25 @@ lesson went nowhere leaves a suite that grows one test per bug and learns nothin
 
 ## Report
 
-Findings with file and line references, severity, evidence, and a concrete
-correction. Separate blockers from optional improvements. Do not report personal
-style preferences as blockers. If you found nothing material, say so plainly
-rather than manufacturing findings.
+Resolve **every** acceptance criterion to **Verified**, **Failed**, or **Gated**
+before reporting — never two outcomes, never silence. A `Gated` criterion is never
+a pass and never a failure: report it outstanding and name the check that would
+close it.
+
+Every finding carries a file and line, evidence, a concrete correction, and exactly
+one severity — the same three the `reviewer` agent uses, because `docs/WORKFLOW.md`
+→ Verify treats the two as interchangeable:
+
+- **blocker** — must be fixed before a human spends time on this
+- **should** — worth fixing, does not gate human review
+- **question** — a domain or intent call only the human can settle; a `Gated`
+  criterion is reported here, never as a blocker
+
+**The verdict is mechanical, so the loop terminates:** `NEEDS WORK` if and only if
+there is at least one **blocker**, otherwise `READY FOR HUMAN REVIEW`. Decide
+severity per finding as you write it; weighing them into an overall impression at
+the end is how the same branch reads as *nearly there* on one pass and *not quite*
+on the next with nothing having changed.
+
+Do not report personal style preferences as blockers. If you found nothing
+material, say so plainly rather than manufacturing findings.

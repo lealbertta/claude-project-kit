@@ -10,9 +10,9 @@
 - **Sized:** <a rough estimate in sessions, and what is left if part has landed.
   Past three sessions it is not a work item; split it.>
 - **Priority:** <High | Medium | Low>, then the reason. The word carries the grep
-  (`grep -rl 'Priority:\*\* High' docs/work/*/spec.md`), so keep it first and keep
-  it one of the three; the reason is what makes it arguable rather than a queue
-  position.
+  (`grep -rl 'Priority:\*\* High' --include=spec.md docs/work`), so keep it first
+  and keep it one of the three; the reason is what makes it arguable rather than a
+  queue position.
 
 ## Problem
 
