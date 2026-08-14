@@ -61,6 +61,9 @@ git status --short
 git log $(git merge-base origin/main HEAD)..HEAD
 ```
 
+**Not `gh pr diff`.** A PR is open by the time you run, and it is where your findings
+get posted rather than what you read. It shows only what was pushed.
+
 Then grep the whole tree for the patterns the change participates in.
 
 ## What you look for

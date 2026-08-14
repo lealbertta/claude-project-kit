@@ -62,8 +62,11 @@ git status --short     # untracked files are part of the change too
 git log $(git merge-base origin/main HEAD)..HEAD
 ```
 
-**Do not use `git diff main...HEAD`.** It sees only committed work, so it silently
-misses everything still in the working tree.
+**Do not use `git diff main...HEAD`, and do not use `gh pr diff`.** A PR is open by
+the time you run — it is where your findings get posted, not what you review. Both
+commands see only what was pushed, so both silently miss everything still in the
+working tree, and the PR is the more tempting of the two because it looks like the
+change.
 
 ## Run the checks — do not eyeball them
 

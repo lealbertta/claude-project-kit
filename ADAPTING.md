@@ -39,18 +39,26 @@ file. Keep the symlink; edit `CLAUDE.md`.
 
 - [ ] `allow`: your verification commands, so test runs never prompt. `git commit`
       is here too — see below.
-- [ ] `ask`: dependency manifests, build config, CI config, `git merge`, `git rebase`.
-- [ ] `deny`: secrets, generated output, build artifacts, logs, `git push`, and
+- [ ] `ask`: dependency manifests, build config, CI config, `git merge`, `git rebase`,
+      `git push`.
+- [ ] `deny`: secrets, generated output, build artifacts, logs, force-push, and
       destructive git.
 
 The posture that works: friction-free for anything that produces evidence or can be
 undone, confirmation for anything that changes shared state, refusal for anything
 irreversible. Loosen it once the verification scripts are reliable — not before.
 
-`git commit` sits on the allowed side of that line because `git push` is denied, so
-a commit changes nothing anyone else can see, and the loop asks for one per verified
-increment. A prompt on every commit is a prompt you stop reading, which costs more
-than it protects. `merge` and `rebase` rewrite history and still ask.
+`git commit` sits on the allowed side of that line because nothing it writes has
+left the machine, and the loop asks for one per verified increment. A prompt on
+every commit is a prompt you stop reading, which costs more than it protects.
+
+`git push` **asks rather than denies**, which is the one place this posture gives
+ground, and it gives it for a reason: Verify opens a PR, and there is no PR without
+a push. That makes it the loop's single outward step and therefore the one prompt
+worth reading, rather than the tenth in a row you have stopped seeing. Force-push
+stays denied — it is the push that destroys work instead of publishing it. `gh pr
+create` and `gh pr comment` are outward too, and are on no list at all, so they
+prompt by default. `merge` and `rebase` rewrite history and still ask.
 
 ### 3. `.claude/rules/*.md`
 

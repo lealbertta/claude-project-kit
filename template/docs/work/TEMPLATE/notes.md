@@ -38,7 +38,17 @@ Verify sends the branch to two reviewers — `reviewer` and `architect` — and
 consolidates both reports (`docs/WORKFLOW.md` → Verify). **Every architect finding
 gets exactly one disposition, including the dismissed ones.** Advisory does not mean
 optional: a finding nobody dispositioned is a finding that was ignored with extra
-steps, and this table is the only place the dismissals are written down.
+steps.
+
+This table is where the dispositions are **worked out**, versioned with the diff
+they describe. Once consolidated they are **posted to the PR** — line-anchored where
+they name a line, plus one summary comment carrying this table and the verdict. Same
+relationship as `plan.md` and its issue comment: the file is the artifact, the post
+is the publication, and the PR is the copy that outlives this folder.
+
+**PR:** <link>
+
+
 
 | Finding | From | Disposition |
 |---------|------|-------------|

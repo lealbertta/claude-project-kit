@@ -49,6 +49,11 @@ Both reviewers ran at once on the same tree, neither having seen the other's
 report. Consolidated verdict: **READY FOR HUMAN REVIEW** — no blockers survived
 the merge.
 
+**PR:** `<owner>/<repo>#118`, opened before either reviewer ran. The consolidated
+set below is posted there — the two rows naming a file went on those lines, the
+architect's duplication row and every dismissal went in the summary comment. Taken
+out of draft when the verdict landed.
+
 | Finding | From | Disposition |
 |---------|------|-------------|
 | The beneath-query is implemented three times — restore, drag, and the layout preview. This branch deleted the restore copy; two remain. | architect, `duplication`, in-diff: no | **New ticket**, filed in `PRODUCT.md` → Next. Not absorbed here: the reviewer is enforcing scope on the same diff and wins inside the branch. Merging the other two is a good idea and a different ticket. |

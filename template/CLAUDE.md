@@ -96,7 +96,8 @@ correct Claude twice on the same thing — that is the signal a rule is missing.
   **never reset, stash, or amend to make a diff look tidy.**
 - An approval covers the tail you described when you asked, and nothing you thought
   of afterwards — `docs/WORKFLOW.md` → What an approval covers.
-- `git push` stays a human step.
+- `git push` stays a human step. The loop pushes once, at Verify, to open the PR the
+  review is posted to — `docs/WORKFLOW.md` → Verify. Never force-push.
 - Ask before editing <dependency manifests / build config / CI>.
 
 ## Where things are written down

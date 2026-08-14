@@ -165,6 +165,15 @@ finding exactly one disposition, dismissals included. Advisory does not mean
 optional; a finding nobody dispositioned is a finding that was ignored with extra
 steps.
 
+**The consolidated set is posted to a PR, opened before either reviewer runs.** Not
+the two raw reports — those are inputs, and they still hold the duplicates
+consolidation merged. Findings that name a line go on that line; one summary comment
+carries the whole disposition table and the verdict. The PR is where the review is
+*recorded* and never what the reviewers read, since `gh pr diff` sees only what was
+pushed while the review surface is the working tree. It is also the half that lasts:
+`docs/work/` is disposable and `notes.md` is promoted and dies with the ticket,
+while a merged PR keeps each finding attached to the line that caused it.
+
 **An approval covers the tail you described when you asked.** A bare "approved",
 answering a summary of what happens next, authorises that whole tail — commit, merge,
 close, report — and is not to be re-asked a step at a time; a narrower word

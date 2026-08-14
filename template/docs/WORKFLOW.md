@@ -79,7 +79,7 @@ assistant's to make:
 | When | Status |
 |------|--------|
 | The ticket is claimed — `pick-ticket`, in the same step that assigns the issue | `In progress` |
-| Start of **Verify** — tests running, diff going to both reviewers | `In review` |
+| Start of **Verify** — checks passed, PR opened, diff going to both reviewers | `In review` |
 | Closing the issue | `Done`, **automatically** |
 
 **Never set `Done` by hand** — closing the issue does it, and doing both is a way
@@ -103,6 +103,7 @@ by who edits it, and is never mirrored.**
 | Blocked | the same single choice — a status option or a label | a field and a label for one fact disagree within a month |
 | Requirements, criteria | `spec.md` | the standard the reviewer scores against |
 | Plan, notes | `plan.md`, `notes.md` | versioned with the diff they describe |
+| Review findings | the **PR**, after consolidation | anchored to the lines that caused them, and outlives the `docs/work/` folder that does not |
 
 The kit's default is that the spec owns priority and the label is the copy. **With a
 board in use, flip it:** the field owns it, because a triage session changes the
@@ -282,9 +283,10 @@ so; the tracker shows it open and looking untouched.
 
 ## Verify
 
-Three things happen here, in order: the checks run, **two** independent reviews run,
-and their reports are consolidated into one set of next steps. None of the three is
-optional, and the third is the one that gets skipped.
+Four things happen here, in order: the checks run, the pull request is opened,
+**two** independent reviews run, and their reports are consolidated into one set of
+next steps and posted back to it. None of the four is optional, and consolidation is
+the one that gets skipped.
 
 ### 1. Run the checks
 
@@ -294,9 +296,37 @@ a focused run tells you the thing you just wrote does what you meant, and it can
 tell you what you broke three modules away, which is exactly what a passing focused
 run tempts you to assume. **A focused run is never grounds for calling work done.**
 
-Move the board to `In review` here.
+A branch that fails here does not get a PR. It re-enters at Implement.
 
-### 2. Send the branch to both reviewers, in parallel
+### 2. Open the pull request
+
+The checks passed, so the branch is worth publishing. **Push it and open the PR
+before either reviewer is dispatched**, because the review needs somewhere to land
+that outlives the session — and a finding written down only after the fact is a
+finding that mostly does not get written down.
+
+Open it as a **draft**: the reviews have not run, so it is not ready for anyone. The
+body is the ticket in one paragraph, `Closes #<id>`, and a link to
+`docs/work/<id>-<slug>/` — the detail is in the spec and is not restated here.
+
+Move the board to `In review` here — **unless** the board's *PR opened → In review*
+automation is switched on, in which case that move is the automation's and you make
+none. Two writers for one field is what *One owner per fact* exists to prevent, and
+this is the field it warns about.
+
+**The PR is where the review is recorded. It is never what the reviewers read.**
+`gh pr diff` shows only what was pushed, and the surface stays the working tree
+against the merge-base plus untracked files. Opening a PR is precisely the moment
+that distinction gets lost, and losing it means the uncommitted part of the branch
+is reviewed by nobody while a green PR says otherwise.
+
+This is the loop's one push, and it stays a human step — `git push` asks, and so
+does opening the PR. Nothing goes outward on the assistant's own authority.
+
+**Without a git host there is no PR.** The board move is yours again, and step 4
+posts the consolidated findings to the issue instead.
+
+### 3. Send the branch to both reviewers, in parallel
 
 Both get a **fresh** context — the `reviewer` and `architect` subagents, or
 `review-change` in clean sessions. Self-review does not satisfy this step: a
@@ -320,7 +350,7 @@ and silently misses the rest.
 Where subagents are unavailable, `review-change` is the fallback: run it twice, in
 two clean sessions, once against each brief above.
 
-### 3. Consolidate the two reports
+### 4. Consolidate the two reports
 
 The reports are inputs, not the answer. One consolidated set of findings is
 produced here, by these rules:
@@ -373,7 +403,35 @@ another pass — both reviewers run again, on the new tree. `should` and `questi
 findings never force that loop on their own; `question` is where a Gated criterion
 is reported, since only the human can close one.
 
-### 4. Resolve every criterion
+**Then post the consolidated set to the PR, once.** Not the two reports — those are
+inputs, and they still carry the duplicates consolidation just merged. One review,
+after consolidation:
+
+- Findings naming a file and line go **on those lines**, where the reader already is
+  when the question occurs to them.
+- **One summary comment** carries the whole disposition table, dismissals included,
+  and the verdict. Most architect findings are whole-tree and have no line in this
+  diff to hang on — and *Dismissed* is the row most worth publishing, because a
+  dismissal nobody can see is indistinguishable from a finding nobody read.
+
+This is to Verify what the issue comment is to Plan: `notes.md` is where the
+dispositions get worked out, versioned with the diff they describe; the PR is where
+they are published and argued with. The PR is also the half that survives.
+`docs/work/` is disposable by design and `notes.md` is promoted and then dies with
+the ticket, while a merged PR keeps each finding attached to the line that caused
+it, for whoever touches this code next.
+
+**On `NEEDS WORK`, the re-run posts to the same PR.** Never a second one: the ticket
+is one branch and one review record, and the thing a later reader most needs — what
+the first pass said and what changed because of it — only exists if both passes are
+in the same place.
+
+**`READY FOR HUMAN REVIEW` is what takes the PR out of draft**, and that is the
+whole meaning draft has carried since step 2: the machine reviews have not cleared
+this. On `NEEDS WORK` it stays a draft, so the state of the PR and the state of the
+ticket cannot drift apart.
+
+### 5. Resolve every criterion
 
 Resolve **every** criterion to one of three outcomes before reporting. Do not stop
 at the first failure: the test run is already paid for, so extract every conclusion
@@ -383,9 +441,9 @@ it supports. Stopping happens before *fixing*, not before finishing the assessme
 - **Failed** — see Failure protocol
 - **Gated** — only a real device, real users, real load, or human eyes can settle
   it. Never record one as verified and never as a failure. Report it outstanding
-  and name the check that would close it, then work step 5.
+  and name the check that would close it, then work step 6.
 
-### 5. A Gated criterion: report it, then ask
+### 6. A Gated criterion: report it, then ask
 
 A gated criterion is settled by a human and not by this loop — but the decision is
 made against a written record rather than a chat message. **Post the report to the
@@ -424,7 +482,7 @@ loop does not run on it, for the same reason it does not run on an epic. Work th
 has to land *before* the check is even possible — a harness, a fixture, a device on
 someone's desk — is a ticket, and a separate one.
 
-### 6. Promote what outlives the ticket
+### 7. Promote what outlives the ticket
 
 Before closing, promote anything from `notes.md` that outlives this ticket: a
 decision to an ADR, a vacuous-test shape to `TESTING_TRAPS.md`, a risk to the
@@ -446,16 +504,16 @@ Every ticket ends in exactly one of these, and every one gets a report:
 
 | Outcome | Condition | Issue | Branch |
 |---------|-----------|-------|--------|
-| **Complete** | Every criterion Verified, or Gated and accepted outstanding | Closed | Merged to `main` |
-| **Blocked** | A Gated criterion declined, or marked `[Gated, blocks merge]` | Open, stays assigned | Stays on its branch |
-| **Failed** | At least one criterion Failed | Open, stays assigned | Stays on its branch |
+| **Complete** | Every criterion Verified, or Gated and accepted outstanding | Closed | PR marked ready, then merged to `main` |
+| **Blocked** | A Gated criterion declined, or marked `[Gated, blocks merge]` | Open, stays assigned | PR stays open, stays draft |
+| **Failed** | At least one criterion Failed | Open, stays assigned | PR stays open, stays draft |
 
 A **Complete** ticket is merged as part of closing out. A closed issue whose work is
 still on a branch looks done everywhere except where it counts.
 
 **Blocked** is the outcome where the loop stops choosing. The work is sound and the
 evidence is not in yet, so what happens to the branch is the human's call rather
-than this document's — step 5 above has the three usual answers.
+than this document's — step 6 above has the three usual answers.
 
 Re-running the suite after a fast-forward is unnecessary when the merged tree is
 identical to the verified commit's tree; quote the two hashes instead of spending
@@ -518,7 +576,8 @@ ticket that ended badly is the one most worth a record.
 |----------|-----------|
 | <what was broken> | <which tests failed> |
 
-**Review:** <READY FOR HUMAN REVIEW | NEEDS WORK>
+**Review:** <READY FOR HUMAN REVIEW | NEEDS WORK> — findings and dispositions on
+<the PR link>. Without a git host, the disposition table goes here instead:
 | Finding | From | Severity | Disposition |
 |---------|------|----------|-------------|
 | <one line> | reviewer / architect / both | blocker / should / question / advisory | <fixed in 42.4, new ticket, ADR proposal, risk row, watch, or dismissed + reason> |
@@ -534,8 +593,9 @@ for, never after>
 
 The Commands, Criteria, and Mutations tables are governed by `CLAUDE.md`: no claim
 that a build, test, or performance target passed without evidence from the run. The
-Review table is governed by the disposition rule above: every architect finding
-appears in it, including the dismissed ones, which is what stops "advisory" from
-becoming "unread". The Gated table goes up **before** the acceptance is asked for,
+Review line **links rather than restates** — the findings live on the PR, and a
+second rendering here is the copy that goes stale first. What stays on the issue is
+the verdict, because the verdict is what decides whether this ticket closes. The
+Gated table goes up **before** the acceptance is asked for,
 with its Decision column empty; the answer is written into it afterwards. Asking
 first and recording later leaves the decision resting on a chat message.
