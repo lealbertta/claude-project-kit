@@ -35,6 +35,18 @@ another, say so on the later one.
 each. "None beyond the files above" is a fine answer once you have actually
 grepped for it; it is the assumption that gets a plan amended mid-implementation.>
 
+**Precedent:** <the existing thing in this codebase that already solves a problem
+shaped like this one, with its path, and how closely it matches. Or the argument
+for doing it differently — a plan that introduces a second way of doing an existing
+thing owes one, and that argument is usually an ADR.>
+
+**Could not determine** — what investigation did not settle, and what would settle
+it. This is the section that reads like an admission and is not one: an unknown
+written here is an unknown the implementer can see coming, and one left out gets
+resolved mid-implementation by guessing. "Nothing" is a strong claim and rarely true.
+
+- <the question — what would answer it: a command, a fixture, a person>
+
 **Implications** — one line each, or "none" **with the reason**. "None" without a
 reason is the sentence that hides the migration.
 

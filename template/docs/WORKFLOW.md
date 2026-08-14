@@ -167,14 +167,49 @@ Implement; review in a third. Carrying exploration context into implementation i
 how scope creeps, and a reviewer holding the implementer's assumptions is not an
 independent reviewer.
 
+Each stage also has a **role**, which is what that session is accountable for
+rather than which model is running:
+
+| Stage | The role | Held by | Dispatches |
+|-------|----------|---------|------------|
+| Plan | **planner** — decides what will be done and what it will cost | the session itself | `investigator` subagents, several at once, for the reading |
+| Implement | **implementer** — executes the agreed plan, and stops when reality disagrees with it | a fresh session, working from `plan.md` | nothing |
+| Verify | **reviewer** and **architect** — score the branch, neither reading the other | two subagents, dispatched together | nothing |
+
+**The planner is the session and not a subagent**, and that is the load-bearing
+part of the table. Planning is the one stage that argues with the human — a spec
+that turns out ambiguous, a ticket that turns out to be two, a one-way door that
+needs agreeing before it is built — and a subagent has no way to ask. It reports
+once and stops, so every question it would have raised comes back unasked or, worse,
+answered by assumption. What a subagent *is* good for is the reading underneath the
+decision, which is most of the stage's cost and almost none of its judgement.
+
+Which gives the rule the rest of this file follows: **subagents go inside a stage,
+never between two.** Between stages the handoff is a written artifact.
+
 Because context does not survive that boundary, **the agreed plan is written to
 `plan.md` and posted as an issue comment.** That is the handoff artifact; the
 Implement session reads it rather than inheriting it. A plan that exists only in a
 session transcript does not exist.
 
+**The boundary is cheap to cross and expensive to cross badly.** What the
+implementer loses is not the planner's judgement — it is the unwritten nine-tenths
+of what the planner read: the file it opened and rejected, the call site it
+checked, the thing it could not determine and decided to work around. A plan that
+is right in outline and vague in detail is the characteristic failure of this shape,
+and it fails silently, because it reads perfectly well right up until someone tries
+to implement it. So the plan names files, call sites, precedent, and unknowns — and
+that specificity, not the session count, is what the split is actually paying for.
+
 Not every ticket needs a full loop. When the change fits in one sentence, **skip
 Plan**: minimal fix plus a regression test, then Verify normally. Implement and
 Verify are never skipped.
+
+**On a bug, the sentence has to be the cause and not the symptom.** "Restore seats
+objects wrongly" is a symptom and does not qualify; "restore re-derives the support
+instead of reading the recorded one" does. A bug whose cause you cannot yet state is
+the case Plan exists for — skipping it there means diagnosing while implementing,
+which is where the first plausible explanation wins by default.
 
 A bug fix skipping Plan still owes its **Autopsy** — which test should have caught
 this, and why it didn't (`write-spec`, and `TESTING_TRAPS.md` → The autopsy). That
@@ -207,6 +242,8 @@ This stage adds:
 
 - Read `spec.md` and every acceptance criterion in full
 - Confirm the ticket is still one ticket; if it is two, stop and say so
+- Name the unknowns, then send them out as `investigator` briefs — dispatched
+  together, one question each, and re-run any finding before building on it
 - List each change as a numbered item with a rationale, ordered so the item most
   likely to be wrong is proven first
 - Map each to the criterion it serves, and name the test that will prove it
@@ -215,6 +252,29 @@ This stage adds:
 - Mark any criterion this environment cannot settle
 - Make no code changes
 - On agreement, write `plan.md` and post it as an issue comment
+
+### What the investigation is for
+
+Two ticket kinds, two unknowns, two dispatches — the skill has the briefs:
+
+| Ticket | Unknown | Investigators |
+|--------|---------|---------------|
+| Change, feature, refactor | *where the code is* | **survey** briefs, one per area the change touches |
+| Bug | *why it happens* | **hypothesis** briefs, one candidate cause each, every one told to kill its own |
+
+**The bug case is why this exists.** Left to itself an agent finds one plausible
+explanation and stops looking, and every search after the first bends toward it —
+so the diagnosis is the one that occurred to you earliest rather than the one that
+is true. On a bug the plan's item `.1` *is* the diagnosis, which makes anchoring
+there the most expensive thing this loop can get wrong: it is discovered at Verify,
+after the fix is built, or in the wild, after it ships. Several investigators each
+attacking a different cause is the countermeasure, and the survivor is the one
+worth planning against.
+
+A finding is a claim until the planner re-runs it — the same rule Verify uses to
+settle a disagreement between the two reviewers, one stage earlier. And where
+subagents are unavailable, the investigation still happens; it happens serially, in
+this session, with the candidate causes written down before any is tested.
 
 ## Implement
 

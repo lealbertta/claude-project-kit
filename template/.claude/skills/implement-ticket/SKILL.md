@@ -20,6 +20,11 @@ This is the Implement stage of `docs/WORKFLOW.md`. Start from the agreed
    - Run the targeted test. Do not defer verification to the end.
    - Confirm the change matches the plan item before moving on.
 3. Stay inside the planned modules. No unrelated refactors, no opportunistic cleanup.
+   **When you reach one of the plan's *Could not determine* items, answer it and
+   write the answer down** — in `notes.md` if the code turned out as the plan hoped,
+   and as a `plan.md` → Amendment if it did not, which is a re-entry condition like
+   any other contradiction. The plan named those unknowns so that resolving one is a
+   visible act; resolving it in your head is the guess the section exists to prevent.
 4. Before declaring an item done, run its mutation check: break the thing the test
    covers and confirm the test goes red. Record which mutations you ran. If a
    mutation survives, the test is the defect — fix the test in this cycle.

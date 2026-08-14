@@ -168,7 +168,11 @@ whether it blocks.
    no autopsy is a `should`; an autopsy whose finding was never written down is a
    blocker, since that is the whole reason the loop exists.
 
-8. **Closing hygiene.** If the branch claims the item is done: every criterion
+8. **Closing hygiene.** If the branch claims the item is done: every plan
+   *Could not determine* item answered somewhere visible — `notes.md`, or an
+   amendment where the answer contradicted the plan — since an unknown the plan
+   named and the branch silently resolved is the guess that section exists to
+   prevent, and this is the only place it is checkable; every criterion
    resolved, `spec.md` → Status flipped, `notes.md` promoted before it dies — a
    decision to an ADR *with the rule it implies written into `.claude/rules/` or the
    non-negotiables in the same change*, a vacuous-test shape to `TESTING_TRAPS.md`, a

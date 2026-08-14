@@ -153,6 +153,7 @@ docs/DECISIONS/              ADR template + your first decision
 | `PRD.md` | One piece of work clearly needs several branches |
 | `sync-tickets` | Keeping the tracker in step by hand becomes the annoying part |
 | `RISK_REGISTER.md` | A risk survives more than one conversation |
+| `investigator` | A bug first costs you two wrong diagnoses, or planning starts reading more than one session can hold |
 | `architect` | The same pattern turns up in a third place, or an ADR stops describing the code |
 
 `reviewer` and `architect` are the two halves of Verify, but they arrive in that
@@ -160,6 +161,11 @@ order for a reason: the reviewer answers a question you need answered on every
 ticket, and the architect answers one that has nothing to say until the codebase is
 big enough to be incoherent. Adding the architect on day three produces a paragraph
 of "this is fine for now", which is the fastest way to teach yourself to skip it.
+
+`investigator` arrives with the bugs rather than with the codebase. On a small
+project the planner can hold the whole search in one head and the first diagnosis is
+usually right; the day it is not, dispatching three of them is worth more than
+anything else on this list.
 
 With no tracker installed, the spec header block is the whole system: `Status:` is
 read where the tracker would have been, and `grep -rl 'Priority:\*\* High'
@@ -247,6 +253,48 @@ feels like investigation. Listing what reads it is the part that actually conver
 an assumption into a fact, and it is skippable precisely because nothing goes wrong
 until later. "None beyond the files above" is a fine answer — it is just not one you
 get to give without having looked.
+
+**Why the planner dispatches subagents but is not one.** Planning reads far more
+than it keeps, which is the exact shape delegation is for — and it is also the one
+stage that argues with the human, which is the exact shape delegation is not for. A
+subagent cannot ask a question; it reports once and stops. Make the planner a
+subagent and the spec ambiguity it should have raised, the ticket that turns out to
+be two, the one-way door that needed agreeing before it was built, all come back
+either unmentioned or answered by assumption — and the assumption reads like a
+decision by the time it reaches `plan.md`. So the split runs along a different seam:
+the session keeps the judgement and sends out the reading. That is also why the
+handoff *between* stages stays a written artifact and never a subagent. A stage
+boundary is a context boundary, and the plan is the only thing that crosses it.
+
+**Why `investigator` is one file and not four.** Survey and hypothesis briefs ask
+the same kind of question — *what is actually there* — and differ only in what they
+are pointed at, so they share a definition and get their difference from the
+dispatch. `architect` and `reviewer` are two files because they genuinely ask
+different questions and return different things; splitting the investigator the same
+way would produce two files whose bodies you would have to keep in step by hand. It
+is also not the built-in `Explore` agent, which skips `CLAUDE.md` to stay cheap:
+worth it for a file search, wrong here, because an investigator that has not read the
+non-negotiables will happily report a precedent that violates one.
+
+**Why the hypothesis brief says "kill it" rather than "check it".** An agent asked
+to confirm a cause confirms it — it finds the evidence that fits and stops, and the
+report reads exactly like one from an agent that tried and failed to break the same
+claim. Only one of those is worth planning against. The asymmetry costs nothing to
+state and is the whole value of the brief. The parallel dispatch is the other half:
+left to itself an agent finds one plausible explanation and stops looking, and every
+search after the first bends toward it, so the diagnosis you end up with is the one
+that occurred to you earliest. On a bug that lands directly on plan item `.1`, where
+the riskiest assumption *is* the diagnosis — and a wrong one there is discovered
+after the fix is built, or after it ships.
+
+**Why a finding gets re-run before it is built on.** An investigator's report is a
+claim, and a fluent one. Verify already has this rule for the case where two
+reviewers disagree — settle it by running the thing rather than by taking the more
+confident report — and Plan needs it more, because at Plan there is no second
+opinion arriving to expose the first. Hence the `traced` / `ran` labels on every
+line: they are not decoration, they are which claims the planner has to reproduce.
+Skip that and the machinery produces confident diagnoses faster than anyone can
+check them, which is worse than not having it.
 
 **Why review agents are separate, and why neither can edit.** A reviewer that fixes
 things stops reporting them, and the finding disappears into a diff nobody reads —

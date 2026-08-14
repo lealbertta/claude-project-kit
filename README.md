@@ -56,14 +56,15 @@ template/
     skills/                      Load on demand, by name.
       pick-ticket/                 Everything upstream of the loop: the eligible set, the epic guard, claiming it.
       write-spec/                  Draft a ticket spec, or a PRD when the work spans several.
-      plan-ticket-implementation/  Plan stage. Risk-first, pre-mortemed, and a plan is all it produces.
+      plan-ticket-implementation/  Plan stage. Dispatches the reading, keeps the deciding. Risk-first, pre-mortemed.
       implement-ticket/            Implement stage. Test-first, increment-verified, stops when reality diverges.
       review-change/               Independent review — of the tests as much as the code.
       record-decision/             ADR or ticket, how to amend rather than rewrite, and shipping the rule with it.
       sync-tickets/                Spec → tracker issues, idempotent, reports drift instead of resolving it.
-    agents/                      Both dispatched together in Verify; their reports are consolidated after.
-      architect.md                 Whole-tree. Convention drift, ADR conformance, duplication. No verdict.
-      reviewer.md                  Ticket-scoped. Runs the checks, attacks the tests, verdicts the branch.
+    agents/                      Read-only roles a session dispatches. Each one reports; none of them decides.
+      investigator.md              Plan, several at once. Locates the code, or tries to kill one hypothesis about a bug.
+      architect.md                 Verify. Whole-tree: convention drift, ADR conformance, duplication. No verdict.
+      reviewer.md                  Verify. Ticket-scoped: runs the checks, attacks the tests, verdicts the branch.
 
   docs/
     PRODUCT.md                   Vision and pillars (frozen) + Now / Next / Someday (weekly).
@@ -75,8 +76,8 @@ template/
     DECISIONS/                   ADR template.
     work/TEMPLATE/               Copy per ticket.
       spec.md                      Source, priority, what and why, acceptance criteria, alternatives considered.  (before Plan)
-      plan.md                      The agreed plan: mutations, call sites, one-way doors, pre-mortem.  (end of Plan)
-      notes.md                     Findings, review dispositions, deferrals, mutations run.  (during Implement/Verify)
+      plan.md                      The agreed plan: mutations, call sites, precedent, unknowns, one-way doors, pre-mortem.  (end of Plan)
+      notes.md                     Causes ruled out, review dispositions, deferrals, mutations run.  (Plan onward)
       PRD.md                       Only when the work spans several tickets — and then it is not a ticket.
                                    `sync-tickets` generates a fourth file, `tickets.md`, where a tracker is in use.
     work/EXAMPLE-42-…/          A filled-in ticket. Read it before writing your first. Delete it after.
@@ -124,7 +125,26 @@ and review in separate sessions. Carrying exploration context into implementatio
 how scope creeps, and a reviewer holding the implementer's assumptions is not an
 independent reviewer. Because context does not survive the boundary, the agreed plan
 is written to `plan.md` and posted to the issue — a plan that exists only in a
-session transcript does not exist.
+session transcript does not exist. What the implementer loses at that boundary is
+not the planner's judgement but the unwritten nine-tenths of what it read, so the
+plan names files, call sites, precedent, and the things investigation could not
+settle. A plan right in outline and vague in detail is the characteristic failure of
+this shape, and it fails silently: it reads perfectly well until someone builds it.
+
+**Subagents go inside a stage, never between two.** Between stages the handoff is a
+written artifact. Inside one, delegation is free money wherever a step reads far
+more than it keeps — so the planner sends out `investigator` briefs and keeps the
+deciding, because planning is the stage that argues with the human and a subagent
+has no way to ask. On a change ticket the briefs are *surveys*: where the code is,
+what calls it, what precedent it should follow. On a **bug** they are *hypotheses*,
+one candidate cause each, and every investigator is told to kill its own. Left alone
+an agent finds one plausible explanation and stops looking, and every search after
+the first bends toward it — which on a bug ticket corrupts item `.1` itself, since
+there the riskiest assumption *is* the diagnosis. What survives being attacked is
+evidence; what merely got confirmed is not, and the two read identically in a
+report. Then the planner re-runs the finding before building on it, because a claim
+nobody reproduced is a suspicion — the same rule Verify uses to settle a
+disagreement between its two reviewers, one stage earlier.
 
 **Plan the riskiest item first, then try to talk yourself out of the plan.** The
 plan's item `.1` is the thinnest slice that proves the assumption most likely to be

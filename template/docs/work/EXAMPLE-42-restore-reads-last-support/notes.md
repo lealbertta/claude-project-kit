@@ -1,8 +1,26 @@
 # Notes — 42 Restore reads last support
 
-Written during Implement and Verify, not reconstructed at the end. This file dies
-with the ticket; everything below that outlives it was promoted before #42
-closed, and the promotion is named on the line.
+Written from Plan onward, not reconstructed at the end. This file dies with the
+ticket; everything below that outlives it was promoted before #42 closed, and the
+promotion is named on the line.
+
+## Causes ruled out
+
+Three `investigator` hypotheses went out together at Plan, each told to kill its
+own. One survived and became 42.1; these are the other two, plus the one the
+survivor displaced.
+
+| Candidate cause | Refuted by |
+|-----------------|------------|
+| The beneath-query picks the wrong object at the contact point, because the float tolerance is too loose. | `ran` — the query returns the correct support on a fully built scene at every tolerance in the range. The query is right; **calling it at restore time is what is wrong**, because the scene it queries is half-rebuilt and "beneath" is a different answer than it was at save. |
+| Undo restores objects before their supports, so the support is not there yet to be found. | `ran` — the restore order is dependency-first and has been since the ordering rewrite. It would have produced this exact symptom, which is why it is written down here rather than left as something someone re-checks in six months. |
+| The drag path records the wrong support in the first place. | `traced` — drag writes the support it actually seated against, verified at the write. This is why the bug is visible only through restore, and it is on the plan's Non-goals for the same reason. |
+
+**The first row is the one that pays for this table.** It is the explanation that
+occurs to everyone first, it survives a casual look, and a session that started
+there would have spent itself tuning a tolerance — arriving at a fix that made the
+symptom rarer and left the cause in place. It was killed in nine minutes by an
+investigator whose only job was to kill it.
 
 ## Mutations checked
 

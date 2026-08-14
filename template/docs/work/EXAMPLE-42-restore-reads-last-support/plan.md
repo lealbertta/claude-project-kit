@@ -36,6 +36,31 @@ The serialized shape from 42.1 is read by the autosave writer and the document
 loader (`src/app/documents`). Both pass the object through whole and needed no
 change — checked, not assumed.
 
+**Precedent**
+
+Selection restore already does this, and has since #29: it stores object ids and
+resolves them on load rather than re-deriving the selection from what is under the
+cursor. Same shape, same reason — a reference recorded at save time survives a
+half-rebuilt scene and a re-derivation does not. 42.1 follows it rather than
+inventing a second way, which is also why this item needs no ADR: the rule is not
+new here, only newly applied to placement.
+
+The two remaining copies of the beneath-query are the *counter*-precedent, and
+following them would have been the mistake. Naming which of the two this item
+follows is the point of the section.
+
+**Could not determine**
+
+- Whether paste mints new ids for copied supports. It matters only for copying an
+  object together with its support, and only then: the recorded id would point at
+  the original. Not settled here because the minting lives in the clipboard module,
+  which this ticket does not touch and which the investigator's brief did not
+  cover. **What would settle it:** a paste-object-with-support case in
+  `RestoreReadsLastSupport`, which is the test 42.1 already runs over the paste
+  caller — if the assumption is wrong it goes red there rather than in the wild.
+  Left as an unknown rather than closed by guessing, and it is genuinely small:
+  named, bounded, and already watched by an existing test.
+
 **Implications**
 
 - **Schema / stored data:** yes — the serialized object gains `support`. Forward

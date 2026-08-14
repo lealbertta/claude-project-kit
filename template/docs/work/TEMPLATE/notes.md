@@ -11,6 +11,19 @@ gets **promoted** before the ticket closes:
 - A risk → `docs/RISK_REGISTER.md`
 - A rule Claude keeps getting wrong → the Gotchas list in `CLAUDE.md`
 
+## Causes ruled out
+
+Bug fixes only; written at Plan, when the `investigator` hypotheses come back
+(`plan-ticket-implementation` → Investigate). Delete the heading otherwise.
+
+| Candidate cause | Refuted by |
+|-----------------|------------|
+| <the claim that was tested> | <the command or line that killed it> |
+
+A cause nobody wrote down as dead gets re-proposed the first afternoon the fix
+looks shaky, and re-investigated by whoever is around. This table is cheap because
+the work is already done — only the sentence is new.
+
 ## Mutations checked
 
 | Mutation | Caught by |
