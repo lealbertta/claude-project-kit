@@ -30,6 +30,12 @@ lives in the spec and the tracker's label is the copy — mirror it onto the iss
 where you use priority labels, and report the drift when a triage session changes
 one and not the other.
 
+**Where a project board is in use, priority flips again**, and this skill is not
+the authority on it: `docs/WORKFLOW.md` → One owner per fact says the board's
+Priority field owns the value and the label goes away. What stays in the spec is
+the sentence explaining the priority, which no field can hold. Read that section
+before mirroring a priority anywhere.
+
 ## The join key
 
 Every issue created from a spec carries a label naming exactly what it covers:
@@ -65,11 +71,24 @@ its criteria sitting in unclosed children.
    `label = "spec:<work-id>:<FR-id>"`. Found → compare. Missing → create.
 3. Create with the label attached, the acceptance criteria in the description, and
    a link back to the spec file.
-4. **Report, do not reconcile.** Print these four lists and stop:
+4. **Report, do not reconcile.** Print these five lists and stop:
    - Requirements with no issue
    - Issues whose requirement no longer exists in the spec
    - Issues whose title or criteria no longer match the spec
    - Specs whose `Status:` or `Priority:` line disagrees with the tracker
+   - **Open issues that are not items on the configured board**, and board items
+     whose Status contradicts the issue's own state — a closed issue sitting in
+     `In review`, an open one marked `Done`
+
+   That fifth list needs a separate call. **Project fields are invisible to
+   `gh issue view`** — they live on the project item, not the issue, so a report
+   built only from issue data will confidently tell you everything agrees while the
+   board says something else entirely.
+
+```sh
+gh project item-list <N> --owner <owner> --limit 2000 --format json \
+  --jq '.items[] | {number: .content.number, status: .status, title: .title}'
+```
 5. Ask before creating or closing anything. Tracker writes are outward-facing and
    a mis-scoped run makes dozens of them.
 6. Write the result to `<work-dir>/tickets.md` as a generated table, headed **"Generated

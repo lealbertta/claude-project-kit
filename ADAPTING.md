@@ -91,6 +91,19 @@ gh project field-list <N> --owner <owner> --format json
       priority labels only if you will actually filter on them — the reason lives in
       the spec either way, and a label with no reason behind it is the thing this
       kit is trying not to have.
+- [ ] **Decide who owns priority and who owns blocked, once** — a board field or a
+      label, never both. `WORKFLOW.md` → One owner per fact has the argument; a
+      field and a label for the same fact will disagree within a month, and the
+      field is the one people sort by.
+- [ ] Confirm the board's **item closed → Done** automation is enabled. It is on by
+      default, it can be switched off, and the workflow tells the agent never to set
+      `Done` by hand — so if it is off, every ticket parks in `In review`.
+- [ ] Check the token you will use has `project` scope. Projects is GraphQL-only;
+      `GITHUB_TOKEN` in Actions does not have it, so board moves that work locally
+      can fail in CI with an error that reads like a missing project.
+- [ ] Raise the `--limit` in the item lookup past your board's **total** item count,
+      Done ones included. The default of 100 fails silently — the item is simply not
+      in the page, and nothing says so.
 - [ ] No board? Delete the Board state section. The loop works without one; it does
       not work without the written plan.
 
