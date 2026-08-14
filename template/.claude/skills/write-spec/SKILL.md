@@ -10,9 +10,10 @@ Two sizes. Pick the smaller one that fits.
 - **One ticket** — fits in one to three sessions, independently mergeable.
   Copy `docs/work/TEMPLATE/spec.md` to `docs/work/<id>-<slug>/spec.md`.
 - **A feature spanning several tickets** — copy `docs/work/TEMPLATE/PRD.md` to
-  `docs/work/<id>-<slug>/PRD.md`, then create child ticket folders beside it.
-  That parent is an **epic**, and the `docs/WORKFLOW.md` loop does not run on one —
-  it runs on each child.
+  `docs/work/<id>-<slug>/PRD.md`. That folder holds the PRD and nothing else; each
+  child ticket gets its own folder **beside** it, one directory deep, named for its
+  own issue. The parent is an **epic**, the `docs/WORKFLOW.md` loop does not run on
+  one, and each child names it on the spec's `Part of:` line.
 
 Most work is the first. Reach for a PRD only when you already know the work needs
 more than one branch.

@@ -115,8 +115,9 @@ gh project field-list <N> --owner <owner> --format json
       and notes, filled in. It is faster than reading the templates and it is the
       only place the kit shows what a rejected alternative, a gated criterion, and
       a recorded divergence look like when they are real rather than bracketed.
-- [ ] `cp -R docs/work/TEMPLATE docs/work/001-<slug>`, delete `PRD.md` unless the
-      work spans several tickets, and fill in `spec.md`. Use the `write-spec` skill.
+- [ ] `cp -R docs/work/TEMPLATE docs/work/<issue>-<slug>`, delete `PRD.md` unless
+      the work spans several tickets, and fill in `spec.md`. Use the `write-spec`
+      skill. The number is the issue's, with no leading zeros — `42-`, never `042-`.
 - [ ] Delete the example folder once you have two tickets of your own — **and the
       `R-04` row in `RISK_REGISTER.md` with it**, since the two are a cross-reference
       pair and the reference check will report the survivor. A borrowed example that

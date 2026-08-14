@@ -65,6 +65,20 @@ produces a folder nobody can find.
 where it belongs logically in the middle: tickets, commits, and prior comments
 already cite the old ones, and renumbering breaks every reference silently.
 
+**Nothing under `docs/work/` carries a leading zero, in either configuration.**
+With a tracker the number is the issue's. Without one it is a plain counter, which
+by the rule above would pad — and does not, because the day a tracker arrives the
+project would otherwise hold two renderings of the same kind of id and a migration
+nobody planned. One rendering means every glob, grep, and citation written today
+still works then.
+
+**Every ticket folder is one directory deep**, including the children of an epic.
+An epic's folder holds its `PRD.md` and nothing else; its tickets sit beside it, and
+each names it on the spec's `Part of:` line. So `docs/work/42-*/` resolves any
+ticket without first knowing whether it belongs to a feature — and the directory
+check below, which only scans one level, sees all of them rather than silently
+skipping the nested ones.
+
 **The slug is decoration and is never part of a key.** `docs/work/42-restore-reads-last-support/`
 is identified by `42`; the rest is for humans and may be reworded at any time. A
 ticket's directory resolves by number — `docs/work/42-*/` — which is why the join

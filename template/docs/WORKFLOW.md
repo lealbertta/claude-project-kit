@@ -50,17 +50,20 @@ Tickets are **not sequenced globally.** Where one genuinely depends on another, 
 take several branches has no single diff to review and no single merge to make, so
 a plan drawn over it is a plan nobody can check and a branch nobody can land.
 
-If what you were handed is one, stop here and break it down first. It gets a parent
+If what you were handed is one, stop here and break it down first. It gets its own
 folder with a `PRD.md` — user stories, numbered requirements, acceptance criteria —
-and its tickets as subfolders beside it:
+and its tickets sit **beside** it, not inside it:
 
 ```
-docs/work/003-nested-stacking/
-    PRD.md              the feature: stories, requirements, criteria
-    42-restore/        one ticket
-        spec.md plan.md notes.md
-    043-subtree-move/
+docs/work/41-nested-stacking/     the epic: PRD.md only, no spec
+docs/work/42-restore/             one ticket: spec.md plan.md notes.md
+docs/work/43-subtree-move/        one ticket
 ```
+
+Every folder here is one directory deep and named for its issue, so `docs/work/42-*/`
+resolves a ticket without knowing whether it belongs to a feature. The parent link
+lives on the child's `Part of:` line and in the PRD's Tickets table — stated, the
+way a dependency is, rather than implied by where the folder sits.
 
 `write-spec` drafts either size and `sync-tickets` turns requirements into issues —
 epic per feature, story per user story, task per requirement with its criteria as

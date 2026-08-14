@@ -1,6 +1,9 @@
 # <id> — <title>
 
 - **Issue:** <#42>
+- **Part of:** <#41 — the epic this belongs to, where there is one. An issue number
+  and never a folder path, because folders get deleted and this is the only thing
+  saying the ticket is part of a feature. Delete the line where it stands alone.>
 - **Status:** <Proposed | Agreed | In progress | Done | Abandoned>. The tracker is
   the truth and wins any disagreement; this field exists so a spec pasted into a
   chat is still self-describing. Nothing reads it to decide anything.
