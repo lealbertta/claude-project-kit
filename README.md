@@ -2,7 +2,7 @@
 
 A starting set of agent files for a new project: a short always-loaded instruction
 file, path-scoped rules, on-demand skills, review subagents, a permission posture,
-and a documentation layer built around independent work items.
+and a documentation layer built around independent tickets.
 
 Extracted from a real multi-phase project, then stripped of everything specific to
 its stack. Nothing here assumes a language, framework, or platform.
@@ -14,10 +14,10 @@ Three problems, one system:
 1. **Context budget.** Everything the agent needs, none of it loaded until it is
    relevant. The instruction file stays short; subsystem rules load on path match;
    procedures load as skills when invoked.
-2. **Evidence.** Work is planned before it is written, verified by someone who did
-   not write it, and reported with the commands that prove it — and a test does not
-   count until it has been shown to fail on a mutation.
-3. **No false sequencing.** Work items are independent by default, so nothing has
+2. **Evidence.** Work is planned before it is written, verified by two reviewers who
+   did not write it and did not read each other, and reported with the commands that
+   prove it — and a test does not count until it has been shown to fail on a mutation.
+3. **No false sequencing.** Tickets are independent by default, so nothing has
    to be reordered or renumbered when priorities change.
 
 ## Install
@@ -54,31 +54,31 @@ template/
       data-and-migrations.md       Schema versioning, atomic writes, forward-only migrations, preserve-unknown.
       code.md                      Language-agnostic skeleton — replace the specifics, keep the structure.
     skills/                      Load on demand, by name.
-      write-spec/                  Draft a work item spec, or a PRD when it spans several.
-      plan-feature/                Plan stage. Produces a plan and nothing else.
-      implement-feature/           Implement stage. Test-first, increment-verified, stops when reality diverges.
+      write-spec/                  Draft a ticket spec, or a PRD when the work spans several.
+      plan-ticket-implementation/  Plan stage. Risk-first, pre-mortemed, and a plan is all it produces.
+      implement-ticket/            Implement stage. Test-first, increment-verified, stops when reality diverges.
       review-change/               Independent review — of the tests as much as the code.
-      record-decision/             ADR or work item, how to amend rather than rewrite, and shipping the rule with it.
+      record-decision/             ADR or ticket, how to amend rather than rewrite, and shipping the rule with it.
       sync-tickets/                Spec → tracker issues, idempotent, reports drift instead of resolving it.
-    agents/
-      architect.md                 Advisory, whole-tree. Convention drift, ADR conformance, duplication.
-      reviewer.md                  Work-item-scoped. Runs the checks, attacks the tests, verdicts the branch.
+    agents/                      Both dispatched together in Verify; their reports are consolidated after.
+      architect.md                 Whole-tree. Convention drift, ADR conformance, duplication. No verdict.
+      reviewer.md                  Ticket-scoped. Runs the checks, attacks the tests, verdicts the branch.
 
   docs/
     PRODUCT.md                   Vision and pillars (frozen) + Now / Next / Someday (weekly).
-    WORKFLOW.md                  Plan → Implement → Verify, per work item. Board state, outcomes, re-entry.
+    WORKFLOW.md                  Plan → Implement → Verify, on one chosen ticket. Board state, outcomes, re-entry.
     ARCHITECTURE.md              Modules, dependency direction, data layers, seams.
     TEST_STRATEGY.md             Which layer covers what; fixtures; what only reality can settle.
     TESTING_TRAPS.md             Eleven ways a passing test proves nothing, and the autopsy that finds the next one.
     RISK_REGISTER.md             Material risks, with mitigations and owners.
     DECISIONS/                   ADR template.
-    work/TEMPLATE/               Copy per work item.
+    work/TEMPLATE/               Copy per ticket.
       spec.md                      Source, priority, what and why, acceptance criteria, alternatives considered.  (before Plan)
-      plan.md                      The agreed plan, with the mutation each test must catch.  (end of Plan)
-      notes.md                     Findings, deferrals, mutations run.       (during Implement/Verify)
-      PRD.md                       Only when the work spans several items.
+      plan.md                      The agreed plan: mutations, call sites, one-way doors, pre-mortem.  (end of Plan)
+      notes.md                     Findings, review dispositions, deferrals, mutations run.  (during Implement/Verify)
+      PRD.md                       Only when the work spans several tickets — and then it is not a ticket.
                                    `sync-tickets` generates a fourth file, `tickets.md`, where a tracker is in use.
-    work/EXAMPLE-042-…/          A filled-in work item. Read it before writing your first. Delete it after.
+    work/EXAMPLE-042-…/          A filled-in ticket. Read it before writing your first. Delete it after.
 ```
 
 ## The ideas worth keeping if you keep nothing else
@@ -91,17 +91,43 @@ helps, except where a wrong answer costs someone something real, and there
 *plausible* is not shippable. Without that paragraph the non-negotiables read as
 arbitrary ceremony instead of as the price of a specific risk.
 
-**Work items are independent.** Each owns a directory, an issue, a branch, and its
+**The loop runs on one ticket, and an epic is not a ticket.** `WORKFLOW.md` starts
+where a ticket has already been chosen and takes it to closed. A feature that will
+take several branches has no single diff to review and no single merge to make, so
+it gets broken down *before* the loop rather than planned around inside it — and
+the same guard fires again at Plan, which is where a ticket most often turns out to
+be two.
+
+**Tickets are independent.** Each owns a directory, an issue, a branch, and its
 own status, so nothing has to be reordered, renumbered, or reopened when priorities
 change. `PRODUCT.md` → Next is an unordered set, and dependencies are stated on the
-item that has them rather than implied by position.
+ticket that has them rather than implied by position.
 
 **Each stage gets a clean context, and the plan is written down.** Plan, implement,
-and review in three separate sessions. Carrying exploration context into
-implementation is how scope creeps, and a reviewer holding the implementer's
-assumptions is not an independent reviewer. Because context does not survive the
-boundary, the agreed plan is written to `plan.md` and posted to the issue — a plan
-that exists only in a session transcript does not exist.
+and review in separate sessions. Carrying exploration context into implementation is
+how scope creeps, and a reviewer holding the implementer's assumptions is not an
+independent reviewer. Because context does not survive the boundary, the agreed plan
+is written to `plan.md` and posted to the issue — a plan that exists only in a
+session transcript does not exist.
+
+**Plan the riskiest item first, then try to talk yourself out of the plan.** The
+plan's item `.1` is the thinnest slice that proves the assumption most likely to be
+wrong, not the easiest one — a wrong assumption found on the first afternoon is an
+amendment and the same one found last is a rewrite. Then two passes that cost
+minutes: a **pre-mortem** written in the past tense, because *what did go wrong* and
+*what could go wrong* do not return the same list; and a sweep for **one-way doors**,
+the items a `git revert` does not undo, each of which is either converted into a
+reversible one or agreed with the human before it is built.
+
+**Verify sends the branch to two reviewers at once, and consolidates.** The
+`reviewer` scores this ticket's diff against its criteria and its tests; the
+`architect` asks whether the tree the branch leaves behind is still coherent.
+Neither reads the other's report — two reviews that have read each other are one
+review and a confirmation. Consolidation is the load-bearing step: merge the
+duplicates, settle a factual disagreement by *running it*, and give every architect
+finding exactly one disposition, dismissals included. Advisory does not mean
+optional; a finding nobody dispositioned is a finding that was ignored with extra
+steps.
 
 **An approval covers the tail you described when you asked.** A bare "approved",
 answering a summary of what happens next, authorises that whole tail — commit, merge,

@@ -42,7 +42,7 @@ threshold, and a threshold invites tests written to move it.
 ## The autopsy — where every trap below came from
 
 A defect that reached a human is the cheapest evidence about a suite anyone ever
-gets, because it has already been paid for. Spend it: **a bug-fix work item answers
+gets, because it has already been paid for. Spend it: **a bug-fix ticket answers
 two questions in its `spec.md` before the fix is written.**
 
 1. **Which test should have caught this?** Name it. If none exists, that is the

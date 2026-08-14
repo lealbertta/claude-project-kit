@@ -11,7 +11,7 @@ a contract, a technology commitment, a rule that says "never do X".
 Do **not** write one for a choice that the code already explains, or one that the
 next person can reverse in an afternoon without consequence.
 
-## ADR or work item?
+## ADR or ticket?
 
 Four places hold plan-level state, and **the boundary between them is what stops any
 of them rotting.** Put a thing in the wrong one and it is either edited when it
@@ -24,16 +24,16 @@ should have been amended, or repeated in five places until the copies disagree.
 | `docs/work/<id>-<slug>/` | one unit of work: its spec, plan, notes | constantly; the tracker holds its status |
 | `.claude/rules/`, `CLAUDE.md` | the *rule* a decision implies, where the agent will meet it | in the same change as its ADR |
 
-**The test for work item versus ADR:** *would this reasoning need repeating in a work
-item that does not exist yet?* If yes, it is an ADR. A spec's **Alternatives
+**The test for ticket versus ADR:** *would this reasoning need repeating in a ticket
+that does not exist yet?* If yes, it is an ADR. A spec's **Alternatives
 considered** explains why *this* work was done this way and is complete on its own;
 an ADR explains a rule that binds work nobody has scoped. "We rejected a shared
 dialog for this one tool" belongs in the spec. "Every destructive action gets its own
 confirmation" is an ADR.
 
-**When in doubt, write the work item.** An ADR that only ever constrained one item is
-permanent clutter in an append-only record; an item whose reasoning turns out to bind
-everything can be promoted to an ADR later, in five minutes. The asymmetry decides it.
+**When in doubt, write the ticket.** An ADR that only ever constrained one ticket is
+permanent clutter in an append-only record; a ticket whose reasoning turns out to
+bind everything can be promoted to an ADR later, in five minutes. The asymmetry decides it.
 
 ## Procedure
 

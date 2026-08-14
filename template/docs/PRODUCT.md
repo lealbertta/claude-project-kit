@@ -75,7 +75,7 @@ better pick — and the reasoning that tells you whether a proposed order is saf
 Update it when the reasoning changes.
 
 - **Risk first.** Whatever could invalidate the plan goes early.
-- **A spike is a work item.** When feasibility is genuinely unknown, timebox an
+- **A spike is a ticket.** When feasibility is genuinely unknown, timebox an
   investigation with a go/no-go outcome, and let it be allowed to fail.
 - **Rules before polish.** Work that changes the rules underneath work that tuned
   the feel wastes the tuning. Either sequence it, or accept the rework explicitly.

@@ -51,7 +51,7 @@ know, say what you are assuming, and ask.
 - `<src/core/>` — <deterministic rules, no framework dependency>
 - `<src/app/>` — <composition root and entry point>
 - `<tests/>` — <…>
-- `docs/` — decisions, work items, architecture
+- `docs/` — decisions, tickets, architecture
 
 ## Non-negotiables
 
@@ -69,9 +69,12 @@ know, say what you are assuming, and ask.
    modules away.
 4. Keep the change scoped to what was asked. No unrelated cleanup.
 5. New work starts from a spec (`write-spec`), and a change spanning several files
-   is planned before it is edited (`plan-feature`). No edits until the plan is agreed.
-6. Hand nontrivial diffs to a fresh reviewer — the `reviewer` agent or the
-   `review-change` skill. Never self-review.
+   is planned before it is edited (`plan-ticket-implementation`). No edits until the
+   plan is agreed.
+6. Hand nontrivial diffs to two fresh reviewers, dispatched together — the
+   `reviewer` and `architect` agents, or the `review-change` skill run twice in
+   clean sessions — and consolidate both reports before reporting anything. Never
+   self-review. See `docs/WORKFLOW.md` → Verify.
 7. <Never <X> without an approved ADR (ADR-000N).>
 
 <!-- Rules 1-6 are supplied; keep them. Replace the placeholder at 7 with two or
@@ -99,11 +102,11 @@ correct Claude twice on the same thing — that is the signal a rule is missing.
 ## Where things are written down
 
 - Product intent and what is next: `docs/PRODUCT.md`
-- How work gets done: `docs/WORKFLOW.md`
+- How one ticket gets done, from chosen to closed: `docs/WORKFLOW.md`
 - Architecture: `docs/ARCHITECTURE.md`
 - Decisions: `docs/DECISIONS/`
 - Tests: `docs/TEST_STRATEGY.md`; how they go vacuous: `docs/TESTING_TRAPS.md`
-- Work items: `docs/work/<id>-<slug>/`
+- Tickets: `docs/work/<id>-<slug>/`
 - Risks: `docs/RISK_REGISTER.md`
 
 Read only what the task needs.

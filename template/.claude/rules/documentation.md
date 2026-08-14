@@ -26,7 +26,7 @@ paths:
 - **Write down what was rejected, with the reason it lost.** A spec or PRD that
   records only the chosen approach cannot stop the rejected one being re-proposed,
   and cannot tell a later reader whether the choice still holds. Local reasons stay
-  in the work item; a reason that constrains later work becomes an ADR.
+  in the ticket; a reason that constrains later work becomes an ADR.
 - Mark assumptions, unresolved decisions, and measured results clearly. A number
   that was computed and a number that was guessed must not read the same.
 - When a document describes a command, keep the command runnable or label it as a
@@ -35,7 +35,7 @@ paths:
   what a requirement said, write down both and name the open point. Silently
   editing the requirement to match the code destroys the only evidence that a
   decision was ever made.
-- A work item's `notes.md` dies with the item. Before it closes, promote anything
+- A ticket's `notes.md` dies with the ticket. Before it closes, promote anything
   that outlives it: a decision to an ADR, a vacuous-test shape to
   `docs/TESTING_TRAPS.md`, a risk to the register, a repeated correction to
   `CLAUDE.md` → Gotchas. Everything not promoted is understood to be disposable.

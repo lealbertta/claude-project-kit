@@ -1,14 +1,16 @@
 # PRD — <id> <feature name>
 
 <!--
-Only for work too big for one item — a feature that will become several. Small
-work does not get a PRD; it gets a `spec.md` and nothing else.
+Only for work too big for one ticket — a feature that will become several. This is
+an **epic**, and `docs/WORKFLOW.md` will not run its loop on one: break it into the
+child tickets below and run the loop on each. Small work does not get a PRD; it
+gets a `spec.md` and nothing else.
 
-This file is the parent. Its child work items live in subfolders beside it:
+This file is the parent. Its child tickets live in subfolders beside it:
 
   docs/work/003-nested-stacking/
       PRD.md              <- this file (the epic)
-      042-restore/        <- one work item
+      042-restore/        <- one ticket
           spec.md plan.md notes.md
       043-subtree-move/
           spec.md ...
@@ -20,7 +22,7 @@ This file is the parent. Its child work items live in subfolders beside it:
   chat is still self-describing.
 - **Source:** <where this came from — a person and a date, a review, a run of
   support tickets. Prose citations are fine and do not need to resolve as links.>
-- **Sized:** <rough number of work items, and how many have landed.>
+- **Sized:** <rough number of tickets, and how many have landed.>
 - **Priority:** <High | Medium | Low>, then the reason. Story-level priorities
   rank work *within* the feature; this one ranks the feature against everything
   else.
@@ -91,7 +93,7 @@ already reference the old ones. Never renumber, never reuse.
 The shapes this feature could have taken, and why each lost. Not optional: at PRD
 scale the rejected shape is the one that gets re-proposed by whoever joins next,
 and re-arguing it costs more than writing it down once did. Number them; they get
-cited from child items and from ADRs.
+cited from child tickets and from ADRs.
 
 1. **<A different shape for the whole feature>** — <why it lost>
 2. **<Buy / adopt / extend something existing instead of building>** — <why it lost>
@@ -120,9 +122,9 @@ A rejection whose reason constrains work beyond this feature belongs in
 Write the answer here when it lands. The resolution is worth more than the
 question and must not live only in a chat log.
 
-## Work items
+## Tickets
 
-Generated as the feature is broken down. One row per child item. `Status` is the
+Generated as the feature is broken down. One row per child ticket. `Status` is the
 same courtesy copy as the header field above — the tracker wins any disagreement,
 and nothing reads this column to decide anything.
 

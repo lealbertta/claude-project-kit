@@ -3,7 +3,7 @@
 - Status: Proposed | Accepted | Amended by ADR-YYYY
 - Date: YYYY-MM-DD
 - Owners: <who decides>
-- Related work: <the feature or work item this came out of, e.g. 0007-<slug> or #42>
+- Related work: <the feature or ticket this came out of, e.g. 0007-<slug> or #42>
 
 ## Context
 
