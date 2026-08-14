@@ -54,6 +54,7 @@ template/
       data-and-migrations.md       Schema versioning, atomic writes, forward-only migrations, preserve-unknown.
       code.md                      Language-agnostic skeleton — replace the specifics, keep the structure.
     skills/                      Load on demand, by name.
+      pick-ticket/                 Everything upstream of the loop: the eligible set, the epic guard, claiming it.
       write-spec/                  Draft a ticket spec, or a PRD when the work spans several.
       plan-ticket-implementation/  Plan stage. Risk-first, pre-mortemed, and a plan is all it produces.
       implement-ticket/            Implement stage. Test-first, increment-verified, stops when reality diverges.

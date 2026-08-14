@@ -148,6 +148,7 @@ docs/DECISIONS/              ADR template + your first decision
 | `docs/work/<id>-<slug>/` | You first lose track of what a change was for |
 | `reviewer` | You first ship something a self-review missed |
 | `docs/WORKFLOW.md` | You have a tracker and more than one thing in flight |
+| `pick-ticket` | Choosing what to work on stops being obvious — more eligible tickets than you can hold in your head |
 | `PRODUCT.md` → Next / Someday | You start forgetting what you decided not to do |
 | `PRD.md` | One piece of work clearly needs several branches |
 | `sync-tickets` | Keeping the tracker in step by hand becomes the annoying part |

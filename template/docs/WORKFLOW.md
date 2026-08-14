@@ -9,9 +9,10 @@ and commands go in *Project configuration* below.
 ## What does not belong here
 
 What the work *is* (`work/<id>-<slug>/spec.md`), how a larger piece of work gets
-broken into tickets in the first place (`write-spec`, `sync-tickets`), which layer
-of test covers what (`TEST_STRATEGY.md`), or the step-by-step of carrying a stage
-out — each stage below names the skill that is the authority on that.
+broken into tickets in the first place (`write-spec`, `sync-tickets`), **how the
+ticket got chosen** (`pick-ticket`), which layer of test covers what
+(`TEST_STRATEGY.md`), or the step-by-step of carrying a stage out — each stage below
+names the skill that is the authority on that.
 
 ---
 
@@ -46,38 +47,11 @@ in, and is the faster way to see what is expected of each.
 Tickets are **not sequenced globally.** Where one genuinely depends on another, its
 `spec.md` says so under *Depends on*; nothing else implies an order.
 
-### What is not a ticket, and what to do about it
-
-**An epic is not a ticket and this loop will not run on one.** A feature that will
-take several branches has no single diff to review and no single merge to make, so
-a plan drawn over it is a plan nobody can check and a branch nobody can land.
-
-If what you were handed is one, stop here and break it down first. It gets its own
-folder with a `PRD.md` — user stories, numbered requirements, acceptance criteria —
-and its tickets sit **beside** it, not inside it:
-
-```
-docs/work/41-nested-stacking/     the epic: PRD.md only, no spec
-docs/work/42-restore/             one ticket: spec.md plan.md notes.md
-docs/work/43-subtree-move/        one ticket
-```
-
-Every folder here is one directory deep and named for its issue, so `docs/work/42-*/`
-resolves a ticket without knowing whether it belongs to a feature. The parent link
-lives on the child's `Part of:` line and in the PRD's Tickets table — stated, the
-way a dependency is, rather than implied by where the folder sits.
-
-`write-spec` drafts either size and `sync-tickets` turns requirements into issues —
-epic per feature, story per user story, task per requirement with its criteria as
-the definition of done. Acceptance criteria never become tickets of their own.
-
-Then come back here with **one** of the children. Nothing else changes: the loop
-below still runs once per ticket.
-
-The same guard fires later, and that is normal. Plan is where a ticket most often
-turns out to be two — `plan-ticket-implementation` stops and says so rather than
-planning around it, because splitting is cheap before a plan exists and expensive
-after.
+**An epic is not a ticket and this loop will not run on one.** `pick-ticket` is
+where that is caught and `write-spec` is where it is broken down. The guard fires
+once more inside the loop, at Plan, because that is where a ticket most often turns
+out to be two — `plan-ticket-implementation` stops and says so rather than planning
+around it.
 
 ## Project configuration
 
@@ -97,33 +71,6 @@ after.
 | Test command | `<./scripts/test.sh>` |
 | Full verification | `<./scripts/verify.sh>` |
 
-## Choosing which ticket — before the loop starts
-
-Upstream of everything below, and included here because it is where people look.
-
-```sh
-gh issue list --state open --label <task> --limit 100 \
-  --json number,title,labels,assignees \
-  --jq 'map(select(([.labels[].name] | index("<blocked>") | not) and (.assignees | length) == 0))'
-```
-
-That returns the eligible set, not a queue — choose from it. Confirm the choice
-with the human before starting, then assign yourself. `--limit` truncates silently
-here too: past a hundred open unassigned tickets you are choosing from a page
-rather than the set, and nothing says so.
-
-Each ticket's `spec.md` carries a **Priority** with the reason on the same line.
-Read the reasons of the high ones before choosing; they are claims, and a claim
-written three weeks ago is often no longer true. Priority narrows the set — it
-does not order it, and it never overrides a *Depends on*.
-
-```sh
-grep -rl 'Priority:\*\* High' --include=spec.md docs/work
-```
-
-That works with no tracker at all, which is the point: it is the fallback for the
-scaled-down setup where this file is not installed.
-
 ## Board state
 
 The tracker has to show where the work actually is. Two moves per ticket, both the
@@ -131,7 +78,7 @@ assistant's to make:
 
 | When | Status |
 |------|--------|
-| Start of **Plan**, in the same step that assigns the issue | `In progress` |
+| The ticket is claimed — `pick-ticket`, in the same step that assigns the issue | `In progress` |
 | Start of **Verify** — tests running, diff going to both reviewers | `In review` |
 | Closing the issue | `Done`, **automatically** |
 
