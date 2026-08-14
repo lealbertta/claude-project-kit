@@ -37,7 +37,7 @@ the merge.
 | The branch establishes a rule nothing has written down — placement state is restored from a recorded reference, never re-derived — and it binds work that does not exist yet. | architect, `adr-gap`, in-diff: yes | **ADR proposal**, drafted for Dana. `rule: none`, so it did not promote to a blocker: the architect found a rule that *should* exist, which is not the same as a rule that does. |
 | `LegacyFileRestoresWithoutSupport` sits in a file matched by no suite config and never runs. | architect, `dead-code`, in-diff: yes | **Dismissed** — and see below. It does run. |
 | AC-4 cannot be settled here. | reviewer, `question` | Reported outstanding, not as a pass and not as a failure. See Gated. |
-| `RestoreEmitsOnceOnMissingSupport` builds its fixture through a helper that hides which support is missing. | reviewer, `should` | Fixed in 42.5. Tests read top to bottom or they are not evidence anyone checks. |
+| `RestoreEmitsOnceOnMissingSupport` builds its fixture through a helper that hides which support is missing. | reviewer, `should` | Fixed in 42.4. Tests read top to bottom or they are not evidence anyone checks. |
 
 **The two reviewers disagreed about a fact**, which is the interesting row. The
 reviewer recorded the suite green with `LegacyFileRestoresWithoutSupport` among the
@@ -79,7 +79,7 @@ deletion is the second new ticket this review produced.
 
 **If it fails:** restoring a large selection drops frames on the oldest supported
 device — a stutter on undo, visible to the user, and not data loss. Undone by
-reverting 42.2 to the beneath-query, which is the bug this item fixed, so the real
+reverting 42.1 to the beneath-query, which is the bug this item fixed, so the real
 answer would be to cache the support lookup rather than to roll back.
 
 That trade is what Dana accepted, and it went up on #42 **before** the ask, not

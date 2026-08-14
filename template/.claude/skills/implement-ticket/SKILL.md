@@ -9,10 +9,11 @@ This is the Implement stage of `docs/WORKFLOW.md`. Start from the agreed
 `plan.md`, not from memory of the planning conversation.
 
 1. Read the approved plan and the acceptance criteria it maps to.
-2. Take the plan's items in order. **Item `.1` is the one the plan chose to put
-   first because it is the most likely to be wrong** — do not reorder it behind
-   something easier, and do not read a failure there as a crisis. Finding out early
-   is what it is for. For each item:
+2. Take the plan's items in numeric order, which is the order the plan chose to
+   land them in, unless an item states a dependency that says otherwise. **Item
+   `.1` is first because it is the most likely to be wrong** — do not reorder it
+   behind something easier, and do not read a failure there as a crisis. Finding
+   out early is what it is for. For each item:
    - Write the failing test first. Run it. Confirm it fails **for the stated
      reason**, not because it does not compile.
    - Implement the smallest change that makes it pass.

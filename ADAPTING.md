@@ -206,6 +206,15 @@ being wrong is still cheap. A wrong assumption found on the first afternoon is a
 amendment. The same assumption found on the third day is a rewrite, and by then
 there is a branch to argue about.
 
+The objection is always that the risky item depends on a duller one, and it is
+usually a symptom rather than a constraint: the slice was cut along a layer instead
+of through it. *Serialize the field* and *read it back* are one item, not two, and
+the plan skill already says so — an item that only works once the next one lands is
+not two items. Split that way, the first thing to land is a field nothing reads,
+the suite passes either way, and the risky half is second. Where the dependency is
+genuine and cannot be folded in, the plan names which item is the risky one, so
+that the order reads as chosen rather than inherited.
+
 **Why the pre-mortem is written in the past tense.** Because the tense is doing the
 work. Asking "what could go wrong" and asking "what did go wrong" are not the same
 question: people are markedly better at explaining an outcome than at forecasting

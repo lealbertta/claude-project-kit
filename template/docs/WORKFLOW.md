@@ -238,7 +238,7 @@ Commit freely as you go, reading each diff yourself before you do. **The review
 surface is the working tree against the merge-base, plus untracked files** — not the
 commit list — so checkpoints cost the review nothing, and nothing is ever gained by
 resetting, stashing, or amending to present a tidy history. Commit subjects cite the
-plan item they land — `42.3: pin restore against the ground-plane fallback` — which
+plan item they land — `42.2: pin restore against the ground-plane fallback` — which
 is what makes partial progress on a branch that takes three days legible in
 `git log` without opening a single diff. `git push` stays a human step.
 
@@ -522,7 +522,7 @@ ticket that ended badly is the one most worth a record.
 **Review:** <READY FOR HUMAN REVIEW | NEEDS WORK>
 | Finding | From | Severity | Disposition |
 |---------|------|----------|-------------|
-| <one line> | reviewer / architect / both | blocker / should / question / advisory | <fixed in 42.5, new ticket, ADR proposal, risk row, watch, or dismissed + reason> |
+| <one line> | reviewer / architect / both | blocker / should / question / advisory | <fixed in 42.4, new ticket, ADR proposal, risk row, watch, or dismissed + reason> |
 
 **Gated:** <"none", or one row per criterion — posted before the acceptance is asked
 for, never after>
