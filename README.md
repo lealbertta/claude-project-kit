@@ -69,7 +69,7 @@ template/
     WORKFLOW.md                  Plan → Implement → Verify, per work item. Board state, outcomes, re-entry.
     ARCHITECTURE.md              Modules, dependency direction, data layers, seams.
     TEST_STRATEGY.md             Which layer covers what; fixtures; what only reality can settle.
-    TESTING_TRAPS.md             Eleven ways a passing test proves nothing, and the autopsy that finds the twelfth.
+    TESTING_TRAPS.md             Eleven ways a passing test proves nothing, and the autopsy that finds the next one.
     RISK_REGISTER.md             Material risks, with mitigations and owners.
     DECISIONS/                   ADR template.
     work/TEMPLATE/               Copy per work item.

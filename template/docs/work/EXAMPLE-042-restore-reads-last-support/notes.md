@@ -57,7 +57,7 @@ the autopsy line into a `CLAUDE.md` → Gotchas entry rather than just a trap.
 ## Promoted before closing
 
 - Trap → `TESTING_TRAPS.md`: *the assertion pins a consequence, not the rule* — a
-  shape the file did not have, and the twelfth in it.
+  shape the file did not have.
 - Gotcha → `CLAUDE.md`: placement tests assert on the support reference, never on
   coordinates.
 - Risk → `RISK_REGISTER.md`: dangling support references, mitigated only on the
