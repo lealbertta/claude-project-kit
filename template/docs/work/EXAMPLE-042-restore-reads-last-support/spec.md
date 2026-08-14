@@ -90,6 +90,13 @@ looking like that is where it always lived.
 - **The placement solver** — untouched. Owned by the layout module; this item only
   changes what restore hands it.
 
+## Risks
+
+- **Raises** — persisting a support id makes a *dangling reference* reachable for the
+  first time: a file can now name a support that no longer exists. Restore handles
+  it (AC-3), but restore is the only path that does. Filed as R-04, raised by #42,
+  mitigated on the restore path only.
+
 ## Open questions
 
 | # | Question | Blocks | Resolution |

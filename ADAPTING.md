@@ -37,14 +37,20 @@ file. Keep the symlink; edit `CLAUDE.md`.
 
 ### 2. `.claude/settings.json`
 
-- [ ] `allow`: your verification commands, so test runs never prompt.
-- [ ] `ask`: dependency manifests, build config, CI config, `git commit`.
+- [ ] `allow`: your verification commands, so test runs never prompt. `git commit`
+      is here too — see below.
+- [ ] `ask`: dependency manifests, build config, CI config, `git merge`, `git rebase`.
 - [ ] `deny`: secrets, generated output, build artifacts, logs, `git push`, and
       destructive git.
 
-The posture that works: friction-free for anything that produces evidence,
-confirmation for anything that changes shared state, refusal for anything
+The posture that works: friction-free for anything that produces evidence or can be
+undone, confirmation for anything that changes shared state, refusal for anything
 irreversible. Loosen it once the verification scripts are reliable — not before.
+
+`git commit` sits on the allowed side of that line because `git push` is denied, so
+a commit changes nothing anyone else can see, and the loop asks for one per verified
+increment. A prompt on every commit is a prompt you stop reading, which costs more
+than it protects. `merge` and `rebase` rewrite history and still ask.
 
 ### 3. `.claude/rules/*.md`
 

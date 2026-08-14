@@ -1,5 +1,5 @@
 {
-  "_comment": "Permission posture. Principle: allow the verification commands you want run without friction, ask for anything that changes shared configuration or history, deny secrets, generated output, and irreversible git. Delete this _comment key and replace the <PLACEHOLDER> entries.",
+  "_comment": "Permission posture. Principle: allow anything that produces evidence or is revertible, ask for anything that changes shared configuration or rewrites history, deny secrets, generated output, and irreversible git. git commit is allowed because git push is denied - the work stays local, and a commit per verified increment is the point of the loop, so prompting for each one just trains you to approve without reading. merge and rebase rewrite history and still ask. Delete this _comment key and replace the <PLACEHOLDER> entries.",
   "permissions": {
     "allow": [
       "Bash(<./scripts/test.sh>*)",
@@ -13,13 +13,14 @@
       "Bash(gh issue view*)",
       "Bash(gh issue list*)",
       "Bash(gh pr view*)",
-      "Bash(gh pr diff*)"
+      "Bash(gh pr diff*)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ],
     "ask": [
       "Edit(/<dependency-manifest-dir>/**)",
       "Edit(/<build-config-dir>/**)",
       "Edit(/.github/**)",
-      "Bash(git commit *)",
       "Bash(git merge *)",
       "Bash(git rebase *)"
     ],

@@ -98,7 +98,9 @@ test per bug and learns nothing.
 
 - What is true today that makes this necessary now?
 - What does this make *reachable* that was previously impossible? That is usually
-  where the next defect comes from.
+  where the next defect comes from, and the answer goes in **Risks** — either as a
+  new row in `docs/RISK_REGISTER.md` raised by this item, or as a reference to the
+  row that already covers it. "Nothing new" is a fine answer once it has been asked.
 - Which existing rule was written when the world was simpler than it is now?
 - What is the smallest version that proves the risky part?
 - How would we know this was wrong?

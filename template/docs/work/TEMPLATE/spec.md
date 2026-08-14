@@ -64,6 +64,22 @@ Bug fixes only. Written before the fix is planned; delete this section otherwise
 
 - <What this deliberately does not touch, and who owns it instead.>
 
+## Risks
+
+New risks come from what a change makes **reachable** — a state, an input, or a code
+path that was impossible before it landed. Two kinds belong here, one line each:
+
+- **Touches R-<n>** — <an existing row in `docs/RISK_REGISTER.md` this item affects,
+  and how: mitigates it, worsens it, or merely comes into contact with it. The
+  register asks to be cited from here, because one nobody cross-references stops
+  being read.>
+- **Raises** — <something this item makes reachable that no row covers. File the row
+  in `docs/RISK_REGISTER.md` naming this item as *Raised by*; the sentence lives
+  here, the mitigation and owner live there. Not both.>
+
+Delete the section when the change makes nothing new reachable and touches no row.
+That is a real answer and a common one; what is not acceptable is never having asked.
+
 ## Depends on
 
 - <Work item that must land first, and why. Delete this section where there is no
@@ -101,8 +117,9 @@ by writing "n/a" under it.
 Alternatives considered.
 
 **Where it applies:** Autopsy (bug fixes — never dropped for one, however small),
-Non-goals (whenever someone might reasonably assume otherwise), Depends on,
-Open questions, Divergences (starts empty; filled during Implement).
+Non-goals (whenever someone might reasonably assume otherwise), Risks (whenever the
+change makes something reachable that was not, or touches a register row), Depends
+on, Open questions, Divergences (starts empty; filled during Implement).
 
 Delete everything from the horizontal rule down to here when you file.
 `docs/work/EXAMPLE-042-restore-reads-last-support/` is a filled-in

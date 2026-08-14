@@ -60,7 +60,8 @@ the autopsy line into a `CLAUDE.md` → Gotchas entry rather than just a trap.
   shape the file did not have.
 - Gotcha → `CLAUDE.md`: placement tests assert on the support reference, never on
   coordinates.
-- Risk → `RISK_REGISTER.md`: dangling support references, mitigated only on the
-  restore path.
+- Risk → `RISK_REGISTER.md`: R-04, dangling support references, mitigated only on
+  the restore path. Named in `spec.md` → Risks when it was raised, not discovered at
+  the end — the register row is the promotion, the spec line is the cross-reference.
 - Decision → none. The serialized-format change was covered by ADR-0004; nothing
   here amended it.

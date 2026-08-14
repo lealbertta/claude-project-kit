@@ -28,7 +28,8 @@ Bugs (the tracker), or generic engineering hazards that apply to every project.
   than leaving the column blank. An unspoken accepted risk is indistinguishable
   from a forgotten one.
 - Close a risk with the evidence that closed it, not with a date.
-- When a work item touches a risk, name the risk in its `spec.md`. A register
-  nobody cross-references stops being read.
+- When a work item touches a risk, name it in that item's `spec.md` → Risks. A
+  register nobody cross-references stops being read. The sentence lives in the spec;
+  the mitigation, owner, and status live here — not a copy in both.
 - New risks most often come from what a change makes **reachable**. When an ADR
   fills in "what this makes reachable", check whether a row belongs here.
