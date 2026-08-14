@@ -69,8 +69,9 @@ lesson went nowhere leaves a suite that grows one test per bug and learns nothin
 
 Resolve **every** acceptance criterion to **Verified**, **Failed**, or **Gated**
 before reporting — never two outcomes, never silence. A `Gated` criterion is never
-a pass and never a failure: report it outstanding and name the check that would
-close it.
+a pass and never a failure: report it outstanding, name the check that would close
+it, and say what it costs if that check later fails — a human is about to be asked
+whether it may ship outstanding, and cannot answer that from a criterion alone.
 
 Every finding carries a file and line, evidence, a concrete correction, and exactly
 one severity — the same three the `reviewer` agent uses, because `docs/WORKFLOW.md`

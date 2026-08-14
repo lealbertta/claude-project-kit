@@ -87,10 +87,12 @@ gh project list --owner <owner>
 gh project field-list <N> --owner <owner> --format json
 ```
 
-- [ ] Two labels are enough to start: a ticket label and a blocked label. Add
-      priority labels only if you will actually filter on them — the reason lives in
-      the spec either way, and a label with no reason behind it is the thing this
-      kit is trying not to have.
+- [ ] Two labels are enough to start: a ticket label and a blocked label. Add the
+      gated label the first time something ships with a criterion outstanding — it
+      is what makes `gh issue list --label <gated>` the standing list of everything
+      unproven. Add priority labels only if you will actually filter on them — the
+      reason lives in the spec either way, and a label with no reason behind it is
+      the thing this kit is trying not to have.
 - [ ] **Decide who owns priority and who owns blocked, once** — a board field or a
       label, never both. `WORKFLOW.md` → One owner per fact has the argument; a
       field and a label for the same fact will disagree within a month, and the
@@ -325,6 +327,15 @@ can settle gets reported as passing (false) or failing (also false, and it block
 the merge). It becomes passing. The third outcome — plus naming the check that would
 close it — is what keeps an honest list of outstanding items instead of a green
 board with holes in it.
+
+It is not a free pass, and the fence has two halves. A gated criterion ships only
+when a human **accepts it outstanding on the record**, answering a report already
+posted to the issue rather than a sentence in a chat window — and the accepted check
+becomes its own labelled issue, because the `notes.md` holding it dies with the
+ticket. The other half is decided earlier: a criterion that must not ship unproven
+is marked `[Gated, blocks merge]` when it is *written*, since at Verify the question
+arrives with a finished branch on the table. That is the same reason one-way doors
+are agreed before they are built and not after.
 
 **Why acceptance criteria never become tickets.** An AC is how work is judged, not a
 unit of work. A subtask per criterion manufactures busywork and separates

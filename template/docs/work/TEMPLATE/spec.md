@@ -31,7 +31,12 @@ a criterion.
 - **AC-1** — <observable condition>
 - **AC-2** — <observable condition>
 - **AC-3** `[Gated]` — <only a real device / real users / real load / human eyes
-  can settle this. Name the check that would close it.>
+  can settle this. Name the check that would close it. At Verify a human is asked
+  whether it may ship outstanding.>
+- **AC-4** `[Gated, blocks merge]` — <the same, except this one must not ship
+  unproven. Marked here, while writing it, because at Verify the question arrives
+  with a finished branch on the table and everyone wanting it in. It is never an
+  acceptance question: the ticket is Blocked until the check runs.>
 
 ## Alternatives considered
 

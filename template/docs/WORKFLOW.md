@@ -83,6 +83,7 @@ after.
 | Repository | `<owner>/<repo>` |
 | Ticket label | `<task>` |
 | Blocked label | `<blocked>` |
+| Gated label | `<gated>` — on the issue carrying a check that shipped outstanding |
 | Priority labels | `<p-high>`, `<p-medium>`, `<p-low>` — the copy; the spec's `Priority:` line holds the reason |
 | Board | `<https://github.com/users/<owner>/projects/<N>>` |
 | Board project ID | `<PVT_...>` |
@@ -378,15 +379,55 @@ it supports. Stopping happens before *fixing*, not before finishing the assessme
 - **Failed** — see Failure protocol
 - **Gated** — only a real device, real users, real load, or human eyes can settle
   it. Never record one as verified and never as a failure. Report it outstanding
-  and name the check that would close it.
+  and name the check that would close it, then work step 5.
 
-### 5. Promote what outlives the ticket
+### 5. A Gated criterion: report it, then ask
+
+A gated criterion is settled by a human and not by this loop — but the decision is
+made against a written record rather than a chat message. **Post the report to the
+issue before asking.** A plan that exists only in a session transcript does not
+exist, and neither does the case for shipping something unproven.
+
+Per gated criterion, the report says:
+
+- The criterion, and why *this* environment cannot settle it
+- The check that would close it, and the booking it rides on where one is scheduled
+- What **was** measured, and why it is not evidence for this criterion — a desktop
+  timing run against a device budget is the shape to be explicit about
+- **What it costs if the check later fails:** what ships wrong, who sees it, and
+  how it would be undone
+- Anything in `notes.md` that bears on it — an inert branch, a divergence, a
+  related deferral
+
+Then ask, naming the acceptance in the tail of the summary: *"merge with AC-4
+outstanding, owned by `<name>`, riding the `<#47>` device session."* A bare
+"approved" answering a report that mentions a gated criterion somewhere in a table
+is not acceptance of shipping unproven — see *What an approval covers*.
+
+**A criterion the spec marked `[Gated, blocks merge]` is not an ask.** That call was
+made at authoring time, away from the pressure of a finished branch, and it stands:
+the ticket is **Blocked** until the check runs.
+
+| The human | Outcome |
+|-----------|---------|
+| **Accepts** | **Complete.** Record the acceptance and who gave it on the issue, then merge and close. Where follow-up work is needed, **propose** the ticket and file it only on approval — tracker writes are outward-facing — then cite it in the closing report. |
+| **Declines** | **Blocked.** Record that on the issue too. **The human decides what happens to the work**: wait for the booking, descope the criterion, or split the unverified part into its own ticket so the rest can land. Do not pick one for them. |
+
+An accepted check becomes its own issue carrying the `<gated>` label, so
+`gh issue list --label <gated>` is the standing list of everything that shipped
+unproven. That issue is **not a ticket** — no branch, no plan, no merge — and this
+loop does not run on it, for the same reason it does not run on an epic. Work that
+has to land *before* the check is even possible — a harness, a fixture, a device on
+someone's desk — is a ticket, and a separate one.
+
+### 6. Promote what outlives the ticket
 
 Before closing, promote anything from `notes.md` that outlives this ticket: a
 decision to an ADR, a vacuous-test shape to `TESTING_TRAPS.md`, a risk to the
-register, a repeated correction to `CLAUDE.md` → Gotchas. If this ticket changed what
-comes next, update `PRODUCT.md` → Next — which is also where the architect's
-new-ticket dispositions land.
+register, an accepted gated check to its own `<gated>` issue, a repeated correction
+to `CLAUDE.md` → Gotchas. If this ticket changed what comes next, update
+`PRODUCT.md` → Next — which is also where the architect's new-ticket dispositions
+land.
 
 **Promotion is where a citation goes missing**, because it is the one step that
 creates a document and a reference to it at the same time. Run the reference checks
@@ -401,12 +442,16 @@ Every ticket ends in exactly one of these, and every one gets a report:
 
 | Outcome | Condition | Issue | Branch |
 |---------|-----------|-------|--------|
-| **Complete** | All criteria Verified | Closed | Merged to `main` |
-| **Blocked** | No failures; at least one Gated | Open, stays assigned | Stays on its branch |
+| **Complete** | Every criterion Verified, or Gated and accepted outstanding | Closed | Merged to `main` |
+| **Blocked** | A Gated criterion declined, or marked `[Gated, blocks merge]` | Open, stays assigned | Stays on its branch |
 | **Failed** | At least one criterion Failed | Open, stays assigned | Stays on its branch |
 
 A **Complete** ticket is merged as part of closing out. A closed issue whose work is
 still on a branch looks done everywhere except where it counts.
+
+**Blocked** is the outcome where the loop stops choosing. The work is sound and the
+evidence is not in yet, so what happens to the branch is the human's call rather
+than this document's — step 5 above has the three usual answers.
 
 Re-running the suite after a fast-forward is unnecessary when the merged tree is
 identical to the verified commit's tree; quote the two hashes instead of spending
@@ -423,7 +468,8 @@ Each stop has one resume point. Nothing restarts from choosing a ticket.
 | Implement, plan contradicted | Plan, amending only the affected items; record it under `plan.md` → Amendments |
 | Verify, consolidated verdict `NEEDS WORK` | Implement, on the blockers only |
 | Verify, criterion Failed | Implement, test-first on the fix — the regression test comes before the correction |
-| Verify, Gated only | Nothing to resume; that check is a human step |
+| Verify, Gated accepted | Nothing to resume — the check is a human step and the ticket closes around it |
+| Verify, Gated declined or `blocks merge` | Nothing to resume until the human says what happens to the ticket: wait, descope, or split |
 
 After an approved fix, re-run the suite covering the failed criterion plus
 anything the fix could plausibly have disturbed — not the full set by reflex, and
@@ -473,7 +519,11 @@ ticket that ended badly is the one most worth a record.
 |---------|------|----------|-------------|
 | <one line> | reviewer / architect / both | blocker / should / question / advisory | <fixed in 42.5, new ticket, ADR proposal, risk row, watch, or dismissed + reason> |
 
-**Gated:** <criterion + the check that would close it, or "none">
+**Gated:** <"none", or one row per criterion — posted before the acceptance is asked
+for, never after>
+| AC | Why not here | What would close it | If it fails | Decision |
+|----|--------------|---------------------|-------------|----------|
+| AC-4 | <what this environment lacks> | <the check, and the booking it rides on> | <what ships wrong, who sees it, how it is undone> | <accepted by `<name>` → #63 / declined → Blocked / `blocks merge` → Blocked> |
 
 **Not closed:** <deferrals, each with an owner, or "none">
 ```
@@ -482,4 +532,6 @@ The Commands, Criteria, and Mutations tables are governed by `CLAUDE.md`: no cla
 that a build, test, or performance target passed without evidence from the run. The
 Review table is governed by the disposition rule above: every architect finding
 appears in it, including the dismissed ones, which is what stops "advisory" from
-becoming "unread".
+becoming "unread". The Gated table goes up **before** the acceptance is asked for,
+with its Decision column empty; the answer is written into it afterwards. Asking
+first and recording later leaves the decision resting on a chat message.

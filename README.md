@@ -174,6 +174,10 @@ you accumulate one test per bug and never learn the shape you keep falling for.
 hardware, real users, real load, or human eyes can settle. A gated criterion is
 never a pass and never a failure; it is outstanding, and it names the check that
 would close it. Two-outcome reporting is what turns "we didn't check" into "green".
+Shipping with one outstanding takes a human accepting it on the record, against a
+report posted to the issue first — and the criteria that must never ship unproven
+say so in the spec, where they are written, rather than at the end with a finished
+branch on the table.
 
 **A rejected alternative is worth more than the chosen one.** Every spec numbers
 the approaches that lost and why, including the honest *do nothing* baseline. The

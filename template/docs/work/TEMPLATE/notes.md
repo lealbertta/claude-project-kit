@@ -60,6 +60,13 @@ some named future change. Record as *inert*, not as covered.
 
 ## Gated
 
-| Criterion | What would close it | Batched with |
-|-----------|---------------------|--------------|
-| AC-<n> | <the specific check> | <other items waiting on the same session> |
+Report these to the issue **before** the acceptance is asked for, not after
+(`docs/WORKFLOW.md` → Verify). The Decision column is filled in from the answer.
+
+| Criterion | Why not here | What would close it | Batched with | Decision |
+|-----------|--------------|---------------------|--------------|----------|
+| AC-<n> | <what this environment lacks> | <the specific check> | <other items waiting on the same session> | <accepted by <who>, <date> → #<issue> / declined → Blocked / `blocks merge` → Blocked> |
+
+**If it fails:** <what ships wrong, who sees it, and how it is undone. This is the
+half that makes acceptance a decision rather than a nod, so it goes in the report
+too — not only here.>

@@ -88,7 +88,10 @@ Then, for the plan as a whole:
   plan is not finished.
 - **Gated criteria.** Mark every criterion this environment cannot settle — real
   hardware, real users, real load, human eyes — and name the check that would close
-  it. An untagged gated criterion gets reported as passing.
+  it. An untagged gated criterion gets reported as passing. Carry the spec's marking
+  through: a `[Gated, blocks merge]` criterion means this ticket cannot complete
+  until that check runs, which is worth knowing now rather than on the day the
+  branch is finished.
 
 ## 4. Stress the plan before you present it
 

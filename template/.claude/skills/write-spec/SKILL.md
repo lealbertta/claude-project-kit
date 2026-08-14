@@ -39,7 +39,12 @@ This is written **with** the developer, not for them. Ask before assuming.
    "Works correctly" is not one.
 6. Tag `[Gated]` every criterion only a real device, real users, real load, or
    human eyes can settle, and name the check that would close it. Do not leave it
-   implicit — an untagged gated criterion gets reported as passing.
+   implicit — an untagged gated criterion gets reported as passing. Then decide
+   **here, and not later**, whether it may ship unproven: one that must not is
+   `[Gated, blocks merge]`, and that ticket cannot complete until the check runs.
+   Everything else becomes an acceptance question at Verify — asked when the branch
+   is finished, reviewed, and everyone wants it in, which is why the call belongs
+   in the spec, where the rest of the standard of done already lives.
 7. Write **Alternatives considered** before the spec is called done — see below.
 8. List non-goals, and mark each *deferred* or *excluded*.
 9. Fill the header block. **Source** is who asked and when; **Sized** is a rough
