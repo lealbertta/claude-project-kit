@@ -5,6 +5,18 @@ description: Write the spec for a ticket, or the PRD for a feature that spans se
 
 # Write a Spec
 
+**The issue comes first, then the folder.** A ticket's id *is* its issue number
+(`.claude/rules/documentation.md` → Names and references), so there is no legal
+folder name until the issue exists. Draft with the developer, agree, **file the
+issue** — the outward-facing step, so ask first — and only then does the folder have
+a name and the spec a home. Where the issue already exists, which is the common
+case, you are starting at the third step.
+
+A draft therefore lives in the session until it is agreed. That is deliberate: a
+spec abandoned mid-draft leaves nothing behind, and one that is filed carries its
+problem statement and criteria into the issue body at the moment it is created,
+rather than arriving there later by a second mechanism.
+
 Two sizes. Pick the smaller one that fits.
 
 - **One ticket** — fits in one to three sessions, independently mergeable.
@@ -54,6 +66,12 @@ This is written **with** the developer, not for them. Ask before assuming.
    priority is worse than a missing one, because it gets acted on.
 10. Record open questions with an owner. Ask the developer for the answers you
     need now; leave the rest open rather than guessing and calling it a decision.
+11. **File the issue, then write the spec to disk.** Ask before filing — a tracker
+    write is outward-facing. The issue carries the problem statement and the
+    acceptance criteria as its definition of done; its number names the folder,
+    and `spec.md` goes in it. With no tracker configured the number is a plain
+    counter and this step is just picking the next one. Where the issue already
+    existed, this is where you confirm the folder matches it.
 
 ## Alternatives considered
 
