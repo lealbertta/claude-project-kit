@@ -30,7 +30,7 @@ too small — just do it.
 Each ticket owns a directory:
 
 ```
-docs/work/042-restore-reads-last-support/
+docs/work/42-restore-reads-last-support/
     spec.md     what and why, acceptance criteria     (before Plan)
     plan.md     the agreed plan                       (end of Plan)
     notes.md    findings, dispositions, deferrals     (during Implement/Verify)
@@ -38,7 +38,7 @@ docs/work/042-restore-reads-last-support/
 ```
 
 Copy `docs/work/TEMPLATE/` to start one. The number matches the issue.
-`docs/work/EXAMPLE-042-restore-reads-last-support/` is the same three files filled
+`docs/work/EXAMPLE-42-restore-reads-last-support/` is the same three files filled
 in, and is the faster way to see what is expected of each.
 
 Tickets are **not sequenced globally.** Where one genuinely depends on another, its
@@ -57,7 +57,7 @@ and its tickets as subfolders beside it:
 ```
 docs/work/003-nested-stacking/
     PRD.md              the feature: stories, requirements, criteria
-    042-restore/        one ticket
+    42-restore/        one ticket
         spec.md plan.md notes.md
     043-subtree-move/
 ```
@@ -232,7 +232,7 @@ Commit freely as you go, reading each diff yourself before you do. **The review
 surface is the working tree against the merge-base, plus untracked files** — not the
 commit list — so checkpoints cost the review nothing, and nothing is ever gained by
 resetting, stashing, or amending to present a tidy history. Commit subjects cite the
-plan item they land — `042.3: pin restore against the ground-plane fallback` — which
+plan item they land — `42.3: pin restore against the ground-plane fallback` — which
 is what makes partial progress on a branch that takes three days legible in
 `git log` without opening a single diff. `git push` stays a human step.
 
@@ -388,6 +388,13 @@ register, a repeated correction to `CLAUDE.md` → Gotchas. If this ticket chang
 comes next, update `PRODUCT.md` → Next — which is also where the architect's
 new-ticket dispositions land.
 
+**Promotion is where a citation goes missing**, because it is the one step that
+creates a document and a reference to it at the same time. Run the reference checks
+in `.claude/rules/documentation.md` → Checking the references before closing: they
+find the ADR nobody cites, the `R-<n>` raised in a spec with no register row, and
+the ticket directory whose number disagrees with its issue. Those are absences, so
+nothing else will report them.
+
 ## Outcomes
 
 Every ticket ends in exactly one of these, and every one gets a report:
@@ -464,7 +471,7 @@ ticket that ended badly is the one most worth a record.
 **Review:** <READY FOR HUMAN REVIEW | NEEDS WORK>
 | Finding | From | Severity | Disposition |
 |---------|------|----------|-------------|
-| <one line> | reviewer / architect / both | blocker / should / question / advisory | <fixed in 042.5, new ticket, ADR proposal, risk row, watch, or dismissed + reason> |
+| <one line> | reviewer / architect / both | blocker / should / question / advisory | <fixed in 42.5, new ticket, ADR proposal, risk row, watch, or dismissed + reason> |
 
 **Gated:** <criterion + the check that would close it, or "none">
 

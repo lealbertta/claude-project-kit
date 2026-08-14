@@ -8,7 +8,7 @@ the Implement session can read it without inheriting the planning context.
 
 | ID | Change | File(s) | Serves | Proven by | Mutation it must catch |
 |----|--------|---------|--------|-----------|------------------------|
-| <042>.1 | <what and why> | `path` | AC-1 | `TestName` | <what to break so it fails> |
+| <42>.1 | <what and why> | `path` | AC-1 | `TestName` | <what to break so it fails> |
 
 If you cannot name the mutation, the test is decoration and the plan is not
 finished.
@@ -18,7 +18,7 @@ runs end to end and proves the assumption most likely to be wrong. A wrong
 assumption found on the first afternoon is an amendment; found last, it is a
 rewrite.
 
-The IDs are `<item>.<n>` and they are **cited from commit subjects** — `042.3:
+The IDs are `<item>.<n>` and they are **cited from commit subjects** — `42.3:
 pin restore against the ground-plane fallback`. That is what keeps partial
 progress legible in `git log` on a branch that lands over three days, and what
 lets a reviewer map a commit to the criterion it serves without reading the diff.

@@ -122,6 +122,6 @@ change makes something reachable that was not, or touches a register row), Depen
 on, Open questions, Divergences (starts empty; filled during Implement).
 
 Delete everything from the horizontal rule down to here when you file.
-`docs/work/EXAMPLE-042-restore-reads-last-support/` is a filled-in
+`docs/work/EXAMPLE-42-restore-reads-last-support/` is a filled-in
 reference: a real-shaped bug fix with an autopsy, four rejected alternatives, a
 gated criterion, and a divergence recorded rather than edited away.

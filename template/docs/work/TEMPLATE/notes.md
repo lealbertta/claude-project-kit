@@ -29,7 +29,7 @@ steps, and this table is the only place the dismissals are written down.
 
 | Finding | From | Disposition |
 |---------|------|-------------|
-| <one line> | reviewer / architect / both | <fixed in <042>.5 / new ticket in `PRODUCT.md` → Next / ADR proposal / risk row R-<n> / watch, until <…> / dismissed, because <…>> |
+| <one line> | reviewer / architect / both | <fixed in <42>.5 / new ticket in `PRODUCT.md` → Next / ADR proposal / risk row R-<n> / watch, until <…> / dismissed, because <…>> |
 
 Where the two reviewers disagreed about a **fact** — one recorded the suite green,
 the other found the new test file matched by no project config — record the

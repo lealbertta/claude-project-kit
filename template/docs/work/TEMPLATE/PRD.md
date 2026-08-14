@@ -10,7 +10,7 @@ This file is the parent. Its child tickets live in subfolders beside it:
 
   docs/work/003-nested-stacking/
       PRD.md              <- this file (the epic)
-      042-restore/        <- one ticket
+      42-restore/        <- one ticket
           spec.md plan.md notes.md
       043-subtree-move/
           spec.md ...
@@ -130,4 +130,4 @@ and nothing reads this column to decide anything.
 
 | Item | Covers | Status |
 |------|--------|--------|
-| [042-restore](042-restore/) | FR-1, FR-2 | In progress |
+| [42-restore](42-restore/) | FR-1, FR-2 | In progress |

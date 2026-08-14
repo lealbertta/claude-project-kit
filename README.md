@@ -49,7 +49,7 @@ template/
     settings.json                Allow verification, ask on config/history, deny secrets & irreversible git.
     settings.local.json.example  Machine-local env. Copy, gitignore.
     rules/                       Auto-load on path match via `paths:` frontmatter.
-      documentation.md             Where each kind of fact belongs; record divergence, don't restate it.
+      documentation.md             Where each kind of fact belongs; id forms, one-way references, and the checks.
       testing.md                   Test-first, mutation-checked, wiring pinned, gated criteria named.
       data-and-migrations.md       Schema versioning, atomic writes, forward-only migrations, preserve-unknown.
       code.md                      Language-agnostic skeleton — replace the specifics, keep the structure.
@@ -78,7 +78,7 @@ template/
       notes.md                     Findings, review dispositions, deferrals, mutations run.  (during Implement/Verify)
       PRD.md                       Only when the work spans several tickets — and then it is not a ticket.
                                    `sync-tickets` generates a fourth file, `tickets.md`, where a tracker is in use.
-    work/EXAMPLE-042-…/          A filled-in ticket. Read it before writing your first. Delete it after.
+    work/EXAMPLE-42-…/          A filled-in ticket. Read it before writing your first. Delete it after.
 ```
 
 ## The ideas worth keeping if you keep nothing else
@@ -97,6 +97,21 @@ take several branches has no single diff to review and no single merge to make, 
 it gets broken down *before* the loop rather than planned around inside it — and
 the same guard fires again at Plan, which is where a ticket most often turns out to
 be two.
+
+**References point one way, from the disposable thing to the durable one.** A
+ticket dies; the trap it discovered does not — so the edge runs spec → trap, notes →
+ADR, spec → risk, and never back. The graph stays acyclic, no pair can disagree, and
+there is one place to update. What makes that affordable is that the reverse lookup
+is a grep, which is why ids are permanent and trap headings are treated as ids too:
+reword one and every citation goes quiet rather than broken. The single exception is
+*provenance* — an ADR's "related work", a risk's "raised by" — which cites an issue
+number, never a folder path, because issues are permanent and folders get deleted.
+
+**The reference check looks for absences, not broken links.** A link checker tells
+you a path failed to resolve. The failure that actually costs you is a reference
+that *should exist and doesn't*: an ADR nobody cites, a risk raised in a spec with
+no row in the register. Three greps, run when promoting out of `notes.md`, which is
+the one step that creates a document and its citation at the same time.
 
 **Tickets are independent.** Each owns a directory, an issue, a branch, and its
 own status, so nothing has to be reordered, renumbered, or reopened when priorities

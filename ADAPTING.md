@@ -109,15 +109,16 @@ gh project field-list <N> --owner <owner> --format json
 
 ### 6. First ticket
 
-- [ ] Read `docs/work/EXAMPLE-042-restore-reads-last-support/` first — spec, plan,
+- [ ] Read `docs/work/EXAMPLE-42-restore-reads-last-support/` first — spec, plan,
       and notes, filled in. It is faster than reading the templates and it is the
       only place the kit shows what a rejected alternative, a gated criterion, and
       a recorded divergence look like when they are real rather than bracketed.
 - [ ] `cp -R docs/work/TEMPLATE docs/work/001-<slug>`, delete `PRD.md` unless the
       work spans several tickets, and fill in `spec.md`. Use the `write-spec` skill.
-- [ ] Delete the example folder once you have two tickets of your own. A
-      borrowed example that outlives its usefulness gets cited as if it were house
-      style.
+- [ ] Delete the example folder once you have two tickets of your own — **and the
+      `R-04` row in `RISK_REGISTER.md` with it**, since the two are a cross-reference
+      pair and the reference check will report the survivor. A borrowed example that
+      outlives its usefulness gets cited as if it were house style.
 
 ---
 

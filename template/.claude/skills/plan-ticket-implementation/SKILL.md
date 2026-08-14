@@ -64,7 +64,7 @@ same assumption found last is a rewrite.
 **Every item leaves the tree green.** Each is separately committable and the suite
 passes after it. An item that only works once the next one lands is not two items.
 
-**The numbers are ids, not an order.** `<item>.<n>` — `042.1`, `042.2` — is cited
+**The numbers are ids, not an order.** `<item>.<n>` — `42.1`, `42.2` — is cited
 from commit subjects, so the numbers are permanent: a change added later takes the
 next free one even where it belongs logically in the middle. Never renumber, never
 reuse. Where item B genuinely cannot land before item A, say so **on B**; nothing
@@ -129,7 +129,7 @@ Do not edit implementation files. Output the plan and wait for approval.
 
 | ID | Change | File(s) | Serves | Proven by | Mutation it must catch |
 |----|--------|---------|--------|-----------|------------------------|
-| 042.1 | <what and why> | `path` | AC-1 | `TestName` | <what to break so it fails> |
+| 42.1 | <what and why> | `path` | AC-1 | `TestName` | <what to break so it fails> |
 
 **Call sites:** <what reads or calls the thing that changes, and which item covers
 each — or "none beyond the files above", having actually looked>

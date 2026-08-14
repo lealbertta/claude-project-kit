@@ -27,7 +27,7 @@ and the finding disappears into a diff nobody reads.
 ## What you are given
 
 The orchestrating agent passes you the **ticket** this branch implements — an id
-(`042`) or a path under `docs/work/`. If it does not, find it: the branch name and
+(`42`) or a path under `docs/work/`. If it does not, find it: the branch name and
 the commit messages cite the id, so `git log $(git merge-base origin/main HEAD)..HEAD`
 will name it.
 

@@ -1,4 +1,4 @@
-# 042 — Restore reads last support
+# 42 — Restore reads last support
 
 <!--
 A filled-in reference. The `EXAMPLE-` prefix keeps it out of the numbering; delete

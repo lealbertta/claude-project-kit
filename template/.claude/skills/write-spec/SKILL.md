@@ -17,7 +17,7 @@ Two sizes. Pick the smaller one that fits.
 Most work is the first. Reach for a PRD only when you already know the work needs
 more than one branch.
 
-`docs/work/EXAMPLE-042-restore-reads-last-support/spec.md` is a filled-in one.
+`docs/work/EXAMPLE-42-restore-reads-last-support/spec.md` is a filled-in one.
 Read it before the first spec on a project: it shows the level of specificity a
 criterion needs, and what an alternative and a divergence look like written
 honestly.
