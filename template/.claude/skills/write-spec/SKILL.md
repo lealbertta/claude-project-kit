@@ -5,14 +5,27 @@ description: Write the spec for a ticket, or the PRD for a feature that spans se
 
 # Write a Spec
 
+**The issue comes first, then the folder.** A ticket's id *is* its issue number
+(`.claude/rules/documentation.md` → Names and references), so there is no legal
+folder name until the issue exists. Draft with the developer, agree, **file the
+issue** — the outward-facing step, so ask first — and only then does the folder have
+a name and the spec a home. Where the issue already exists, which is the common
+case, you are starting at the third step.
+
+A draft therefore lives in the session until it is agreed. That is deliberate: a
+spec abandoned mid-draft leaves nothing behind, and one that is filed carries its
+problem statement and criteria into the issue body at the moment it is created,
+rather than arriving there later by a second mechanism.
+
 Two sizes. Pick the smaller one that fits.
 
 - **One ticket** — fits in one to three sessions, independently mergeable.
   Copy `docs/work/TEMPLATE/spec.md` to `docs/work/<id>-<slug>/spec.md`.
 - **A feature spanning several tickets** — copy `docs/work/TEMPLATE/PRD.md` to
-  `docs/work/<id>-<slug>/PRD.md`, then create child ticket folders beside it.
-  That parent is an **epic**, and the `docs/WORKFLOW.md` loop does not run on one —
-  it runs on each child.
+  `docs/work/<id>-<slug>/PRD.md`. That folder holds the PRD and nothing else; each
+  child ticket gets its own folder **beside** it, one directory deep, named for its
+  own issue. The parent is an **epic**, the `docs/WORKFLOW.md` loop does not run on
+  one, and each child names it on the spec's `Part of:` line.
 
 Most work is the first. Reach for a PRD only when you already know the work needs
 more than one branch.
@@ -39,7 +52,12 @@ This is written **with** the developer, not for them. Ask before assuming.
    "Works correctly" is not one.
 6. Tag `[Gated]` every criterion only a real device, real users, real load, or
    human eyes can settle, and name the check that would close it. Do not leave it
-   implicit — an untagged gated criterion gets reported as passing.
+   implicit — an untagged gated criterion gets reported as passing. Then decide
+   **here, and not later**, whether it may ship unproven: one that must not is
+   `[Gated, blocks merge]`, and that ticket cannot complete until the check runs.
+   Everything else becomes an acceptance question at Verify — asked when the branch
+   is finished, reviewed, and everyone wants it in, which is why the call belongs
+   in the spec, where the rest of the standard of done already lives.
 7. Write **Alternatives considered** before the spec is called done — see below.
 8. List non-goals, and mark each *deferred* or *excluded*.
 9. Fill the header block. **Source** is who asked and when; **Sized** is a rough
@@ -48,6 +66,12 @@ This is written **with** the developer, not for them. Ask before assuming.
    priority is worse than a missing one, because it gets acted on.
 10. Record open questions with an owner. Ask the developer for the answers you
     need now; leave the rest open rather than guessing and calling it a decision.
+11. **File the issue, then write the spec to disk.** Ask before filing — a tracker
+    write is outward-facing. The issue carries the problem statement and the
+    acceptance criteria as its definition of done; its number names the folder,
+    and `spec.md` goes in it. With no tracker configured the number is a plain
+    counter and this step is just picking the next one. Where the issue already
+    existed, this is where you confirm the folder matches it.
 
 ## Alternatives considered
 

@@ -87,10 +87,12 @@ gh project list --owner <owner>
 gh project field-list <N> --owner <owner> --format json
 ```
 
-- [ ] Two labels are enough to start: a ticket label and a blocked label. Add
-      priority labels only if you will actually filter on them — the reason lives in
-      the spec either way, and a label with no reason behind it is the thing this
-      kit is trying not to have.
+- [ ] Two labels are enough to start: a ticket label and a blocked label. Add the
+      gated label the first time something ships with a criterion outstanding — it
+      is what makes `gh issue list --label <gated>` the standing list of everything
+      unproven. Add priority labels only if you will actually filter on them — the
+      reason lives in the spec either way, and a label with no reason behind it is
+      the thing this kit is trying not to have.
 - [ ] **Decide who owns priority and who owns blocked, once** — a board field or a
       label, never both. `WORKFLOW.md` → One owner per fact has the argument; a
       field and a label for the same fact will disagree within a month, and the
@@ -113,8 +115,9 @@ gh project field-list <N> --owner <owner> --format json
       and notes, filled in. It is faster than reading the templates and it is the
       only place the kit shows what a rejected alternative, a gated criterion, and
       a recorded divergence look like when they are real rather than bracketed.
-- [ ] `cp -R docs/work/TEMPLATE docs/work/001-<slug>`, delete `PRD.md` unless the
-      work spans several tickets, and fill in `spec.md`. Use the `write-spec` skill.
+- [ ] `cp -R docs/work/TEMPLATE docs/work/<issue>-<slug>`, delete `PRD.md` unless
+      the work spans several tickets, and fill in `spec.md`. Use the `write-spec`
+      skill. The number is the issue's, with no leading zeros — `42-`, never `042-`.
 - [ ] Delete the example folder once you have two tickets of your own — **and the
       `R-04` row in `RISK_REGISTER.md` with it**, since the two are a cross-reference
       pair and the reference check will report the survivor. A borrowed example that
@@ -202,6 +205,15 @@ skeleton idea applied at the scale of one ticket: prove the chain works while
 being wrong is still cheap. A wrong assumption found on the first afternoon is an
 amendment. The same assumption found on the third day is a rewrite, and by then
 there is a branch to argue about.
+
+The objection is always that the risky item depends on a duller one, and it is
+usually a symptom rather than a constraint: the slice was cut along a layer instead
+of through it. *Serialize the field* and *read it back* are one item, not two, and
+the plan skill already says so — an item that only works once the next one lands is
+not two items. Split that way, the first thing to land is a field nothing reads,
+the suite passes either way, and the risky half is second. Where the dependency is
+genuine and cannot be folded in, the plan names which item is the risky one, so
+that the order reads as chosen rather than inherited.
 
 **Why the pre-mortem is written in the past tense.** Because the tense is doing the
 work. Asking "what could go wrong" and asking "what did go wrong" are not the same
@@ -325,6 +337,15 @@ can settle gets reported as passing (false) or failing (also false, and it block
 the merge). It becomes passing. The third outcome — plus naming the check that would
 close it — is what keeps an honest list of outstanding items instead of a green
 board with holes in it.
+
+It is not a free pass, and the fence has two halves. A gated criterion ships only
+when a human **accepts it outstanding on the record**, answering a report already
+posted to the issue rather than a sentence in a chat window — and the accepted check
+becomes its own labelled issue, because the `notes.md` holding it dies with the
+ticket. The other half is decided earlier: a criterion that must not ship unproven
+is marked `[Gated, blocks merge]` when it is *written*, since at Verify the question
+arrives with a finished branch on the table. That is the same reason one-way doors
+are agreed before they are built and not after.
 
 **Why acceptance criteria never become tickets.** An AC is how work is judged, not a
 unit of work. A subtask per criterion manufactures busywork and separates

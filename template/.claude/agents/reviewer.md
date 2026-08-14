@@ -91,9 +91,13 @@ whether it blocks.
    resolve each to **Verified**, **Failed**, or **Gated** — never two outcomes, never
    silence. A criterion with no code behind it is a blocker. A `[Gated]` criterion,
    which only a real device, real users, real load, or human eyes can settle, is
-   never a pass and never a failure: report it outstanding and name the check that
-   would close it. Do not stop at the first failure — the run is already paid for, so
-   extract every conclusion it supports.
+   never a pass and never a failure: report it outstanding, name the check that
+   would close it, and say **what it costs if that check later fails** — a human is
+   about to be asked whether it may ship outstanding, and that is the half of the
+   question they cannot answer from your report otherwise. One marked
+   `[Gated, blocks merge]` is reported the same way but is not that question; it
+   simply blocks (`docs/WORKFLOW.md` → Verify). Do not stop at the first failure —
+   the run is already paid for, so extract every conclusion it supports.
 
 2. **Scope discipline.** `CLAUDE.md` is emphatic: the change stays scoped to what was
    asked, with no unrelated cleanup. Flag abstractions, config surface, options, or

@@ -8,6 +8,12 @@ description: Create or update tracker issues from a spec or PRD, idempotently, a
 Turn a spec into tracker issues without creating duplicates, and report where the
 spec and the tracker have drifted apart.
 
+**What this creates, and what it does not.** A single ticket's issue is filed by
+`write-spec` before its folder exists, because the folder is named after it — so
+there is nothing here to create for one, and running this against a lone `spec.md`
+is a drift report and nothing else. What it creates is a **PRD's** children: one
+issue per requirement, under the epic issue that already exists for the same reason.
+
 **The rule this rests on: the spec holds requirements, the tracker holds state.**
 Neither writes into the other's column. Do not treat an edited issue body as a
 requirement change.

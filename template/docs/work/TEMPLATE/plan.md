@@ -16,16 +16,20 @@ finished.
 **Item `.1` is the riskiest thing here, not the easiest** — the thinnest slice that
 runs end to end and proves the assumption most likely to be wrong. A wrong
 assumption found on the first afternoon is an amendment; found last, it is a
-rewrite.
+rewrite. Cut it *through* the layers rather than along them, so it carries its own
+dependencies: an item that only works once the next one lands is not two items.
+Where a dependency genuinely cannot be folded in, say which item is the risky one
+and why it could not come first.
 
-The IDs are `<item>.<n>` and they are **cited from commit subjects** — `42.3:
+The IDs are `<item>.<n>` and they are **cited from commit subjects** — `42.2:
 pin restore against the ground-plane fallback`. That is what keeps partial
 progress legible in `git log` on a branch that lands over three days, and what
 lets a reviewer map a commit to the criterion it serves without reading the diff.
-The numbers are permanent: a change inserted later takes the next free number even
-where it belongs logically in the middle. Never renumber, never reuse. They are
-**ids and not an order**: where an item genuinely cannot land before another, say
-so on the later one.
+Once the plan is agreed the numbers are **frozen ids**: a change inserted later
+takes the next free number even where it belongs logically in the middle, and sits
+where the plan puts it rather than at the end. Never renumber, never reuse. Nothing
+in the numbering implies a dependency — where an item genuinely cannot land before
+another, say so on the later one.
 
 **Call sites:** <what reads or calls the thing that changes, and which item covers
 each. "None beyond the files above" is a fine answer once you have actually

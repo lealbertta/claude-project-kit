@@ -54,21 +54,31 @@ probable shape of a file is a plan whose first amendment is already written.
 
 ## 3. Design the change
 
-**Order the plan by risk, not by convenience.** Item `.1` is the thinnest slice
-that runs end to end through every layer this change touches and proves the
-assumption most likely to be wrong — not the easiest item, and not the bottom
-layer because it is tidy to start there. Say what it would mean if that slice
-fails. A wrong assumption found on the first afternoon is a plan amendment; the
-same assumption found last is a rewrite.
+**Number the items in the order you mean to land them, and order by risk rather
+than convenience.** Item `.1` is the thinnest slice that runs end to end through
+every layer this change touches and proves the assumption most likely to be wrong —
+not the easiest item, and not the bottom layer because it is tidy to start there.
+Say what it would mean if that slice fails. A wrong assumption found on the first
+afternoon is a plan amendment; the same assumption found last is a rewrite.
+
+**Cut the slice through the layers, not along them**, and the usual objection —
+*the risky item depends on a duller one* — mostly disappears, because a slice that
+runs end to end carries its own dependencies. Serializing a field in one item and
+reading it back in the next puts the risky half second and lands a field nothing
+reads; the two are one item. Where a dependency genuinely cannot be folded in, say
+which item is the risky one and why it could not come first, so the next reader
+knows the order was chosen rather than inherited.
 
 **Every item leaves the tree green.** Each is separately committable and the suite
-passes after it. An item that only works once the next one lands is not two items.
+passes after it. **An item that only works once the next one lands is not two
+items** — that rule is what forces the slice above, and it is the one most often
+broken by a plan that looks tidy.
 
-**The numbers are ids, not an order.** `<item>.<n>` — `42.1`, `42.2` — is cited
-from commit subjects, so the numbers are permanent: a change added later takes the
-next free one even where it belongs logically in the middle. Never renumber, never
-reuse. Where item B genuinely cannot land before item A, say so **on B**; nothing
-else in the numbering implies a dependency.
+**From agreement onward the numbers are frozen ids.** `<item>.<n>` — `42.1`, `42.2`
+— is cited from commit subjects, so a change added later takes the next free number
+even where it belongs logically in the middle, and sits where the plan says rather
+than last. Never renumber, never reuse. Nothing in the numbering implies a
+dependency: where item B genuinely cannot land before item A, say so **on B**.
 
 **Break contracts in parallel, never in one step.** Where the change alters
 something already written down elsewhere — a persisted shape, a serialized field, a
@@ -88,7 +98,10 @@ Then, for the plan as a whole:
   plan is not finished.
 - **Gated criteria.** Mark every criterion this environment cannot settle — real
   hardware, real users, real load, human eyes — and name the check that would close
-  it. An untagged gated criterion gets reported as passing.
+  it. An untagged gated criterion gets reported as passing. Carry the spec's marking
+  through: a `[Gated, blocks merge]` criterion means this ticket cannot complete
+  until that check runs, which is worth knowing now rather than on the day the
+  branch is finished.
 
 ## 4. Stress the plan before you present it
 

@@ -6,14 +6,15 @@ an **epic**, and `docs/WORKFLOW.md` will not run its loop on one: break it into 
 child tickets below and run the loop on each. Small work does not get a PRD; it
 gets a `spec.md` and nothing else.
 
-This file is the parent. Its child tickets live in subfolders beside it:
+This folder holds the PRD and nothing else. Child tickets are siblings, not
+subfolders — one directory deep, each named for its own issue:
 
-  docs/work/003-nested-stacking/
-      PRD.md              <- this file (the epic)
-      42-restore/        <- one ticket
-          spec.md plan.md notes.md
-      043-subtree-move/
-          spec.md ...
+  docs/work/41-nested-stacking/     <- this file (the epic)
+  docs/work/42-restore/            <- one ticket: spec.md plan.md notes.md
+  docs/work/43-subtree-move/       <- one ticket
+
+Nothing is implied by position. Each child names this epic on its `Part of:` line,
+and the Tickets table at the bottom of this file lists them.
 -->
 
 - **Epic:** <#41>
@@ -130,4 +131,4 @@ and nothing reads this column to decide anything.
 
 | Item | Covers | Status |
 |------|--------|--------|
-| [42-restore](42-restore/) | FR-1, FR-2 | In progress |
+| [42-restore](../42-restore/) | FR-1, FR-2 | In progress |
