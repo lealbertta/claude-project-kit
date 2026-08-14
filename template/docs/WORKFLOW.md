@@ -201,20 +201,10 @@ and it fails silently, because it reads perfectly well right up until someone tr
 to implement it. So the plan names files, call sites, precedent, and unknowns — and
 that specificity, not the session count, is what the split is actually paying for.
 
-Not every ticket needs a full loop. When the change fits in one sentence, **skip
-Plan**: minimal fix plus a regression test, then Verify normally. Implement and
-Verify are never skipped.
-
-**On a bug, the sentence has to be the cause and not the symptom.** "Restore seats
-objects wrongly" is a symptom and does not qualify; "restore re-derives the support
-instead of reading the recorded one" does. A bug whose cause you cannot yet state is
-the case Plan exists for — skipping it there means diagnosing while implementing,
-which is where the first plausible explanation wins by default.
-
-A bug fix skipping Plan still owes its **Autopsy** — which test should have caught
-this, and why it didn't (`write-spec`, and `TESTING_TRAPS.md` → The autopsy). That
-is the one part of the loop a one-line fix must not skip, because a defect that
-escaped is the only free evidence about the suite anyone gets.
+**All three stages run, on every ticket.** The change too small to be worth planning
+is the change too small to be a ticket, and that line is drawn once, at Entry, before
+the loop starts — not a second time inside it. A bypass here would be a second lower
+bound, and the one that gets used is always the later one.
 
 Commit freely as you go, reading each diff yourself before you do. **The review
 surface is the working tree against the merge-base, plus untracked files** — not the
@@ -244,6 +234,8 @@ This stage adds:
 - Confirm the ticket is still one ticket; if it is two, stop and say so
 - Name the unknowns, then send them out as `investigator` briefs — dispatched
   together, one question each, and re-run any finding before building on it
+- On a bug, go back and correct the spec's **Autopsy** once the cause is known: it
+  was written from the symptom, and `reviewer` gates the done-claim on it
 - List each change as a numbered item with a rationale, ordered so the item most
   likely to be wrong is proven first
 - Map each to the criterion it serves, and name the test that will prove it

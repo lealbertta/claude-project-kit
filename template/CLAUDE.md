@@ -68,9 +68,9 @@ know, say what you are assuming, and ask.
    you what you just wrote does what you meant, and cannot see what you broke three
    modules away.
 4. Keep the change scoped to what was asked. No unrelated cleanup.
-5. New work starts from a spec (`write-spec`), and a change spanning several files
-   is planned before it is edited (`plan-ticket-implementation`). No edits until the
-   plan is agreed.
+5. New work starts from a spec (`write-spec`), and every ticket is planned before it
+   is edited (`plan-ticket-implementation`). No edits until the plan is agreed. Work
+   too small to plan is too small to be a ticket — `docs/WORKFLOW.md` → Entry.
 6. Hand nontrivial diffs to two fresh reviewers, dispatched together — the
    `reviewer` and `architect` agents, or the `review-change` skill run twice in
    clean sessions — and consolidate both reports before reporting anything. Never
