@@ -11,6 +11,21 @@ code does not satisfy this step — you will re-derive the same assumptions.
 Review the diff against the accepted plan, the acceptance criteria, and the
 relevant ADRs.
 
+## Where this sits
+
+`docs/WORKFLOW.md` → Verify sends a branch to **two** reviewers: the `reviewer`
+agent, whose brief is this file, and the `architect`, whose brief is
+`.claude/agents/architect.md`. This skill is the fallback where subagents are not
+available — run it twice, in two clean sessions, once against each brief. Running
+both briefs in one session produces one review with two headings, and the second
+half will be written by someone who has already made up their mind.
+
+Outside the loop — an ad-hoc diff, a branch nobody filed a ticket for — this skill
+stands on its own and the reviewer brief below is the whole job.
+
+Either way, the review **reports and does not fix**. A reviewer that fixes things
+stops reporting them, and the finding disappears into a diff nobody reads.
+
 ## Check the code
 
 - Incorrect behavior, or an acceptance criterion nothing actually satisfies

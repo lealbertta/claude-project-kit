@@ -1,10 +1,10 @@
 # Notes — <id> <title>
 
-What this work item found. Written as you go, not reconstructed at the end — an
+What this ticket found. Written as you go, not reconstructed at the end — an
 observation that lives only in a session's context is lost when the session ends.
 
-This file dies with the work item. Anything that will still matter in six months
-gets **promoted** before this item closes:
+This file dies with the ticket. Anything that will still matter in six months
+gets **promoted** before the ticket closes:
 
 - A decision → `docs/DECISIONS/`
 - A way a test went vacuous → `docs/TESTING_TRAPS.md`
@@ -18,6 +18,23 @@ gets **promoted** before this item closes:
 | <what was broken> | <which tests failed, and how many> |
 
 A mutation that survived is a finding. Record it even after you fix the test.
+
+## Review findings and their disposition
+
+Verify sends the branch to two reviewers — `reviewer` and `architect` — and
+consolidates both reports (`docs/WORKFLOW.md` → Verify). **Every architect finding
+gets exactly one disposition, including the dismissed ones.** Advisory does not mean
+optional: a finding nobody dispositioned is a finding that was ignored with extra
+steps, and this table is the only place the dismissals are written down.
+
+| Finding | From | Disposition |
+|---------|------|-------------|
+| <one line> | reviewer / architect / both | <fixed in <42>.5 / new ticket in `PRODUCT.md` → Next / ADR proposal / risk row R-<n> / watch, until <…> / dismissed, because <…>> |
+
+Where the two reviewers disagreed about a **fact** — one recorded the suite green,
+the other found the new test file matched by no project config — record the
+disagreement and how it was settled by running it. Two careful readers getting
+different answers is itself a finding about the project, and it outlives this ticket.
 
 ## Changed without being asked
 

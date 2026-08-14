@@ -1,8 +1,8 @@
-# 042 — Restore reads last support
+# 42 — Restore reads last support
 
 <!--
 A filled-in reference. The `EXAMPLE-` prefix keeps it out of the numbering; delete
-the folder once your own work items are better examples than this one.
+the folder once your own tickets are better examples than this one.
 
 The domain is a scene editor where objects rest on supports and can be stacked. It
 is illustrative — commands and paths are the same placeholders the rest of the kit

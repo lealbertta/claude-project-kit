@@ -3,7 +3,9 @@
 - Status: Proposed | Accepted | Amended by ADR-YYYY
 - Date: YYYY-MM-DD
 - Owners: <who decides>
-- Related work: <the feature or work item this came out of, e.g. 0007-<slug> or #42>
+- Related work: <provenance — the issue this came out of, e.g. #42. An issue number,
+  never a `docs/work/` path: the issue is permanent and the folder is deletable.
+  Nothing reads this to decide anything, and it is not kept up to date.>
 
 ## Context
 

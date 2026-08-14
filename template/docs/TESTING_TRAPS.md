@@ -9,6 +9,22 @@ release. Do not add general testing advice — that is what books are for.
 The reliable way to find one is **the autopsy** below. Every trap here started as
 something that got through.
 
+**A trap's heading is its id.** Specs cite traps by name — `spec.md` → Autopsy says
+which one a defect was a second instance of — and the reference runs one way, from
+the ticket to the trap, because the ticket dies and the trap does not
+(`.claude/rules/documentation.md` → Names and references). That makes the reverse
+lookup a grep:
+
+```sh
+grep -rl 'Trap 3' --include=spec.md docs/work     # which defects hit this one
+```
+
+Which only works while the heading holds still. **Rewording a trap is renaming an
+id**: every spec citing the old wording goes quiet rather than broken, and the
+victim count — the thing that decides whether a trap has earned a `CLAUDE.md` →
+Gotchas line — silently resets to zero. Add traps freely; rename them almost never,
+and when you must, fix the citations in the same change.
+
 ## What does not belong here
 
 Which tests to write (`TEST_STRATEGY.md`), or how the loop runs (`WORKFLOW.md`).
@@ -42,7 +58,7 @@ threshold, and a threshold invites tests written to move it.
 ## The autopsy — where every trap below came from
 
 A defect that reached a human is the cheapest evidence about a suite anyone ever
-gets, because it has already been paid for. Spend it: **a bug-fix work item answers
+gets, because it has already been paid for. Spend it: **a bug-fix ticket answers
 two questions in its `spec.md` before the fix is written.**
 
 1. **Which test should have caught this?** Name it. If none exists, that is the

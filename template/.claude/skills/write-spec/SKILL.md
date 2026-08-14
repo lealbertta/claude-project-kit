@@ -1,21 +1,23 @@
 ---
 name: write-spec
-description: Write the spec for a work item, or the PRD for a feature that spans several.
+description: Write the spec for a ticket, or the PRD for a feature that spans several.
 ---
 
 # Write a Spec
 
 Two sizes. Pick the smaller one that fits.
 
-- **One work item** — fits in one to three sessions, independently mergeable.
+- **One ticket** — fits in one to three sessions, independently mergeable.
   Copy `docs/work/TEMPLATE/spec.md` to `docs/work/<id>-<slug>/spec.md`.
-- **A feature spanning several items** — copy `docs/work/TEMPLATE/PRD.md` to
-  `docs/work/<id>-<slug>/PRD.md`, then create child item folders beside it.
+- **A feature spanning several tickets** — copy `docs/work/TEMPLATE/PRD.md` to
+  `docs/work/<id>-<slug>/PRD.md`, then create child ticket folders beside it.
+  That parent is an **epic**, and the `docs/WORKFLOW.md` loop does not run on one —
+  it runs on each child.
 
 Most work is the first. Reach for a PRD only when you already know the work needs
 more than one branch.
 
-`docs/work/EXAMPLE-042-restore-reads-last-support/spec.md` is a filled-in one.
+`docs/work/EXAMPLE-42-restore-reads-last-support/spec.md` is a filled-in one.
 Read it before the first spec on a project: it shows the level of specificity a
 criterion needs, and what an alternative and a divergence look like written
 honestly.
@@ -76,7 +78,7 @@ This does **not** reintroduce ordering. `PRODUCT.md` → Next stays an unordered
 set, and priority is a claim about *this* item that stands on its own — a real
 sequencing constraint is still a *Depends on* line and nothing else.
 
-## When the work item is a bug fix
+## When the ticket is a bug fix
 
 One extra section, written **before** the fix is planned, under the heading
 **Autopsy**. It is two lines and it is the highest-value thing in the spec:
