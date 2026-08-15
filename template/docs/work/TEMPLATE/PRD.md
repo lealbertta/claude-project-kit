@@ -18,9 +18,9 @@ and the Tickets table at the bottom of this file lists them.
 -->
 
 - **Epic:** <#41>
-- **Status:** <Proposed | Agreed | In progress | Done | Abandoned>. The tracker is
-  the truth and wins any disagreement; this field exists so a PRD pasted into a
-  chat is still self-describing.
+- **Status:** <Proposed | Agreed | In progress | Done | Abandoned>. Owned the same
+  way a spec's is — `docs/WORKFLOW.md` → One owner per fact. With a tracker it is a
+  copy `sync-tickets` refreshes; with no tracker it is the status itself.>
 - **Source:** <where this came from — a person and a date, a review, a run of
   support tickets. Prose citations are fine and do not need to resolve as links.>
 - **Sized:** <rough number of tickets, and how many have landed.>

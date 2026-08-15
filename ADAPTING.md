@@ -434,13 +434,19 @@ backlog fills with work that was merely proposed.
 
 **Why the spec carries a `Status:` line when the tracker owns status.** Because a
 spec gets pasted into a chat window, and one that cannot say what state it is in
-gets answered from memory. It is the single exception to "never mirror state", and
-it survives only because it is fenced: the tracker wins any disagreement, nothing
-is gated on the spec's copy, and a stale one is cosmetic rather than wrong. The
-fence is what makes it safe, so it is written down in `sync-tickets` next to the
-rule it breaks. Anything else — assignee, dates, percent complete — has no such
-excuse and goes stale silently, which is the failure this kit spends most of its
-pages avoiding.
+gets answered from memory. It is the closest thing to an exception to "never mirror
+state", and it survives only because it is fenced: the tracker wins any
+disagreement, nothing is gated on the copy, a stale one is cosmetic rather than
+wrong, and **`sync-tickets` is the only thing that writes it** — one writer is what
+keeps a copy from being a mirror, since a mirror is two writers and no owner.
+Anything else — assignee, dates, percent complete — has no such excuse and goes
+stale silently, which is the failure this kit spends most of its pages avoiding.
+
+The fence only describes the configuration that has a tracker. **Without one the
+line is not a copy at all** — it is the status, the stages move it, and the
+reviewer's closing check reads it because there is nothing else to read. Which of
+the two you are in is not something a spec template can know, so the authority on
+it is `docs/WORKFLOW.md` → One owner per fact, and everything else defers there.
 
 **Why there is a priority at all, in a kit that refuses to order work.** Priority
 and sequence are different claims, and conflating them is what made the source

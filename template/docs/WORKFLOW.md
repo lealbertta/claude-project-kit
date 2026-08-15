@@ -111,6 +111,16 @@ field and touches nothing else, and the label goes away unless you genuinely fil
 on labels from the CLI. What survives in the spec is the sentence explaining the
 priority, which is the half no field can hold.
 
+**The spec's own `Status:` line flips owner with the configuration, and this is the
+authority on which.** With a tracker installed, the tracker owns it and the spec
+line is a copy — written by `sync-tickets` refreshing it from the tracker and by
+nothing else, never by hand, and never gated on, because gating on a copy checks the
+copy rather than the fact. **With no tracker there is no other owner**, so the spec
+line *is* the status: `Agreed` at the end of Plan, `In progress` when Implement
+starts, `Done` or `Abandoned` at close — the same three moves the board would have
+made — and the reviewer's closing check reads it, because in that configuration it
+is the only thing to read.
+
 ### Setting the status
 
 The field is on the *project item*, not on the issue, so it takes a lookup first.

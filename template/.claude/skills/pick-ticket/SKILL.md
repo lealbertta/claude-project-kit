@@ -28,7 +28,12 @@ choosing from a page rather than from the set, and nothing says so.
 query:
 
 ```sh
-grep -rl 'Priority:\*\* High' --include=spec.md docs/work
+# Priority carries the sort; Status carries what is still eligible. In this
+# configuration the spec's Status: line IS the status, so a finished ticket is
+# excluded here or not at all.
+grep -rl 'Priority:\*\* High' --include=spec.md docs/work | while read -r s; do
+  grep -qE '^- \*\*Status:\*\* (Done|Abandoned)' "$s" || echo "$s"
+done
 ```
 
 ## 2. Read the priorities as claims, not as ranks

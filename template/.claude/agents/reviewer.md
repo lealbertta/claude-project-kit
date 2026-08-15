@@ -176,7 +176,9 @@ whether it blocks.
    amendment where the answer contradicted the plan — since an unknown the plan
    named and the branch silently resolved is the guess that section exists to
    prevent, and this is the only place it is checkable; every criterion
-   resolved, `spec.md` → Status flipped, `notes.md` promoted before it dies — a
+   resolved; `spec.md` → Status flipped **only where no tracker is installed**,
+   since with one the tracker owns it and that line is a copy nothing gates on
+   (`docs/WORKFLOW.md` → One owner per fact); `notes.md` promoted before it dies — a
    decision to an ADR *with the rule it implies written into `.claude/rules/` or the
    non-negotiables in the same change*, a vacuous-test shape to `TESTING_TRAPS.md`, a
    risk to the register, a repeated correction to `CLAUDE.md` → Gotchas — and commit
