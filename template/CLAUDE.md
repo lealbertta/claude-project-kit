@@ -72,9 +72,10 @@ know, say what you are assuming, and ask.
    is edited (`plan-ticket-implementation`). No edits until the plan is agreed. Work
    too small to plan is too small to be a ticket — `docs/WORKFLOW.md` → Entry.
 6. Hand nontrivial diffs to two fresh reviewers, dispatched together — the
-   `reviewer` and `architect` agents, or the `review-change` skill run twice in
-   clean sessions — and consolidate both reports before reporting anything. Never
-   self-review. See `docs/WORKFLOW.md` → Verify.
+   `reviewer` and `architect` agents, or without subagents their two briefs as two
+   clean sessions (`review-change`, and `.claude/agents/architect.md`) — and
+   consolidate both before reporting anything. Never self-review. See
+   `docs/WORKFLOW.md` → Verify.
 7. <Never <X> without an approved ADR (ADR-000N).>
 
 <!-- Rules 1-6 are supplied; keep them. Replace the placeholder at 7 with two or

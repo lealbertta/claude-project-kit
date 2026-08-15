@@ -231,8 +231,10 @@ path. The surface they both read is the **working tree against the merge-base, p
 untracked files** — never `git diff main...HEAD`, which sees only what is committed
 and silently misses the rest.
 
-Where subagents are unavailable, `review-change` is the fallback: run it twice, in
-two clean sessions, once against each brief above.
+Where subagents are unavailable, run the two briefs as two clean sessions: the
+`review-change` skill for the reviewer pass, and `.claude/agents/architect.md` read
+as the brief for the architect pass. `review-change` is the reviewer's brief and
+covers none of the architect's, so running it twice gives you one review twice.
 
 ### 4. Consolidate the two reports
 

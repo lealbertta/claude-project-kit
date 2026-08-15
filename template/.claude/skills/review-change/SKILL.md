@@ -13,15 +13,20 @@ relevant ADRs.
 
 ## Where this sits
 
-`docs/WORKFLOW.md` → Verify sends a branch to **two** reviewers: the `reviewer`
-agent, whose brief is this file, and the `architect`, whose brief is
-`.claude/agents/architect.md`. This skill is the fallback where subagents are not
-available — run it twice, in two clean sessions, once against each brief. Running
-both briefs in one session produces one review with two headings, and the second
-half will be written by someone who has already made up their mind.
+`docs/WORKFLOW.md` → Verify sends a branch to **two** reviewers, and they do not
+share a brief. **This file is the reviewer's**, and it is a reviewer brief all the
+way down: correctness against the criteria, test strength, scope, regressions. The
+architect's brief is `.claude/agents/architect.md` — convention drift, ADR
+conformance, duplication, whole-tree coherence — and **nothing in this file
+substitutes for it.**
+
+Where subagents are unavailable, run two clean sessions: **this skill in one**, and
+`.claude/agents/architect.md`, read as the brief, in the other. Two sessions and not
+two headings in one — a second pass written by someone who has already made up their
+mind is a confirmation, not a review.
 
 Outside the loop — an ad-hoc diff, a branch nobody filed a ticket for — this skill
-stands on its own and the reviewer brief below is the whole job.
+stands on its own and is the whole job.
 
 Either way, the review **reports and does not fix**. A reviewer that fixes things
 stops reporting them, and the finding disappears into a diff nobody reads.
