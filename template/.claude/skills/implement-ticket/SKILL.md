@@ -41,9 +41,10 @@ working tree against the merge-base, including uncommitted and untracked files**
 (`docs/WORKFLOW.md` → Session shape), so checkpoints cost the review nothing and
 they are what makes a three-day branch legible in `git log`.
 
-**Never reset, stash, revert, or amend to make the diff look right for review.** The
-reviewer sees the work in whatever state it is in; rewriting history to present
-something tidy destroys work to solve a problem that does not exist.
+Rearranging the history — reset, stash, revert, amend — is yours to do as you like.
+The reviewer reads the working tree, so it changes nothing about what gets reviewed.
+The one thing to watch is doing it **while a review is running**: the surface is the
+tree as it stands, so work stashed mid-review is work the reviewer scores as absent.
 
 ## When reality contradicts the plan
 

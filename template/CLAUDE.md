@@ -92,8 +92,8 @@ correct Claude twice on the same thing — that is the signal a rule is missing.
 
 - Branch: `<convention>`
 - Commit: `<convention>`
-- Commit freely as you go. Review reads the working tree, not the commit list — so
-  **never reset, stash, or amend to make a diff look tidy.**
+- Commit freely as you go. Review reads the working tree, not the commit list, so
+  the shape of the history costs the review nothing either way.
 - An approval covers the tail you described when you asked, and nothing you thought
   of afterwards — `docs/WORKFLOW.md` → What an approval covers.
 - `git push` stays a human step. The loop pushes once, at Verify, to open the PR the

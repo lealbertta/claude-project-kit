@@ -209,8 +209,8 @@ bound, and the one that gets used is always the later one.
 
 Commit freely as you go, reading each diff yourself before you do. **The review
 surface is the working tree against the merge-base, plus untracked files** — not the
-commit list — so checkpoints cost the review nothing, and nothing is ever gained by
-resetting, stashing, or amending to present a tidy history. Commit subjects cite the
+commit list — so checkpoints cost the review nothing and the shape of the history is
+yours to manage however you prefer. Commit subjects cite the
 plan item they land — `42.2: pin restore against the ground-plane fallback` — which
 is what makes partial progress on a branch that takes three days legible in
 `git log` without opening a single diff. `git push` stays a human step.
