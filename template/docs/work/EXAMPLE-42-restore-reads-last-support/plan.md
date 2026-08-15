@@ -70,8 +70,9 @@ follows is the point of the section.
 - **Performance:** one id lookup per restored object, against a map that is already
   built. Not none, but not measurable — AC-4 is the check that decides.
 - **Compatibility:** 42.3 bumps the schema version, so files written after this
-  lands are refused by the previous release. Acceptable per ADR-0004; noted here
-  because "none" would have been a lie.
+  lands are refused by the previous release. Acceptable under the schema-versioning
+  decision this project already recorded; noted here because "none" would have been
+  a lie.
 - **Lifecycle:** an object deleted while something rests on it already leaves a
   dangling reference. That is not new, but 42.2 is the first code that has to have
   an answer for it.

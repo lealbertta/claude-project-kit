@@ -122,8 +122,10 @@ question at all: a frame budget that misses is a follow-up, not a wrong feature.
 - Risk → `RISK_REGISTER.md`: R-04, dangling support references, mitigated only on
   the restore path. Named in `spec.md` → Risks when it was raised, not discovered at
   the end — the register row is the promotion, the spec line is the cross-reference.
-- Decision → none *made here*. The serialized-format change was covered by ADR-0004
-  and nothing amended it. The architect's `adr-gap` finding is a **proposal** for
+- Decision → none *made here*. The serialized-format change was covered by a
+  decision recorded before this ticket, and nothing amended it. That ADR is one of
+  the targets the kit does not ship — see the note at the top of `spec.md`. The
+  architect's `adr-gap` finding is a **proposal** for
   Dana to accept or reject, not a decision this ticket took: an agent that writes
   the ADR it recommended has approved its own recommendation.
 - Gated check → #63, labelled `gated`, carrying AC-4 and the device session that

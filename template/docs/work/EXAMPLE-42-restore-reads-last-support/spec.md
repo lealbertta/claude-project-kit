@@ -9,6 +9,15 @@ is illustrative — commands and paths are the same placeholders the rest of the
 uses. What is worth copying is the shape: what a criterion looks like when someone
 else can check it, what a rejected alternative looks like when the reason survives,
 and what a divergence looks like recorded rather than edited away.
+
+**Its promotions name targets the kit does not ship.** A trap heading, a Gotchas
+line, a prior decision — this ticket promoted to all three, and the files it
+promoted into belong to the project it was extracted from. They are deliberately
+not carried over: one example's furniture has no business landing in `CLAUDE.md`
+or `TESTING_TRAPS.md` in every project that copies this kit. The promotion is the
+part to imitate, not the destination's contents. `R-04` in `RISK_REGISTER.md` is
+the single exception, shipped so that one cross-reference resolves and you can see
+a real pair — and flagged there for deletion with this folder.
 -->
 
 - **Issue:** #42
@@ -78,8 +87,9 @@ looking like that is where it always lived.
 - **Why it wasn't:** it asserted on position. Restore produces the right position
   and the wrong support, so a position-shaped assertion is green in precisely the
   case that is broken.
-- **Written down as:** a shape not already in `TESTING_TRAPS.md`, added to it as
-  *the assertion pins a consequence, not the rule*. It then took a second victim
+- **Written down as:** a shape not already in `TESTING_TRAPS.md`, added to that
+  project's copy as *the assertion pins a consequence, not the rule* — one of the
+  promotions this folder names and the kit does not carry. It then took a second victim
   inside this same item — see `notes.md` → the survivor — and a trap that does not
   hold where it is written is also a `CLAUDE.md` → Gotchas line:
   *placement tests assert on the support reference, never on coordinates.*
