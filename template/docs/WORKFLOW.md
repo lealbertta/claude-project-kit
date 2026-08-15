@@ -150,8 +150,10 @@ not happen.
 ## Implement
 
 Run the `implement-ticket` skill. Read the agreed plan from `plan.md`. Execute it
-item by item, test-first — the failing test comes before the implementation, not
-after. Keep `notes.md` open as you go.
+**item by item, test-driven** — red, green, refactor, then the item's mutation check
+and a full verification run before the next item starts. The skill is the authority
+on that cycle and it is not summarised here. Keep `notes.md` open as you go: the red
+run's failure line goes in as you get it, which is the only moment it exists.
 
 If reality contradicts the plan, stop and report. See Re-entry.
 

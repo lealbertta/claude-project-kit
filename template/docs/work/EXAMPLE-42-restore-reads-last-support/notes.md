@@ -22,6 +22,24 @@ there would have spent itself tuning a tolerance — arriving at a fix that made
 symptom rarer and left the cause in place. It was killed in nine minutes by an
 investigator whose only job was to kill it.
 
+## Red steps
+
+| Item | Test | Failed with |
+|------|------|-------------|
+| 42.1 | `SerializedStateCarriesSupport` | `expected serialized state to carry support id 7, got <absent>` |
+| 42.1 | `RestoreReadsLastSupport` | `expected support 7 after restore, got 0 (ground plane)` |
+| 42.2 | `RestoreEmitsOnceOnMissingSupport` | `expected 1 support-lost event, got 0` |
+| 42.3 | `LegacyFileRestoresWithoutSupport` | `expected ground plane for pre-migration file, got support id 0 read as present` |
+
+**42.1's second row is the one worth reading.** It failed on the support id while
+every coordinate in the assertion was already correct — which is the whole bug in
+one line, and the reason `RestoreRoundTrip` had been green for a year. A red step
+that only says *"failed"* would not have shown that.
+
+`LegacyFileRestoresWithoutSupport` is also the test the architect later reported as
+never running. This row is dated before that finding and is part of what settled it:
+it had failed, on its assertion, in this repo.
+
 ## Mutations checked
 
 | Mutation | Caught by |

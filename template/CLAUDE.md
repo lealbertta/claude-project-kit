@@ -55,11 +55,15 @@ know, say what you are assuming, and ask.
 
 ## Non-negotiables
 
-1. Write the failing test before the implementation, for rules, data migrations,
-   and bug fixes. Where an automated test cannot express the behavior (feel,
-   visuals, real-hardware performance), say so rather than writing a vacuous one.
-   A bug fix also names the test that *should* have caught it and why it did not —
-   see `docs/TESTING_TRAPS.md` → The autopsy.
+1. **Work test-driven: red, green, refactor, one plan item at a time.** The failing
+   test comes before the implementation — for rules, data migrations, and bug fixes
+   alike — and it must fail on its assertion rather than on a compile error. Then
+   the smallest change that passes it, then the tidy-up of what you just wrote.
+   `.claude/skills/implement-ticket` is the authority on the cycle and is where it
+   is argued. Where an automated test cannot express the behavior (feel, visuals,
+   real-hardware performance), say so rather than writing a vacuous one. A bug fix
+   also names the test that *should* have caught it and why it did not — see
+   `docs/TESTING_TRAPS.md` → The autopsy.
 2. **IMPORTANT: a test is done when it fails on a mutation, not when it passes.**
    Break the behavior it covers, confirm it goes red, and report which mutations
    you ran. See `docs/TESTING_TRAPS.md`.
@@ -67,7 +71,10 @@ know, say what you are assuming, and ask.
    run itself. **A focused run is never grounds for calling work done** — it tells
    you what you just wrote does what you meant, and cannot see what you broke three
    modules away.
-4. Keep the change scoped to what was asked. No unrelated cleanup.
+4. Keep the change scoped to what was asked. No unrelated cleanup. Tidying the code
+   *this item just wrote* is the refactor beat of non-negotiable 1 and is not
+   "unrelated"; touching the code it merely sits next to is, however obvious the
+   improvement — that one is a note and a new ticket.
 5. New work starts from a spec (`write-spec`), and every ticket is planned before it
    is edited (`plan-ticket-implementation`). No edits until the plan is agreed. Work
    too small to plan is too small to be a ticket — `docs/WORKFLOW.md` → Entry.

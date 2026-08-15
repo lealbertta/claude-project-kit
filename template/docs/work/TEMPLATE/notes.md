@@ -24,6 +24,21 @@ A cause nobody wrote down as dead gets re-proposed the first afternoon the fix
 looks shaky, and re-investigated by whoever is around. This table is cheap because
 the work is already done — only the sentence is new.
 
+## Red steps
+
+One row per plan item, written **the moment the test goes red** — the failure line
+as it printed, not a paraphrase of it. This is the evidence the test could fail
+without its implementation, and it is the one thing a mutation run cannot give you
+afterwards: by then everything compiles and the test's reason for failing is no
+longer in question. `.claude/skills/implement-ticket` → red, green, refactor.
+
+A line that reads like a compile error, a missing import, or a typo'd fixture name
+is not a red step. Get it failing on the assertion first.
+
+| Item | Test | Failed with |
+|------|------|-------------|
+| <42>.1 | `<TestName>` | <the assertion line, verbatim> |
+
 ## Mutations checked
 
 | Mutation | Caught by |

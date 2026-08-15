@@ -13,12 +13,7 @@ This is the Implement stage of `docs/WORKFLOW.md`. Start from the agreed
    land them in, unless an item states a dependency that says otherwise. **Item
    `.1` is first because it is the most likely to be wrong** — do not reorder it
    behind something easier, and do not read a failure there as a crisis. Finding
-   out early is what it is for. For each item:
-   - Write the failing test first. Run it. Confirm it fails **for the stated
-     reason**, not because it does not compile.
-   - Implement the smallest change that makes it pass.
-   - Run the targeted test. Do not defer verification to the end.
-   - Confirm the change matches the plan item before moving on.
+   out early is what it is for. Each item runs the cycle below, and no item skips it.
 3. Stay inside the planned modules. No unrelated refactors, no opportunistic cleanup.
    **When you reach one of the plan's *Could not determine* items, answer it and
    write the answer down** — in `notes.md` if the code turned out as the plan hoped,
@@ -36,6 +31,62 @@ This is the Implement stage of `docs/WORKFLOW.md`. Start from the agreed
    `.3` rather than after `.7`. `docs/WORKFLOW.md` → Verify has the argument.
 6. Update ADRs, the ticket's `notes.md`, fixtures, and contract documentation when a
    contract moved. A change whose contracts moved is not complete while those are stale.
+
+## Every item is test-driven: red, green, refactor
+
+**This is where the kit's test-first non-negotiable is carried out**, and it is the
+whole shape of an item. Steps 4 and 5 above are the last two beats of the same
+cycle — mutation, then full verification — and they run per item, not per branch.
+
+**Red.** Write the test the plan named in its *Proven by* column, and write it
+before the code it tests exists. Run it. Confirm it fails **for the reason the plan
+stated** — the assertion you meant, not a compile error, a missing import, or a
+typo'd fixture name. A test that fails because nothing builds yet has told you
+nothing about the behavior, and it is the shape that quietly becomes a test asserting
+whatever the code does. Get it failing on the assertion, then copy that failure line
+into `notes.md` → **Red steps**.
+
+That record is the point of the beat and it costs nothing, because you have already
+run it. It is also the one thing mutation testing cannot give you: by the time a
+mutation runs, everything compiles and the test's *reason* for failing is no longer
+in question. The red line is the evidence that this test could ever fail without its
+implementation — and, unrecorded, it is a claim rather than evidence.
+
+**Green.** The smallest change that makes that test pass. Not the general version,
+not the version that also handles the case item `.4` is for. If the smallest change
+is embarrassing, that is the cycle working — the next red is what generalises it.
+
+**Refactor.** With the test green, tidy what you just wrote: names, duplication you
+introduced, a shape that only became obvious once the code existed. Re-run the test.
+This beat is the one that gets dropped, and dropping it is how a branch of
+individually-smallest changes lands as something nobody would have designed.
+
+**It is bounded by the same scope rule as everything else.** Code this item wrote is
+yours to clean; code it merely sits next to is not — `CLAUDE.md` → non-negotiable 4,
+and there is no exception here. *"This pattern is now duplicated in three other
+files"* is a real finding and a different ticket: write it in `notes.md`, leave it
+alone, and let the `architect` raise it at Verify.
+
+Then confirm the change matches the plan item, and go to step 4.
+
+### When the test genuinely cannot come first
+
+Two cases, and neither is a licence to write the test afterwards and call it
+test-driven:
+
+- **The behavior is gated** — feel, visuals, real hardware, real load, real users.
+  The plan marked it (`plan-ticket-implementation` → Gated criteria) and the honest
+  move is to say so, not to write a test that asserts something adjacent and
+  cheaper. It goes to `notes.md` → Gated and is never recorded as verified.
+- **You do not yet know the shape well enough to name the assertion.** Spike it —
+  then **throw the spike away and start at red.** A spike kept as the green step is
+  the implementation writing its own test, and every assertion in it will be true by
+  construction. Anything the spike taught you that the plan did not know is a *Could
+  not determine* answered, per step 3.
+
+A third case that is not one of these: the test is awkward to write because the code
+is hard to test. That is the design telling you something, and the answer is in the
+design, not in skipping the beat.
 
 ## Commit as you go
 
