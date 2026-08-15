@@ -1,12 +1,12 @@
 ---
 name: sync-tickets
-description: Create or update tracker issues from a spec or PRD, idempotently, and report drift.
+description: Create a PRD's ticket issues, one per requirement, idempotently — and report where a spec or PRD and the tracker have drifted apart.
 ---
 
 # Sync Tickets
 
-Turn a spec into tracker issues without creating duplicates, and report where the
-spec and the tracker have drifted apart.
+Turn a PRD's requirements into tracker issues without creating duplicates, and
+report where a spec or PRD and the tracker have drifted apart.
 
 **What this creates, and what it does not.** A single ticket's issue is filed by
 `write-spec` before its folder exists, because the folder is named after it — so
@@ -34,17 +34,15 @@ lost. One writer is also what keeps it from being a mirror in the sense
 `docs/WORKFLOW.md` → One owner per fact forbids — the fact has one owner, and this
 is the one thing that propagates it.
 
-`Priority:` is the opposite and is **reported, never repaired**: the spec holds the
-reason as well as the word, so overwriting it destroys the half no field can hold.
-
 **With no tracker there is nothing to sync and none of this applies** — the spec's
 line is the status itself, moved by the stages. `docs/WORKFLOW.md` → One owner per
 fact is the authority on both configurations.
 
-`Priority:` runs the other way. It is a judgement with its reason attached, so it
-lives in the spec and the tracker's label is the copy — mirror it onto the issue
-where you use priority labels, and report the drift when a triage session changes
-one and not the other.
+`Priority:` runs the other way and is **reported, never repaired**. It is a
+judgement with its reason attached, so it lives in the spec and the tracker's label
+is the copy — mirror it onto the issue where you use priority labels, and report the
+drift when a triage session changes one and not the other. Never overwrite the
+spec's: that would destroy the half no field can hold.
 
 **Where a project board is in use, priority flips again**, and this skill is not
 the authority on it: `docs/WORKFLOW.md` → One owner per fact says the board's
@@ -88,15 +86,21 @@ its criteria sitting in unclosed children.
 
 ## Procedure
 
-1. Read the spec or PRD. Extract requirements in document order.
+1. Read the document, and branch on which one it is:
+   - **A PRD** — extract its requirements (`FR-<n>`) in document order. Those are
+     what steps 2 and 3 create.
+   - **A lone `spec.md`** — there is nothing to extract. Its issue was filed by
+     `write-spec` before the folder existed, and its acceptance criteria are the
+     definition of done inside that issue's body, never issues of their own. Skip
+     to step 4 and report drift.
 2. For each requirement, query for its key before creating anything:
    `label = "spec:<ticket>:<FR-id>"`. Found → compare. Missing → create.
 3. Create with the label attached, the acceptance criteria in the description, and
    a link back to the spec file.
 4. **Report, do not reconcile — with one exception.** Print these five lists and
    stop:
-   - Requirements with no issue
-   - Issues whose requirement no longer exists in the spec
+   - PRD requirements with no issue
+   - Issues whose requirement no longer exists in the PRD
    - Issues whose title or criteria no longer match the spec
    - Specs whose `Priority:` line disagrees with the tracker — reported, never
      repaired, because the spec holds the reason as well as the word. Specs whose
