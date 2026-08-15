@@ -24,9 +24,10 @@ Bugs (the tracker), or generic engineering hazards that apply to every project.
 - **Raised by** is the ticket, ADR, or spike the risk came out of; **Acted on by** is
   the ticket that closes it. They are rarely the same one, and the first is what
   tells you whether the risk still applies once that work has landed. Both are
-  **provenance** — they cite an issue number, never a `docs/work/` path, because an
-  issue is permanent and a folder is deletable. Nothing reads them to decide
-  anything.
+  **provenance**, so each cites a **permanent id** — an issue number, or an
+  `ADR-<nnnn>` where a decision is what raised it, as `R-02` does — and never a
+  `docs/work/` path, because an issue and an ADR are permanent and a folder is
+  deletable. Nothing reads them to decide anything.
 - A risk with no mitigation and no owner is **accepted** — say so explicitly rather
   than leaving the column blank. An unspoken accepted risk is indistinguishable
   from a forgotten one.

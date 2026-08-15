@@ -110,12 +110,14 @@ affordable:
   Numbers are already permanent, which is the whole promise the grep needs — and it
   is why renumbering, not rewording, is the thing that makes a citation silently
   unfindable rather than visibly broken.
-- **Provenance is the one thing a durable document may record, and it cites the
-  issue.** An ADR's `Related work:` and a risk row's `Raised by` answer "what made us
-  decide this", which is worth keeping. They name `#42` and never
+- **Provenance is the one thing a durable document may record, and it cites a
+  permanent id.** An ADR's `Related work:` and a risk row's `Raised by` answer "what
+  made us decide this", which is worth keeping. They name `#42` and never
   `docs/work/42-<slug>/`, because an issue is permanent and a folder is deletable.
-  They are provenance, not maintained links, and nothing reads them to decide
-  anything.
+  A risk row's `Raised by` also takes `ADR-<nnnn>`, since a decision is one of the
+  things that can make a new hazard reachable — an ADR id is equally permanent, and
+  `RISK_REGISTER.md` → Conventions has that case. They are provenance, not
+  maintained links, and nothing reads them to decide anything.
 
 ### Checking the references
 

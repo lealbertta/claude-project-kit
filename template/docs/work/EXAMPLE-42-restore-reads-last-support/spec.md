@@ -95,7 +95,7 @@ looking like that is where it always lived.
 ## Non-goals
 
 - **Multi-support** — an object bridging two shelves. Deferred, filed as #58.
-- **The placement solver** — untouched. Owned by the layout module; this item only
+- **The placement solver** — untouched. Owned by the layout module; this ticket only
   changes what restore hands it.
 
 ## Risks

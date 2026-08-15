@@ -39,8 +39,8 @@ A mutation that survived is a finding. Record it even after you fix the test.
 sign was invisible: every existing assertion checked *which* support an object was
 on, and AC-2 was being read as satisfied by "it moved with the shelf". Added the
 offset comparison to `RestoreReadsLastSupport` and confirmed the flipped sign now
-fails. It is the same shape as the bug this item exists to fix — an assertion on a
-consequence rather than the rule — found twice in one item, which is what turned
+fails. It is the same shape as the bug this ticket exists to fix — an assertion on a
+consequence rather than the rule — found twice in one ticket, which is what turned
 the autopsy line into a `CLAUDE.md` → Gotchas entry rather than just a trap.
 
 ## Review findings and their disposition
@@ -88,7 +88,7 @@ deletion is the second new ticket this review produced.
 |------|-------|
 | Clearing the reference means a support that comes back cannot be re-adopted by objects that lost it. Nobody has asked for that; it is a decision, not an oversight. | Dana, open point on #42 |
 | Deleting a support still leaves dangling references everywhere except this path. | #61 |
-| `RestoreRoundTrip` still asserts on coordinates elsewhere in the file. Left alone deliberately — out of scope for this item, and worth its own pass. | #62 |
+| `RestoreRoundTrip` still asserts on coordinates elsewhere in the file. Left alone deliberately — out of scope for this ticket, and worth its own pass. | #62 |
 
 ## Unreachable today
 
@@ -105,7 +105,7 @@ deletion is the second new ticket this review produced.
 
 **If it fails:** restoring a large selection drops frames on the oldest supported
 device — a stutter on undo, visible to the user, and not data loss. Undone by
-reverting 42.1 to the beneath-query, which is the bug this item fixed, so the real
+reverting 42.1 to the beneath-query, which is the bug this ticket fixed, so the real
 answer would be to cache the support lookup rather than to roll back.
 
 That trade is what Dana accepted, and it went up on #42 **before** the ask, not

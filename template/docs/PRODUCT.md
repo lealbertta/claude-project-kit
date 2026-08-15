@@ -70,7 +70,7 @@ Ideas kept so they stop being re-proposed. No commitment implied.
 
 ## Choosing what's next
 
-`Next` is a set, not a queue. These are the considerations that make one item the
+`Next` is a set, not a queue. These are the considerations that make one ticket the
 better pick — and the reasoning that tells you whether a proposed order is safe.
 Update it when the reasoning changes.
 

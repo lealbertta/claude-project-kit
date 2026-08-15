@@ -83,14 +83,14 @@ reason is the only part that transfers.
 - Write **two or more**, numbered, each with the reason it lost. A list of one is
   a decision defending itself.
 - Include the honest baseline — *do nothing* — wherever it is a real option. An
-  item whose baseline was never stated is an item nobody checked was worth doing.
+  ticket whose baseline was never stated is a ticket nobody checked was worth doing.
 - A rejection is not "we preferred X". Name what it costs: the case it handles
   worse, the thing it makes unreachable, the work it doubles.
 
 **Where it goes.** Local reasons stay in `spec.md`. A rejection whose reason
-constrains work *beyond this item* is a decision — write the ADR
+constrains work *beyond this ticket* is a decision — write the ADR
 (`record-decision`) and cite it from the list, so the spec stays short and the
-constraint is somewhere the next item will actually look.
+constraint is somewhere the next ticket will actually look.
 
 ## Priority
 
@@ -125,7 +125,7 @@ test per bug and learns nothing.
 - What is true today that makes this necessary now?
 - What does this make *reachable* that was previously impossible? That is usually
   where the next defect comes from, and the answer goes in **Risks** — either as a
-  new row in `docs/RISK_REGISTER.md` raised by this item, or as a reference to the
+  new row in `docs/RISK_REGISTER.md` raised by this ticket, or as a reference to the
   row that already covers it. "Nothing new" is a fine answer once it has been asked.
 - Which existing rule was written when the world was simpler than it is now?
 - What is the smallest version that proves the risky part?

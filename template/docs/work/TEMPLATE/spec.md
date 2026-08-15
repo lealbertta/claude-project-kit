@@ -53,10 +53,10 @@ cited.
    worth nothing later, because the reason is the only part that transfers.>
 2. **<Do nothing / leave it as is>** — <include the honest baseline wherever it is
    a real option, and say what makes it lose. An item whose baseline was never
-   stated is an item nobody checked was worth doing.>
+   stated is a ticket nobody checked was worth doing.>
 
-Alternatives that lost for reasons local to this item stay here. One whose reason
-constrains work beyond this item is a decision, not a note — promote it to
+Alternatives that lost for reasons local to this ticket stay here. One whose reason
+constrains work beyond this ticket is a decision, not a note — promote it to
 `docs/DECISIONS/` (`record-decision`) and cite the ADR from this list.
 
 ## Autopsy
@@ -79,13 +79,13 @@ Bug fixes only. Written before the fix is planned; delete this section otherwise
 New risks come from what a change makes **reachable** — a state, an input, or a code
 path that was impossible before it landed. Two kinds belong here, one line each:
 
-- **Touches R-<n>** — <an existing row in `docs/RISK_REGISTER.md` this item affects,
+- **Touches R-<n>** — <an existing row in `docs/RISK_REGISTER.md` this ticket affects,
   and how: mitigates it, worsens it, or merely comes into contact with it. The
   register asks to be cited from here, because one nobody cross-references stops
   being read.>
-- **Raises** — <something this item makes reachable that no row covers. File the row
-  in `docs/RISK_REGISTER.md` naming this item as *Raised by*; the sentence lives
-  here, the mitigation and owner live there. Not both.>
+- **Raises** — <something this ticket makes reachable that no row covers. File the
+  row in `docs/RISK_REGISTER.md` naming this ticket as *Raised by*; the sentence
+  lives here, the mitigation and owner live there. Not both.>
 
 Delete the section when the change makes nothing new reachable and touches no row.
 That is a real answer and a common one; what is not acceptable is never having asked.
