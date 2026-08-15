@@ -63,7 +63,7 @@ template/
       sync-tickets/                Spec → tracker issues, idempotent, reports drift instead of resolving it.
     agents/                      Read-only roles a session dispatches. Each one reports; none of them decides.
       investigator.md              Plan, several at once. Locates the code, or tries to kill one hypothesis about a bug.
-      architect.md                 Verify. Whole-tree: convention drift, ADR conformance, duplication. No verdict.
+      architect.md                 Verify. Whole-tree: convention drift, ADR conformance, duplication. Blocks at its discretion.
       reviewer.md                  Verify. Ticket-scoped: runs the checks, attacks the tests, verdicts the branch.
 
   docs/
@@ -158,21 +158,24 @@ reversible one or agreed with the human before it is built.
 **Verify sends the branch to two reviewers at once, and consolidates.** The
 `reviewer` scores this ticket's diff against its criteria and its tests; the
 `architect` asks whether the tree the branch leaves behind is still coherent.
-Neither reads the other's report — two reviews that have read each other are one
-review and a confirmation. Consolidation is the load-bearing step: merge the
-duplicates, settle a factual disagreement by *running it*, and give every architect
-finding exactly one disposition, dismissals included. Advisory does not mean
-optional; a finding nobody dispositioned is a finding that was ignored with extra
-steps.
+**Either may block, on its own judgement** — neither is advisory. Neither reads the
+other's review, which now has to be said in both directions, because both post to
+the same place.
 
-**The consolidated set is posted to a PR, opened before either reviewer runs.** Not
-the two raw reports — those are inputs, and they still hold the duplicates
-consolidation merged. Findings that name a line go on that line; one summary comment
-carries the whole disposition table and the verdict. The PR is where the review is
-*recorded* and never what the reviewers read, since `gh pr diff` sees only what was
-pushed while the review surface is the working tree. It is also the half that lasts:
-`docs/work/` is disposable and `notes.md` is promoted and dies with the ticket,
-while a merged PR keeps each finding attached to the line that caused it.
+**Both post to a PR, opened before either one runs**, each as its own review under
+its own name. A later reader can see which pass caught what, and a finding keeps the
+voice of the agent that made it. Consolidation is then the load-bearing step and it
+happens on the PR: merge duplicates and say both raised it, settle a factual
+disagreement by *running it* — a blocker refuted on fact does not gate, whoever
+marked it — and give every finding exactly one disposition, dismissals included. Not
+blocking does not mean optional; a finding nobody dispositioned is a finding that was
+ignored with extra steps.
+
+The PR is where the review is *recorded* and never what the reviewers read, since
+`gh pr diff` sees only what was pushed while the review surface is the working tree.
+It is also the half that lasts: `docs/work/` is disposable and `notes.md` is promoted
+and dies with the ticket, while a merged PR keeps each finding attached to the line
+that caused it.
 
 **An approval covers the tail you described when you asked.** A bare "approved",
 answering a summary of what happens next, authorises that whole tail — commit, merge,

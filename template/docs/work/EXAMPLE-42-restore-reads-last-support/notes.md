@@ -49,15 +49,18 @@ Both reviewers ran at once on the same tree, neither having seen the other's
 report. Consolidated verdict: **READY FOR HUMAN REVIEW** — no blockers survived
 the merge.
 
-**PR:** `<owner>/<repo>#118`, opened before either reviewer ran. The consolidated
-set below is posted there — the two rows naming a file went on those lines, the
-architect's duplication row and every dismissal went in the summary comment. Taken
-out of draft when the verdict landed.
+**PR:** `<owner>/<repo>#118`, opened before either reviewer ran. Each posted its own
+review there, under its own name, neither reading the other's — the rows naming a
+file went on those lines. This table is the consolidation, posted after both as one
+summary comment carrying the dispositions and the verdict, plus a reply on each
+thread. The `dead-code` thread carries the run that refuted it, which is why a
+finding that turned out wrong is still worth leaving on the record. Taken out of
+draft when the verdict landed.
 
 | Finding | From | Disposition |
 |---------|------|-------------|
-| The beneath-query is implemented three times — restore, drag, and the layout preview. This branch deleted the restore copy; two remain. | architect, `duplication`, in-diff: no | **New ticket**, filed in `PRODUCT.md` → Next. Not absorbed here: the reviewer is enforcing scope on the same diff and wins inside the branch. Merging the other two is a good idea and a different ticket. |
-| The branch establishes a rule nothing has written down — placement state is restored from a recorded reference, never re-derived — and it binds work that does not exist yet. | architect, `adr-gap`, in-diff: yes | **ADR proposal**, drafted for Dana. `rule: none`, so it did not promote to a blocker: the architect found a rule that *should* exist, which is not the same as a rule that does. |
+| The beneath-query is implemented three times — restore, drag, and the layout preview. This branch deleted the restore copy; two remain. | architect, `duplication`, in-diff: no | **New ticket**, filed in `PRODUCT.md` → Next. Marked `blocking: no` by the architect, which is the right call: merging the other two is a good idea and a different ticket, and wanting a refactor is not grounds to block. |
+| The branch establishes a rule nothing has written down — placement state is restored from a recorded reference, never re-derived — and it binds work that does not exist yet. | architect, `adr-gap`, in-diff: yes | **ADR proposal**, drafted for Dana. `blocking: no` — the architect found a rule that *should* exist, which is not the same as a rule that does, and it said so in the one line the field asks for. |
 | `LegacyFileRestoresWithoutSupport` sits in a file matched by no suite config and never runs. | architect, `dead-code`, in-diff: yes | **Dismissed** — and see below. It does run. |
 | AC-4 cannot be settled here. | reviewer, `question` | Reported outstanding, not as a pass and not as a failure. See Gated. |
 | `RestoreEmitsOnceOnMissingSupport` builds its fixture through a helper that hides which support is missing. | reviewer, `should` | Fixed in 42.4. Tests read top to bottom or they are not evidence anyone checks. |

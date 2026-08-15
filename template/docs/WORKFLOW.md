@@ -206,12 +206,25 @@ them.
 
 | Agent | Asks | Looks at | Returns |
 |-------|------|----------|---------|
-| `reviewer` | Does this ticket's change do what its spec said, and do its tests have teeth? | this ticket's diff | a mechanical verdict, plus findings tagged `blocker` / `should` / `question` |
-| `architect` | Is the codebase, as this branch leaves it, still coherent? | the whole tree | recommendations, each needing a disposition |
+| `reviewer` | Does this ticket's change do what its spec said, and do its tests have teeth? | this ticket's diff | findings tagged `blocker` / `should` / `question`, and a verdict |
+| `architect` | Is the codebase, as this branch leaves it, still coherent? | the whole tree | findings, each with a disposition asked for, and any it judges blocking |
 
-**Dispatch them together, not in sequence.** Neither reads the other's report, and
-that is the point — two reviews that have seen each other's findings are one review
-and a confirmation of it.
+**Each posts its own findings to the PR**, as its own review, under its own name —
+line-anchored where a finding names a line. Two reviews on the record beats one
+merged summary: a later reader can see which pass caught what, and a finding keeps
+the voice of the agent that made it rather than being paraphrased by the session
+that dispatched it.
+
+**Either may block, at its own discretion.** Neither is advisory. A finding marked
+blocking by either agent gates the branch, and the consolidated verdict is
+`NEEDS WORK` while any survives. What survives is the subject of step 4.
+
+**Dispatch them together, not in sequence, and neither reads the other's review.**
+Two reviews that have seen each other's findings are one review and a confirmation
+of it — and now that both post to the same PR, that channel is open in a way it was
+not before. So the rule is explicit at both ends: post your own review; **never read
+what is already on the PR.** Consolidation is where the two meet, and it is not
+either reviewer's job.
 
 Brief each with the same two things: the ticket id and its `docs/work/<id>-<slug>/`
 path. The surface they both read is the **working tree against the merge-base, plus
@@ -223,41 +236,53 @@ two clean sessions, once against each brief above.
 
 ### 4. Consolidate the two reports
 
-The reports are inputs, not the answer. One consolidated set of findings is
-produced here, by these rules:
+Both reviews are already on the PR. What is not yet decided is what the branch does
+about them, and that is this step — it disposes of findings rather than publishing
+them, and it happens **on the PR**, in the threads the reviewers opened.
 
-**Merge duplicates.** Same file, same line, same underlying cause is one entry, at
-the reviewer's severity — only reviewer severities gate. Record that both raised it;
-independent agreement is the strongest signal the pair produces.
+**Merge duplicates.** Same file, same line, same underlying cause is one finding.
+Reply on both threads saying so and carry the higher severity. Independent agreement
+is the strongest signal the pair produces, so say that it happened rather than
+quietly deleting one — two agents reaching the same finding from different briefs is
+worth more than either finding alone.
 
-**Promote the one class of architect finding that blocks.** An architect finding
-becomes a **blocker** when *both* of these hold: it names a violation of an
-**Accepted** ADR or a `CLAUDE.md` non-negotiable, **and** the offending line is one
-this branch changed. That is the reviewer's own convention axis — the architect
-merely found it first. Everything else is advisory, including every finding on lines
-this branch did not touch. Two conditions, both checkable, so this cannot quietly
-widen into "the architect blocks when it feels strongly about something".
+**A blocker is whichever finding its author marked blocking.** Both agents have that
+call and neither has to justify it against a checklist. The old rule promoted
+exactly one class of architect finding and left the rest advisory; discretion
+replaces it, on the grounds that an agent that has just read the whole tree is
+better placed to judge what matters than a rule written before it looked.
 
-**Inside this branch, the reviewer wins.** The likeliest conflict in the pair is the
-architect recommending something the reviewer would call scope creep — "these three
-copies want a centre" against "keep the change scoped to what was asked". Merging
-the three copies is a good idea and a **different ticket**. It becomes a new ticket,
-not an extra commit here; absorbing it is how a reviewable branch stops being one.
+**What discretion is not.** Two guards, and only two:
 
-**A disagreement about a fact is settled by running it.** Where the reviewer records
-the suite as green and the architect says the new test file is matched by no project
-config and never ran, do not average the two and do not take the more confident one.
-Run the thing. Then note the disagreement itself: something was ambiguous enough
-that two careful readers got different answers, and that ambiguity outlives this
-ticket.
+- **A blocker refuted on fact does not gate.** This is the case below — the
+  architect reports a test file that never runs, the reviewer reports the suite
+  green with that test in it. Run it. Whichever way it falls, one finding was wrong,
+  and a wrong finding does not block regardless of who marked it. Reply on the
+  thread with what the run said and resolve it. That is fact-checking, not
+  overriding a judgement.
+- **Scope is still the reviewer's axis.** An architect finding that amounts to
+  "these three copies want a centre" is a good idea and a **different ticket**;
+  absorbing it is how a reviewable branch stops being one, and `CLAUDE.md`
+  non-negotiable 4 is the standard. The architect may still block if it judges the
+  branch genuinely unsafe to land — that is what discretion means — but wanting a
+  refactor is not that, and blocking on it is the failure mode to watch for.
 
-**Every architect finding gets exactly one disposition.** Advisory does not mean
-optional — a finding nobody dispositioned is a finding that was ignored with extra
-steps. Propose them in the report; the human's approval is what files them.
+**Settle a factual disagreement by running it.** Do not average the two and do not
+take the more confident one. Run the thing, then note the disagreement itself:
+something was ambiguous enough that two careful readers got different answers, and
+that ambiguity outlives this ticket. A confident report is not evidence — the same
+rule Plan uses on an investigator's finding, one stage later and with a second
+opinion available, which is the only reason it is cheaper here.
+
+**Every finding gets exactly one disposition, from either agent.** Not blocking does
+not mean optional — a finding nobody dispositioned is a finding that was ignored
+with extra steps. Reply on its thread with the disposition and resolve it, so the PR
+shows what happened to every one rather than only to the ones that changed the
+branch. Propose the tickets and ADRs; the human's approval is what files them.
 
 | Disposition | Where it goes |
 |-------------|---------------|
-| **Blocker** | back to Implement — only via the promotion rule above |
+| **Blocker** | back to Implement — whichever agent marked it, unless a guard above removed it |
 | **New ticket** | `PRODUCT.md` → Next, with its one-line reason |
 | **ADR proposal** | drafted for a human to accept or reject (`record-decision`) |
 | **Risk** | a row in `RISK_REGISTER.md` naming this ticket as *Raised by* |
@@ -274,23 +299,18 @@ another pass — both reviewers run again, on the new tree. `should` and `questi
 findings never force that loop on their own; `question` is where a Gated criterion
 is reported, since only the human can close one.
 
-**Then post the consolidated set to the PR, once.** Not the two reports — those are
-inputs, and they still carry the duplicates consolidation just merged. One review,
-after consolidation:
+**Close with one summary comment** carrying the disposition table and the verdict.
+The findings are already on the PR in the reviewers' own words; this is the layer
+that says what the branch did about each — including the dismissals, because a
+dismissal nobody can see is indistinguishable from a finding nobody read, and
+including the refutations, because a finding that turned out wrong is only fair to
+its author if the correction sits next to it.
 
-- Findings naming a file and line go **on those lines**, where the reader already is
-  when the question occurs to them.
-- **One summary comment** carries the whole disposition table, dismissals included,
-  and the verdict. Most architect findings are whole-tree and have no line in this
-  diff to hang on — and *Dismissed* is the row most worth publishing, because a
-  dismissal nobody can see is indistinguishable from a finding nobody read.
-
-This is to Verify what the issue comment is to Plan: `notes.md` is where the
-dispositions get worked out, versioned with the diff they describe; the PR is where
-they are published and argued with. The PR is also the half that survives.
-`docs/work/` is disposable by design and `notes.md` is promoted and then dies with
-the ticket, while a merged PR keeps each finding attached to the line that caused
-it, for whoever touches this code next.
+The PR therefore ends up carrying three things: what each agent found, what was
+decided, and why. `notes.md` holds the same dispositions versioned with the diff and
+then dies with the ticket — `docs/work/` is disposable by design — while a merged PR
+keeps each finding attached to the line that caused it, for whoever touches this
+code next.
 
 **On `NEEDS WORK`, the re-run posts to the same PR.** Never a second one: the ticket
 is one branch and one review record, and the thing a later reader most needs — what
@@ -451,7 +471,7 @@ ticket that ended badly is the one most worth a record.
 <the PR link>. Without a git host, the disposition table goes here instead:
 | Finding | From | Severity | Disposition |
 |---------|------|----------|-------------|
-| <one line> | reviewer / architect / both | blocker / should / question / advisory | <fixed in 42.4, new ticket, ADR proposal, risk row, watch, or dismissed + reason> |
+| <one line> | reviewer / architect / both | blocker / should / question | <fixed in 42.4, new ticket, ADR proposal, risk row, watch, or dismissed + reason> |
 
 **Gated:** <"none", or one row per criterion — posted before the acceptance is asked
 for, never after>

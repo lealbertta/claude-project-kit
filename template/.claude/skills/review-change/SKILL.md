@@ -26,6 +26,12 @@ stands on its own and the reviewer brief below is the whole job.
 Either way, the review **reports and does not fix**. A reviewer that fixes things
 stops reporting them, and the finding disappears into a diff nobody reads.
 
+**Inside the loop, post your findings to the PR as your own review** — line-anchored
+where a finding names a line — and never read what the other review has already put
+there. Same rule at both ends: two reviews that have read each other are one review
+and a confirmation of it. Outside the loop there may be no PR, and the report goes
+wherever the change is being discussed.
+
 ## Check the code
 
 - Incorrect behavior, or an acceptance criterion nothing actually satisfies
@@ -82,8 +88,10 @@ one severity — the same three the `reviewer` agent uses, because `docs/WORKFLO
 - **question** — a domain or intent call only the human can settle; a `Gated`
   criterion is reported here, never as a blocker
 
-**The verdict is mechanical, so the loop terminates:** `NEEDS WORK` if and only if
-there is at least one **blocker**, otherwise `READY FOR HUMAN REVIEW`. Decide
+**Your verdict is mechanical, so the loop terminates:** `NEEDS WORK` if and only if
+there is at least one **blocker**, otherwise `READY FOR HUMAN REVIEW`. It covers
+your own findings; the consolidated verdict also accounts for whatever the other
+review marked blocking, so a branch you pass can still come back. Decide
 severity per finding as you write it; weighing them into an overall impression at
 the end is how the same branch reads as *nearly there* on one pass and *not quite*
 on the next with nothing having changed.

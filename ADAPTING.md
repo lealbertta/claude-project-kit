@@ -325,30 +325,34 @@ ambiguous enough that two careful readers got different answers.
 
 **Why consolidation is a step and not a formatting exercise.** Two reports do not
 compose into next steps on their own, and the failure mode is not confusion — it is
-that the advisory half gets skimmed and dropped. So consolidation has rules rather
-than judgement: merge duplicates at the reviewer's severity, settle a factual
-disagreement by *running the thing* instead of trusting the more confident report,
-and give every architect finding exactly one disposition — new ticket, ADR proposal,
-risk row, watch, or dismissed with the reason — all of which are written down,
-dismissals included. That last part is the whole mechanism. Advisory findings do not
-need to block to be useful; they need to be impossible to leave unanswered.
+that the half nobody has to act on gets skimmed and dropped. So consolidation has
+rules: merge duplicates and say that both raised it, settle a factual disagreement
+by *running the thing* instead of trusting the more confident report, and give every
+finding exactly one disposition — new ticket, ADR proposal, risk row, watch, or
+dismissed with the reason — all written down, dismissals included. That last part is
+the whole mechanism. A finding does not need to block to be useful; it needs to be
+impossible to leave unanswered.
 
-**Why the architect still does not carry a verdict, with one exception.** The
-reviewer answers a closed question — does this change do what its spec said, do its
-tests have teeth — and the answer gates a merge. The architect asks an open one about
-the whole tree, where the honest answer is often "this is fine for now". Make that a
-gate and it becomes either a rubber stamp or an argument at the worst possible
-moment. So it returns no verdict, and consolidation promotes exactly one class of
-its findings to a blocker: a violation of an **Accepted** ADR or a non-negotiable,
-**on a line this branch changed**. That is not an exception to the principle so much
-as an admission that this particular finding was never the open question — it is the
-reviewer's own convention axis, and the architect happened to reach it first.
+**Why both reviewers can block, and what that replaced.** Each posts its own review
+to the PR and marks what it judges blocking. The kit did not start here. The
+original design let the architect block through exactly one checkable rule — a
+violation of an Accepted ADR or a non-negotiable, on a line this branch changed —
+and left everything else advisory, on the reasoning that the reviewer answers a
+closed question that gates a merge while the architect asks an open one about the
+whole tree, where the honest answer is often "this is fine for now". Make an open
+question a gate, the argument ran, and it becomes either a rubber stamp or a fight
+at the worst possible moment.
 
-Both conditions are checkable from the architect's output, which is why its report
-carries a `rule:` citation and an `in-diff:` flag on every finding including the many
-where the answers are `none` and `no`. A promotion rule that reads a field the
-architect fills in at its own discretion is not a rule; it is the architect deciding
-what blocks, one honest-sounding sentence at a time.
+**That argument is still the one to weigh if you are reversing this.** What replaced
+it is the view that an agent which has just read the whole tree is better placed to
+judge what matters than a rule written before it looked, and that a rule narrow
+enough to be checkable is also narrow enough to miss the finding you most wanted
+caught. The cost is real and it is the one the old rule named: discretion widens.
+The guards against it are that a blocker refuted on fact does not gate — consolidation
+runs anything the two disagree on — and that scope remains the reviewer's axis, so
+wanting a refactor is explicitly not grounds to block. Watch the architect's blockers
+over a few months; if they trend toward "I would have built this differently", the
+narrow rule is in the history and it worked.
 
 **Why the reviewer's verdict is mechanical.** `NEEDS WORK` if and only if there is at
 least one `blocker`, and every finding is tagged with exactly one severity when it is
