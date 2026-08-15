@@ -1,0 +1,50 @@
+{
+  "_comment": "Permission posture. Principle: allow anything that produces evidence or is revertible, ask for anything that changes shared configuration or goes outward, deny secrets, generated output, and irreversible git. git commit is allowed because nothing it writes has left the machine, and a commit per verified increment is the point of the loop, so prompting for each one just trains you to approve without reading. git push asks rather than denies: Verify opens a PR and that cannot happen without one push, which is the loop's single outward step and therefore the one prompt worth reading. Force-push is denied outright - it is the push that destroys work rather than publishing it. gh pr create and gh pr comment are outward too and are absent from every list, so they prompt by default. merge and rebase rewrite history and still ask. Delete this _comment key and replace the <PLACEHOLDER> entries.",
+  "permissions": {
+    "allow": [
+      "Bash(<./scripts/test.sh>*)",
+      "Bash(<./scripts/verify.sh>*)",
+      "Bash(<./scripts/build.sh>*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git check-ignore *)",
+      "Bash(gh issue view*)",
+      "Bash(gh issue list*)",
+      "Bash(gh pr view*)",
+      "Bash(gh pr diff*)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ],
+    "ask": [
+      "Edit(/<dependency-manifest-dir>/**)",
+      "Edit(/<build-config-dir>/**)",
+      "Edit(/.github/**)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)",
+      "Bash(git push *)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Edit(**/.env)",
+      "Read(**/.env.*)",
+      "Edit(**/.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.p12)",
+      "Read(**/*.key)",
+      "Read(**/id_rsa*)",
+      "Read(/<generated-output-dir>/**)",
+      "Edit(/<generated-output-dir>/**)",
+      "Read(/<build-artifacts-dir>/**)",
+      "Edit(/<build-artifacts-dir>/**)",
+      "Read(/<log-dir>/**)",
+      "Edit(/<log-dir>/**)",
+      "Bash(git push --force*)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
+      "Bash(git filter-branch *)"
+    ]
+  }
+}
