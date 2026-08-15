@@ -5,7 +5,7 @@
   and never a folder path, because folders get deleted and this is the only thing
   saying the ticket is part of a feature. Delete the line where it stands alone.>
 - **Status:** <Proposed | Agreed | In progress | Done | Abandoned>. **Who owns this
-  line depends on the configuration** — `docs/WORKFLOW.md` → One owner per fact is
+  line depends on the configuration** — `docs/TRACKER.md` → One owner per fact is
   the authority. With a tracker, the tracker is the truth and wins any disagreement;
   the line is a copy `sync-tickets` refreshes, never edited by hand and never gated
   on. With no tracker, this line *is* the status and the stages move it.>

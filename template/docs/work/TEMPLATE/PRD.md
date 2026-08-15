@@ -19,7 +19,7 @@ and the Tickets table at the bottom of this file lists them.
 
 - **Epic:** <#41>
 - **Status:** <Proposed | Agreed | In progress | Done | Abandoned>. Owned the same
-  way a spec's is — `docs/WORKFLOW.md` → One owner per fact. With a tracker it is a
+  way a spec's is — `docs/TRACKER.md` → One owner per fact. With a tracker it is a
   copy `sync-tickets` refreshes; with no tracker it is the status itself.>
 - **Source:** <where this came from — a person and a date, a review, a run of
   support tickets. Prose citations are fine and do not need to resolve as links.>

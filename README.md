@@ -68,7 +68,8 @@ template/
 
   docs/
     PRODUCT.md                   Vision and pillars (frozen) + Now / Next / Someday (weekly).
-    WORKFLOW.md                  Plan → Implement → Verify, on one chosen ticket. Board state, outcomes, re-entry.
+    WORKFLOW.md                  Plan → Implement → Verify, on one chosen ticket. Outcomes, re-entry, the report.
+    TRACKER.md                   Tracker and board config, the board moves, and one owner per fact. Set up once.
     ARCHITECTURE.md              Modules, dependency direction, data layers, seams.
     TEST_STRATEGY.md             Which layer covers what; fixtures; what only reality can settle.
     TESTING_TRAPS.md             Eleven ways a passing test proves nothing, and the autopsy that finds the next one.

@@ -105,6 +105,7 @@ correct Claude twice on the same thing — that is the signal a rule is missing.
 
 - Product intent and what is next: `docs/PRODUCT.md`
 - How one ticket gets done, from chosen to closed: `docs/WORKFLOW.md`
+- Tracker, board, and who owns which fact: `docs/TRACKER.md`
 - Architecture: `docs/ARCHITECTURE.md`
 - Decisions: `docs/DECISIONS/`
 - Tests: `docs/TEST_STRATEGY.md`; how they go vacuous: `docs/TESTING_TRAPS.md`

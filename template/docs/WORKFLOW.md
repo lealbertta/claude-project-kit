@@ -3,8 +3,8 @@
 ## What belongs here
 
 How **one ticket** gets done once it has been chosen: the stages, what each one
-produces, the tracker moves, and how a ticket ends. The project's own labels, IDs,
-and commands go in *Project configuration* below.
+produces, the tracker moves, and how a ticket ends. The project's own labels and
+board IDs go in `TRACKER.md`; its commands go in `CLAUDE.md` → Commands.
 
 ## What does not belong here
 
@@ -12,7 +12,9 @@ What the work *is* (`work/<id>-<slug>/spec.md`), how a larger piece of work gets
 broken into tickets in the first place (`write-spec`, `sync-tickets`), **how the
 ticket got chosen** (`pick-ticket`), which layer of test covers what
 (`TEST_STRATEGY.md`), or the step-by-step of carrying a stage out — each stage below
-names the skill that is the authority on that.
+names the skill that is the authority on that. The tracker and board this loop
+writes to are configured once, in `TRACKER.md`, which also owns **One owner per
+fact**.
 
 ---
 
@@ -100,9 +102,12 @@ the loop starts — not a second time inside it. A bypass here would be a second
 bound, and the one that gets used is always the later one.
 
 Commit freely as you go, reading each diff yourself before you do. **The review
-surface is the working tree against the merge-base, plus untracked files** — not the
-commit list — so checkpoints cost the review nothing and the shape of the history is
-yours to manage however you prefer. Commit subjects cite the
+surface is the working tree against the merge-base, plus untracked files** — never
+`git diff main...HEAD`, which sees only what is committed and silently misses the
+rest. That is the definition, stated once; everything below says *the review
+surface* and means this. Because it is not the commit list, checkpoints cost the
+review nothing and the shape of the history is yours to manage however you prefer.
+Commit subjects cite the
 plan item they land — `42.2: pin restore against the ground-plane fallback` — which
 is what makes partial progress on a branch that takes three days legible in
 `git log` without opening a single diff. `git push` stays a human step.
@@ -182,14 +187,14 @@ body is the ticket in one paragraph, `Closes #<id>`, and a link to
 
 Move the board to `In review` here — **unless** the board's *PR opened → In review*
 automation is switched on, in which case that move is the automation's and you make
-none. Two writers for one field is what *One owner per fact* exists to prevent, and
-this is the field it warns about.
+none. Two writers for one field is what `TRACKER.md` → One owner per fact exists to
+prevent, and this is the field it warns about.
 
 **The PR is where the review is recorded. It is never what the reviewers read.**
-`gh pr diff` shows only what was pushed, and the surface stays the working tree
-against the merge-base plus untracked files. Opening a PR is precisely the moment
-that distinction gets lost, and losing it means the uncommitted part of the branch
-is reviewed by nobody while a green PR says otherwise.
+`gh pr diff` shows only what was pushed; the review surface is unchanged. Opening a
+PR is precisely the moment that distinction gets lost, and losing it means the
+uncommitted part of the branch is reviewed by nobody while a green PR says
+otherwise.
 
 This is the loop's one push, and it stays a human step — `git push` asks, and so
 does opening the PR. Nothing goes outward on the assistant's own authority.
@@ -227,9 +232,8 @@ what is already on the PR.** Consolidation is where the two meet, and it is not
 either reviewer's job.
 
 Brief each with the same two things: the ticket id and its `docs/work/<id>-<slug>/`
-path. The surface they both read is the **working tree against the merge-base, plus
-untracked files** — never `git diff main...HEAD`, which sees only what is committed
-and silently misses the rest.
+path. Both read **the review surface** as *Session shape* defines it, and neither
+substitutes the PR diff for it.
 
 Where subagents are unavailable, run the two briefs as two clean sessions: the
 `review-change` skill for the reviewer pass, and `.claude/agents/architect.md` read
@@ -249,10 +253,9 @@ quietly deleting one — two agents reaching the same finding from different bri
 worth more than either finding alone.
 
 **A blocker is whichever finding its author marked blocking.** Both agents have that
-call and neither has to justify it against a checklist. The old rule promoted
-exactly one class of architect finding and left the rest advisory; discretion
-replaces it, on the grounds that an agent that has just read the whole tree is
-better placed to judge what matters than a rule written before it looked.
+call and neither has to justify it against a checklist: an agent that has just read
+the whole tree is better placed to judge what matters than a rule written before it
+looked.
 
 **What discretion is not.** Two guards, and only two:
 
@@ -340,8 +343,8 @@ it supports. Stopping happens before *fixing*, not before finishing the assessme
 
 A gated criterion is settled by a human and not by this loop — but the decision is
 made against a written record rather than a chat message. **Post the report to the
-issue before asking.** A plan that exists only in a session transcript does not
-exist, and neither does the case for shipping something unproven.
+issue before asking.** What *Session shape* says about a plan holds for the case to
+ship something unproven: it does not exist if it exists only in a transcript.
 
 Per gated criterion, the report says:
 
@@ -495,123 +498,7 @@ first and recording later leaves the decision resting on a chat message.
 
 ## Tracker and board
 
-Reference for the two systems the loop writes to. Filled in once at setup and read
-rarely after that, which is why it sits below the loop rather than in front of it.
-
-## Project configuration
-
-<!-- FILL IN ONCE. Everything else in this file is generic. -->
-
-| Setting | Value |
-|---------|-------|
-| Repository | `<owner>/<repo>` |
-| Ticket label | `<task>` |
-| Blocked label | `<blocked>` |
-| Gated label | `<gated>` — on the issue carrying a check that shipped outstanding |
-| Priority labels | `<p-high>`, `<p-medium>`, `<p-low>` — the copy; the spec's `Priority:` line holds the reason |
-| Board | `<https://github.com/users/<owner>/projects/<N>>` |
-| Board project ID | `<PVT_...>` |
-| Status field ID | `<PVTSSF_...>` |
-| Status option IDs | Todo `<id>`, In progress `<id>`, In review `<id>`, Done `<id>` |
-| Test command | `<./scripts/test.sh>` |
-| Full verification | `<./scripts/verify.sh>` |
-
-## Board state
-
-The tracker has to show where the work actually is. Two moves per ticket, both the
-assistant's to make:
-
-| When | Status |
-|------|--------|
-| The ticket is claimed — `pick-ticket`, in the same step that assigns the issue | `In progress` |
-| Start of **Verify** — checks passed, PR opened, diff going to both reviewers | `In review` |
-| Closing the issue | `Done`, **automatically** |
-
-**Never set `Done` by hand** — closing the issue does it, and doing both is a way
-to get them out of sync.
-
-That automation is also why these steps are easy to skip: the end of a cycle
-always looks right on the board while the middle shows nothing. `In review`
-matters most and is easiest to lose — a ticket that closes with its review still
-outstanding reads as `Done` and nowhere says otherwise.
-
-### One owner per fact
-
-The board is a third place state can live, alongside the issue and this repo. It
-does not get to hold a copy of anything: **each fact has exactly one owner, chosen
-by who edits it, and is never mirrored.**
-
-| Fact | Owner | Why there |
-|------|-------|-----------|
-| Status | the board's Status field | written by the automation and the two moves above, and nowhere else |
-| Priority | **one** of the board field or the label — never both | whichever you actually sort by; the *reason* stays in prose in `spec.md` |
-| Blocked | the same single choice — a status option or a label | a field and a label for one fact disagree within a month |
-| Requirements, criteria | `spec.md` | the standard the reviewer scores against |
-| Plan, notes | `plan.md`, `notes.md` | versioned with the diff they describe |
-| Review findings | the **PR**, after consolidation | anchored to the lines that caused them, and outlives the `docs/work/` folder that does not |
-
-The kit's default is that the spec owns priority and the label is the copy. **With a
-board in use, flip it:** the field owns it, because a triage session changes the
-field and touches nothing else, and the label goes away unless you genuinely filter
-on labels from the CLI. What survives in the spec is the sentence explaining the
-priority, which is the half no field can hold.
-
-**The spec's own `Status:` line flips owner with the configuration, and this is the
-authority on which.** With a tracker installed, the tracker owns it and the spec
-line is a copy — written by `sync-tickets` refreshing it from the tracker and by
-nothing else, never by hand, and never gated on, because gating on a copy checks the
-copy rather than the fact. **With no tracker there is no other owner**, so the spec
-line *is* the status: `Agreed` at the end of Plan, `In progress` when Implement
-starts, `Done` or `Abandoned` at close — the same three moves the board would have
-made — and the reviewer's closing check reads it, because in that configuration it
-is the only thing to read.
-
-### Setting the status
-
-The field is on the *project item*, not on the issue, so it takes a lookup first.
-
-```sh
-# --limit must exceed the board's TOTAL item count, Done ones included. The default
-# of 100 is a silent failure on any board with history: the item is simply absent.
-ITEM_ID=$(gh project item-list <N> --owner <owner> --limit 2000 --format json \
-  --jq '.items[] | select(.content.number == <ISSUE>) | .id')
-
-[ -n "$ITEM_ID" ] || { echo "issue <ISSUE> is not an item on project <N>"; exit 1; }
-
-gh project item-edit --id "$ITEM_ID" --project-id <PROJECT_ID> \
-  --field-id <STATUS_FIELD_ID> --single-select-option-id <OPTION_ID>
-```
-
-**An empty lookup is a stop, not a skip.** It means the issue was never added to
-the board, and continuing quietly is how a ticket runs its whole cycle without the
-board ever showing it.
-
-### What the board can hide
-
-Three states where the board and the work disagree and nothing reports it:
-
-- **A draft item** has no issue behind it, so it has no `spec:` label, no repo
-  folder, and no way for any of this to see it. Work triaged into drafts is
-  invisible to the loop — promote it to an issue before it is picked up.
-- **An archived item** leaves the board while its issue stays open. The board then
-  fails to show work that is in flight, which is the exact failure this section
-  exists to prevent. Archive on close, never before.
-- **A second project.** An issue can sit on several boards. The configuration table
-  names one, and it is the one the moves above write to; the others are somebody
-  else's view and are not kept in step.
-
-### Before the first run
-
-Three checks, once, when the board is configured:
-
-- **The `Done` automation is actually on.** Projects enables *item closed → Done*
-  and *PR merged → Done* by default, but they can be switched off — and if they are,
-  "never set `Done` by hand" leaves every ticket parked in `In review` forever.
-- **The token can write project fields.** Projects is GraphQL-only and needs
-  `project` scope. `GITHUB_TOKEN` in Actions does not have it and fine-grained PATs
-  are patchy, so a board move that works from your machine can fail in CI with an
-  error that reads like a missing project.
-- **The field and option IDs are current.** Renaming a status option keeps its ID;
-  deleting and recreating one mints a new ID, and the configuration table above then
-  points at a value nothing will ever match. Re-run `gh project field-list` after
-  any change to the field itself.
+`docs/TRACKER.md` is the authority: the configuration table, the two board moves
+above collected in one place, what the board can hide, and **One owner per fact** —
+which decides who owns the spec's `Status:` line, and applies even with no tracker
+at all.

@@ -31,11 +31,11 @@ anyone noticing, and does not go in the spec.
 that you did, in the same list as the rest. Repairing it is safe in a way repairing
 the rest is not: the tracker already wins, so the copy holds nothing that can be
 lost. One writer is also what keeps it from being a mirror in the sense
-`docs/WORKFLOW.md` → One owner per fact forbids — the fact has one owner, and this
+`docs/TRACKER.md` → One owner per fact forbids — the fact has one owner, and this
 is the one thing that propagates it.
 
 **With no tracker there is nothing to sync and none of this applies** — the spec's
-line is the status itself, moved by the stages. `docs/WORKFLOW.md` → One owner per
+line is the status itself, moved by the stages. `docs/TRACKER.md` → One owner per
 fact is the authority on both configurations.
 
 `Priority:` runs the other way and is **reported, never repaired**. It is a
@@ -45,7 +45,7 @@ drift when a triage session changes one and not the other. Never overwrite the
 spec's: that would destroy the half no field can hold.
 
 **Where a project board is in use, priority flips again**, and this skill is not
-the authority on it: `docs/WORKFLOW.md` → One owner per fact says the board's
+the authority on it: `docs/TRACKER.md` → One owner per fact says the board's
 Priority field owns the value and the label goes away. What stays in the spec is
 the sentence explaining the priority, which no field can hold. Read that section
 before mirroring a priority anywhere.

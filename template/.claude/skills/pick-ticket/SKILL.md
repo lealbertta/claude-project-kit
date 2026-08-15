@@ -70,7 +70,7 @@ over another is usually something the tracker does not hold.
 Then claim it, in one step:
 
 - Assign the issue to yourself
-- Move the board to `In progress` — `docs/WORKFLOW.md` → Board state has the
+- Move the board to `In progress` — `docs/TRACKER.md` → Setting the status has the
   lookup, and an empty item lookup is a stop rather than a skip
 
 A ticket that is being worked on and shows as unassigned in `Todo` is how two

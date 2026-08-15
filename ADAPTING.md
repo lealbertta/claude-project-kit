@@ -84,10 +84,11 @@ prompt by default. `merge` and `rebase` rewrite history and still ask.
       loads `docs/DECISIONS/` by default, so an ADR nothing cites constrains nobody
       (`record-decision`).
 
-### 5. `docs/WORKFLOW.md`
+### 5. `docs/TRACKER.md`
 
-- [ ] The configuration table: repo, labels, board URL, project and field IDs,
-      test and verification commands.
+- [ ] The configuration table: repo, labels, board URL, project and field IDs. The
+      test and verification commands are not here — `CLAUDE.md` → Commands owns
+      those, and a second copy is the one that goes stale.
 - [ ] Get the IDs with:
 
 ```bash
@@ -102,7 +103,7 @@ gh project field-list <N> --owner <owner> --format json
       reason lives in the spec either way, and a label with no reason behind it is
       the thing this kit is trying not to have.
 - [ ] **Decide who owns priority and who owns blocked, once** — a board field or a
-      label, never both. `WORKFLOW.md` → One owner per fact has the argument; a
+      label, never both. `TRACKER.md` → One owner per fact has the argument; a
       field and a label for the same fact will disagree within a month, and the
       field is the one people sort by.
 - [ ] Confirm the board's **item closed → Done** automation is enabled. It is on by
@@ -114,8 +115,10 @@ gh project field-list <N> --owner <owner> --format json
 - [ ] Raise the `--limit` in the item lookup past your board's **total** item count,
       Done ones included. The default of 100 fails silently — the item is simply not
       in the page, and nothing says so.
-- [ ] No board? Delete the Board state section. The loop works without one; it does
-      not work without the written plan.
+- [ ] No board? Keep **One owner per fact** and delete the rest of the file — that
+      section is what tells you the spec's `Status:` line is the status rather than
+      a copy. The loop works without a board; it does not work without the written
+      plan.
 
 ### 6. First ticket
 
@@ -156,7 +159,8 @@ docs/DECISIONS/              ADR template + your first decision
 | `plan-ticket-implementation` + `implement-ticket` | A change first spans several sessions |
 | `docs/work/<id>-<slug>/` | You first lose track of what a change was for |
 | `reviewer` | You first ship something a self-review missed |
-| `docs/WORKFLOW.md` | You have a tracker and more than one thing in flight |
+| `docs/WORKFLOW.md` | More than one thing is in flight and the stages stop being obvious |
+| `docs/TRACKER.md` | You put a tracker or a board in front of the work |
 | `pick-ticket` | Choosing what to work on stops being obvious — more eligible tickets than you can hold in your head |
 | `PRODUCT.md` → Next / Someday | You start forgetting what you decided not to do |
 | `PRD.md` | One piece of work clearly needs several branches |
@@ -451,7 +455,7 @@ The fence only describes the configuration that has a tracker. **Without one the
 line is not a copy at all** — it is the status, the stages move it, and the
 reviewer's closing check reads it because there is nothing else to read. Which of
 the two you are in is not something a spec template can know, so the authority on
-it is `docs/WORKFLOW.md` → One owner per fact, and everything else defers there.
+it is `docs/TRACKER.md` → One owner per fact, and everything else defers there.
 
 **Why there is a priority at all, in a kit that refuses to order work.** Priority
 and sequence are different claims, and conflating them is what made the source
