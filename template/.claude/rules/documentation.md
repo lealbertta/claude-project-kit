@@ -52,7 +52,7 @@ paths:
 | Requirement, in a PRD | `FR-<n>` | `FR-7` |
 | Risk | `R-<nn>` | `R-04` |
 | ADR | `ADR-<nnnn>`, in `<nnnn>-<slug>.md` | `ADR-0004` |
-| Trap | the heading `Trap <n>` — cite it by **name** | `Trap 3` |
+| Trap | `Trap <n>` — the number; the rest of the heading is decoration | `Trap 3` |
 | Spec→issue join label | `spec:<ticket>:<FR>` | `spec:42:FR-7` |
 
 **Pad an internal sequence; never pad an id that mirrors an external one.** ADRs
@@ -84,6 +84,11 @@ is identified by `42`; the rest is for humans and may be reworded at any time. A
 ticket's directory resolves by number — `docs/work/42-*/` — which is why the join
 label carries the number and not the slug.
 
+**The same holds for a trap heading and an ADR title.** `Trap 3` and `ADR-0004` are
+the ids; the prose after them is for the reader, and rewording it breaks nothing.
+Write the prose into a citation where it helps — *Trap 3 — the fixture makes the
+branch unreachable* — knowing only the number is load-bearing.
+
 ### References point one way, from the disposable to the durable
 
 A ticket dies; the trap it discovered does not. So the edge runs `spec.md` → `Trap 3`,
@@ -93,11 +98,11 @@ stays acyclic, no pair can disagree, and there is exactly one place to update.
 Two consequences worth stating, because they are what make the one-way rule
 affordable:
 
-- **The reverse lookup is a grep, so the name it greps for must be stable.**
+- **The reverse lookup is a grep, and what it greps for is the number.**
   "Which tickets hit Trap 3?" is `grep -rl 'Trap 3' --include=spec.md docs/work`.
-  Numbers are already permanent; this extends the same promise to **trap headings and
-  ADR titles**, which are cited as text. Reword one and every citation to it goes
-  quiet — not broken, which would at least be visible, but silently unfindable.
+  Numbers are already permanent, which is the whole promise the grep needs — and it
+  is why renumbering, not rewording, is the thing that makes a citation silently
+  unfindable rather than visibly broken.
 - **Provenance is the one thing a durable document may record, and it cites the
   issue.** An ADR's `Related work:` and a risk row's `Raised by` answer "what made us
   decide this", which is worth keeping. They name `#42` and never

@@ -104,8 +104,10 @@ be two.
 ticket dies; the trap it discovered does not — so the edge runs spec → trap, notes →
 ADR, spec → risk, and never back. The graph stays acyclic, no pair can disagree, and
 there is one place to update. What makes that affordable is that the reverse lookup
-is a grep, which is why ids are permanent and trap headings are treated as ids too:
-reword one and every citation goes quiet rather than broken. The single exception is
+is a grep for the id, which is why every id is permanent and every prose tail beside
+one — a folder slug, a trap heading, an ADR title — is decoration you may reword
+freely. Renumbering is what makes a citation go quiet rather than visibly break, and
+nothing renumbers. The single exception is
 *provenance* — an ADR's "related work", a risk's "raised by" — which cites an issue
 number, never a folder path, because issues are permanent and folders get deleted.
 

@@ -9,21 +9,25 @@ release. Do not add general testing advice — that is what books are for.
 The reliable way to find one is **the autopsy** below. Every trap here started as
 something that got through.
 
-**A trap's heading is its id.** Specs cite traps by name — `spec.md` → Autopsy says
-which one a defect was a second instance of — and the reference runs one way, from
-the ticket to the trap, because the ticket dies and the trap does not
-(`.claude/rules/documentation.md` → Names and references). That makes the reverse
-lookup a grep:
+**A trap's number is its id, and the rest of the heading is decoration.** Specs cite
+traps — `spec.md` → Autopsy says which one a defect was a second instance of — and
+the reference runs one way, from the ticket to the trap, because the ticket dies and
+the trap does not (`.claude/rules/documentation.md` → Names and references). That
+makes the reverse lookup a grep:
 
 ```sh
 grep -rl 'Trap 3' --include=spec.md docs/work     # which defects hit this one
 ```
 
-Which only works while the heading holds still. **Rewording a trap is renaming an
-id**: every spec citing the old wording goes quiet rather than broken, and the
-victim count — the thing that decides whether a trap has earned a `CLAUDE.md` →
-Gotchas line — silently resets to zero. Add traps freely; rename them almost never,
-and when you must, fix the citations in the same change.
+**So reword a heading whenever a better wording turns up.** The number is what every
+citation carries and what that grep matches, exactly as a ticket folder resolves by
+`42` while its slug is for humans. Write *Trap 3 — the fixture makes the branch
+unreachable* in a citation where it helps the reader; only `Trap 3` is load-bearing.
+
+**Numbers, on the other hand, are permanent.** A new trap takes the next free one
+even where it belongs logically beside an existing one. Renumbering is the thing
+that breaks citations silently and resets the victim count that decides whether a
+trap has earned a `CLAUDE.md` → Gotchas line.
 
 ## What does not belong here
 
