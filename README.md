@@ -1,3 +1,13 @@
+```
+                 /\_____/\
+                /  o   o  \
+               ( ==  ^  == )
+                )         (
+               (           )
+              ( (  )   (  ) )
+             (__(__)___(__)__)
+```
+
 # Claude Project Kit
 
 A starting set of agent files for a new project: a short always-loaded instruction
@@ -22,13 +32,19 @@ Three problems, one system:
 
 ## Install
 
+Needs Claude Code — the rules, skills, and subagents are its features. Everything
+under `docs/` is plain Markdown and reads fine anywhere. `gh` is needed only for the
+tracker and pull request steps; the loop runs without it, and the no-tracker and
+no-PR fallbacks are stated where they apply rather than left to be improvised.
+
 ```bash
 cp -R template/. /path/to/new-project/
 ```
 
 Then work through `ADAPTING.md`. Nothing here works until the `<ANGLE_BRACKET>`
 placeholders are filled in — that is deliberate; a template that runs unedited is a
-template nobody reads.
+template nobody reads. The fill-in pass is a checklist, in order, and takes under an
+hour.
 
 Add to the new project's `.gitignore`:
 
@@ -36,6 +52,31 @@ Add to the new project's `.gitignore`:
 CLAUDE.local.md
 .claude/settings.local.json
 ```
+
+Then read, in this order: `ADAPTING.md` for what to fill in,
+`template/docs/WORKFLOW.md` for the loop those files serve, and
+`template/docs/work/EXAMPLE-42-restore-reads-last-support/` for what a finished
+ticket's three documents actually look like. Everything else is reference, read when
+its turn comes.
+
+## Using it
+
+Each stage is a skill you invoke by name. Nothing fires on its own, and nothing here
+is a background process — the sequence is yours to drive.
+
+| To | Invoke | Which produces |
+|----|--------|----------------|
+| say what a change is for | `write-spec` | an issue, then `docs/work/<id>-<slug>/spec.md` — or a PRD, when the work spans several tickets |
+| turn a PRD's requirements into issues | `sync-tickets` | one issue per requirement, idempotently, plus a drift report |
+| choose the next thing | `pick-ticket` | one ticket, claimed — or a refusal, where what you handed it is an epic |
+| plan it | `plan-ticket-implementation` | `plan.md`, risk-first and pre-mortemed, posted to the issue |
+| build it | `implement-ticket` | a commit per plan item, each verified before the next |
+| review it | the `reviewer` and `architect` agents together — `review-change` is the reviewer's brief where subagents are unavailable | a draft PR carrying two independent reviews, consolidated into one verdict |
+| record why | `record-decision` | an ADR, and the rule it implies written where rules load |
+
+Plan, Implement, and Verify each run in their own session — see *Each stage gets a
+clean context* below for why, and `docs/WORKFLOW.md` for what each stage owes the
+next.
 
 ## File map
 
@@ -85,6 +126,9 @@ template/
 ```
 
 ## The ideas worth keeping if you keep nothing else
+
+The rest of this file is the reasoning, one idea per paragraph, each opening with the
+claim in bold. Skim the bold; read the paragraph where you disagree.
 
 **The agent has a role, and the goal has a tension in it.** `CLAUDE.md` opens by
 naming who the agent is, who it works with, what that person knows that it does not,
@@ -234,6 +278,17 @@ something that looks like it was right all along and teaches nobody anything.
 
 ## Scaling down
 
-The full set suits a project with a tracker and several things in flight. For
-something smaller, see "Scaling down" in `ADAPTING.md` — the minimum useful subset
-is four files.
+The full set suits a project with a tracker and several things in flight. A stale
+document is worse than a missing one, because it is still read — so on something
+smaller, take a subset rather than filling in templates you will not maintain. Four
+files carry most of the value:
+
+```
+CLAUDE.md                    stack, commands, non-negotiables, gotchas
+docs/TESTING_TRAPS.md        keep verbatim
+docs/DECISIONS/              the ADR template, and your first decision
+.claude/settings.json        the permission posture
+```
+
+"Scaling down" in `ADAPTING.md` has the rest: which piece to add, and the specific
+thing that has to go wrong before it earns its place.
