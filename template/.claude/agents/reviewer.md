@@ -53,7 +53,7 @@ not background:
 - `CLAUDE.md` in full. **Non-negotiables** and **Gotchas** are normative here, not
   advisory.
 - `docs/TESTING_TRAPS.md`, before you judge any test.
-- Any ADR under `docs/DECISIONS/` the item or the diff touches. Only **Accepted**
+- Any ADR under `docs/DECISIONS/` the ticket or the diff touches. Only **Accepted**
   ones constrain.
 
 Then read the change, on the same surface the human's review will see: **the working
@@ -158,7 +158,7 @@ whether it blocks.
 5. **Convention conformance, ticket-local.** Does the new code obey the
    conventions it touches — `CLAUDE.md` → Non-negotiables and Gotchas, the rules
    under `.claude/rules/`, the ADRs the diff sits on top of? Branch-*wide* pattern
-   drift is the architect's job; here you judge only the lines this item changed.
+   drift is the architect's job; here you judge only the lines this ticket changed.
 
 6. **Regressions and boundaries.** Did anything existing break? Data incompatibility
    or a missing migration; a broken transaction, undo, or batch boundary;
@@ -167,7 +167,7 @@ whether it blocks.
    sprinkled defensively through internal code? Comments that merely restate the code
    are a comment, lightly; the architect owns comment hygiene branch-wide.
 
-7. **The autopsy, on a bug fix.** If this item fixes a defect, `spec.md` carries an
+7. **The autopsy, on a bug fix.** If this ticket fixes a defect, `spec.md` carries an
    **Autopsy** naming the test that should have caught it and why it did not. Check
    the second line is a real diagnosis and not a restatement of the bug, and that it
    was acted on: a new failure shape belongs in `docs/TESTING_TRAPS.md`, and a shape
@@ -176,7 +176,7 @@ whether it blocks.
    no autopsy is a `should`; an autopsy whose finding was never written down is a
    blocker, since that is the whole reason the loop exists.
 
-8. **Closing hygiene.** If the branch claims the item is done: every plan
+8. **Closing hygiene.** If the branch claims the ticket is done: every plan
    *Could not determine* item answered somewhere visible — `notes.md`, or an
    amendment where the answer contradicted the plan — since an unknown the plan
    named and the branch silently resolved is the guess that section exists to
@@ -188,7 +188,7 @@ whether it blocks.
    non-negotiables in the same change*, a vacuous-test shape to `TESTING_TRAPS.md`, a
    risk to the register, a repeated correction to `CLAUDE.md` → Gotchas — and commit
    messages citing the item id, which is the only ticket→commit link there is. A
-   half-closed item is a blocker on a "done" claim, and a non-issue on partial
+   half-closed ticket is a blocker on a "done" claim, and a non-issue on partial
    progress deliberately left open.
 
 ## Domain judgement

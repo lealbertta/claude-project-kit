@@ -28,9 +28,12 @@ This is the Implement stage of `docs/WORKFLOW.md`. Start from the agreed
 4. Before declaring an item done, run its mutation check: break the thing the test
    covers and confirm the test goes red. Record which mutations you ran. If a
    mutation survives, the test is the defect — fix the test in this cycle.
-5. Run **full verification** before declaring the item done — not the targeted tests
-   you have been running, and not "when practical". A focused run cannot see what
-   you broke three modules away; `docs/WORKFLOW.md` → Verify has the argument.
+5. Run **full verification before declaring a plan item done** — every item, not
+   once at the end, and not "when practical". Not the targeted tests you have been
+   running either: a focused run cannot see what you broke three modules away, and
+   the plan's own rule is that every item leaves the tree green. Verify runs it once
+   more on the finished branch, as the gate; this one is how you find out at item
+   `.3` rather than after `.7`. `docs/WORKFLOW.md` → Verify has the argument.
 6. Update ADRs, the ticket's `notes.md`, fixtures, and contract documentation when a
    contract moved. A change whose contracts moved is not complete while those are stale.
 

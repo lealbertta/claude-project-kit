@@ -55,6 +55,13 @@ paths:
 | Trap | `Trap <n>` — the number; the rest of the heading is decoration | `Trap 3` |
 | Spec→issue join label | `spec:<ticket>:<FR>` | `spec:42:FR-7` |
 
+**"Ticket" and "item" are not interchangeable, and the first two rows are why.** A
+**ticket** is the unit of work — one issue, one branch, one plan, one review, one
+merge. An **item** is always a *plan* item, `<ticket>.<n>`, one numbered step inside
+that ticket's plan. Never write "item" for a ticket: the two differ by an order of
+magnitude in what they cost to run, and the sentence that suffers most is the one
+telling you how often full verification runs.
+
 **Pad an internal sequence; never pad an id that mirrors an external one.** ADRs
 and risks are ours and pad so they sort. A ticket's id *is* its issue number, so
 padding it invents an `042` ↔ `#42` transformation that nothing enforces and
