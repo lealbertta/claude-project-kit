@@ -119,9 +119,10 @@ question at all: a frame budget that misses is a follow-up, not a wrong feature.
   shape the file did not have.
 - Gotcha → `CLAUDE.md`: placement tests assert on the support reference, never on
   coordinates.
-- Risk → `RISK_REGISTER.md`: R-04, dangling support references, mitigated only on
-  the restore path. Named in `spec.md` → Risks when it was raised, not discovered at
+- Risk → `RISK_REGISTER.md`: dangling support references, mitigated only on the
+  restore path. Named in `spec.md` → Risks when it was raised, not discovered at
   the end — the register row is the promotion, the spec line is the cross-reference.
+  Another of the targets the kit does not carry.
 - Decision → none *made here*. The serialized-format change was covered by a
   decision recorded before this ticket, and nothing amended it. That ADR is one of
   the targets the kit does not ship — see the note at the top of `spec.md`. The

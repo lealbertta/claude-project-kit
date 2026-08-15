@@ -126,10 +126,11 @@ gh project field-list <N> --owner <owner> --format json
 - [ ] `cp -R docs/work/TEMPLATE docs/work/<issue>-<slug>`, delete `PRD.md` unless
       the work spans several tickets, and fill in `spec.md`. Use the `write-spec`
       skill. The number is the issue's, with no leading zeros — `42-`, never `042-`.
-- [ ] Delete the example folder once you have two tickets of your own — **and the
-      `R-04` row in `RISK_REGISTER.md` with it**, since the two are a cross-reference
-      pair and the reference check will report the survivor. A borrowed example that
-      outlives its usefulness gets cited as if it were house style.
+- [ ] Delete the example folder once you have two tickets of your own. It cites a
+      trap, a Gotchas line, a risk row and an ADR that the kit deliberately does not
+      ship — its own header says so — so deleting it leaves nothing dangling behind.
+      A borrowed example that outlives its usefulness gets cited as if it were house
+      style.
 
 ---
 

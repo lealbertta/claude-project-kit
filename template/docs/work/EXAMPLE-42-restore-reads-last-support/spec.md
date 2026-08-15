@@ -11,13 +11,11 @@ else can check it, what a rejected alternative looks like when the reason surviv
 and what a divergence looks like recorded rather than edited away.
 
 **Its promotions name targets the kit does not ship.** A trap heading, a Gotchas
-line, a prior decision — this ticket promoted to all three, and the files it
-promoted into belong to the project it was extracted from. They are deliberately
-not carried over: one example's furniture has no business landing in `CLAUDE.md`
-or `TESTING_TRAPS.md` in every project that copies this kit. The promotion is the
-part to imitate, not the destination's contents. `R-04` in `RISK_REGISTER.md` is
-the single exception, shipped so that one cross-reference resolves and you can see
-a real pair — and flagged there for deletion with this folder.
+line, a risk row, a prior decision — this ticket promoted to all four, and the files
+it promoted into belong to the project it was extracted from. They are deliberately
+not carried over: one example's furniture has no business landing in `CLAUDE.md`,
+`TESTING_TRAPS.md` or `RISK_REGISTER.md` in every project that copies this kit. The
+promotion is the part to imitate, not the destination's contents.
 -->
 
 - **Issue:** #42
@@ -104,8 +102,8 @@ looking like that is where it always lived.
 
 - **Raises** — persisting a support id makes a *dangling reference* reachable for the
   first time: a file can now name a support that no longer exists. Restore handles
-  it (AC-3), but restore is the only path that does. Filed as R-04, raised by #42,
-  mitigated on the restore path only.
+  it (AC-3), but restore is the only path that does. Filed as a row in
+  `RISK_REGISTER.md`, raised by #42, mitigated on the restore path only.
 
 ## Open questions
 
