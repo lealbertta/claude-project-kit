@@ -64,12 +64,20 @@ to take back. Report it before you write the code, not after.
 
 ## What to write down as you go
 
-Keep a running list of things the next person needs and would not find:
+Write the things the next person needs and would not find into `notes.md` as you
+go — it already has a section for each:
 
-- Behaviors you changed that nobody asked you to change, and why
-- Cases you found unreachable today but reachable after some named future change
-- A test you *wanted* to write and could not, and what would make it possible
-- Anything you deferred, with the ticket that owns it
+| What you found | Where it goes |
+|----------------|---------------|
+| A behavior you changed that nobody asked you to change, and why | `notes.md` → **Changed without being asked** |
+| A case unreachable today but reachable after some named future change | `notes.md` → **Unreachable today**, recorded as *inert* and not as covered |
+| A test you *wanted* to write and could not | `notes.md` → **Not closed**, with what would make it possible as the unblocker |
+| Anything you deferred | `notes.md` → **Not closed**, naming the ticket or person that owns it |
 
-This list becomes the "notes carried forward" section of the post-cycle report.
-An observation that lives only in your context is lost at the end of the session.
+**Write them when you find them, not at the end.** An observation that lives only in
+your context is lost when the session is, and Verify runs in a different one.
+
+`notes.md` is the working record and it dies with the ticket. Of this list, only the
+deferrals surface on the issue — `docs/WORKFLOW.md` → Report → **Not closed** — and
+anything that outlives the ticket is promoted before it closes, which is Verify's
+last step and not yours.
